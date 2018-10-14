@@ -1,6 +1,7 @@
 package model.tile;
 
 import model.token.CharacterToken;
+import model.player.*;
 
 public class Building extends Tile {
 	public Tile[] getAccessibleTiles(int numMoves, CharacterToken character, Player player) {

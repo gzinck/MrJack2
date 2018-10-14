@@ -1,6 +1,7 @@
 package model.tile;
 
 import model.token.*;
+import model.player.*;
 
 public abstract class Tile {
 	private Tile[] neighbours;
