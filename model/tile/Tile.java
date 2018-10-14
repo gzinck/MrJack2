@@ -1,5 +1,7 @@
 package model.tile;
 
+import model.token.*;
+
 public abstract class Tile {
 	private Tile[] neighbours;
 	
