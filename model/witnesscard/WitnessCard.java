@@ -1,4 +1,4 @@
-package model;
+package model.witnesscard;
 
 public class WitnessCard {
 

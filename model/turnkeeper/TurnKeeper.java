@@ -1,4 +1,4 @@
-package model;
+package model.turnkeeper;
 
 public class TurnKeeper {
 
