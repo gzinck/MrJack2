@@ -1,5 +1,9 @@
 package model.token;
-
-public class Barricade {
-
+import model.tile.*;
+public class Barricade extends Token
+{
+	public Barricade(Tile initialTile)
+	{
+		super(initialTile);
+	}
 }

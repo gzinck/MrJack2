@@ -1,5 +1,9 @@
 package model.token;
-
-public class GasLight {
-
+import model.tile.*;
+public class GasLight extends Token
+{
+	public GasLight(Tile initialTile)
+	{
+		super(initialTile);
+	}
 }
