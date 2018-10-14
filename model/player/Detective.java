@@ -1,5 +1,7 @@
 package model.player;
 
+import model.token.CharacterToken;
+
 public class Detective extends Player
 {
 	public static final String PLAYER_NAME = "Detective";
@@ -9,7 +11,7 @@ public class Detective extends Player
 		return PLAYER_NAME;
 	}
 	
-	public boolean canExitBoard() {
+	public boolean canExitBoard(CharacterToken character) {
 		return CAN_EXIT_BOARD;
 	}
 }

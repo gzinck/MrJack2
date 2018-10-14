@@ -1,7 +1,7 @@
 package model.tile;
 
-import model.ability.Ability;
 import model.player.*;
+import model.token.CharacterToken;
 
 public abstract class Tile {
 	private Tile[] neighbours;
@@ -14,5 +14,5 @@ public abstract class Tile {
 		neighbours[direction] = t;
 	}
 	
-	public abstract Tile[] getAccessibleTiles(int numMoves, Ability ability, Player player);
+	public abstract Tile[] getAccessibleTiles(int numMoves, CharacterToken character, Player player);
 }

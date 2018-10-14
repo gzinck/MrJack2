@@ -1,15 +1,24 @@
 package model.player;
 
+import model.token.CharacterToken;
+
 public class MrJack extends Player
 {
 	public static final String PLAYER_NAME = "MrJack";
-	private static final boolean CAN_EXIT_BOARD = true;
+	CharacterToken jackChar;
+	
+	public void setCharacter(CharacterToken character) {
+		jackChar = character;
+	}
 	
 	public String getPlayerName() {
 		return PLAYER_NAME;
 	}
 	
-	public boolean canExitBoard() {
-		return CAN_EXIT_BOARD;
+	public boolean canExitBoard(CharacterToken character) {
+		if(character.equals(jackChar)) {
+			return true;
+		}
+		return false;
 	}
 }
