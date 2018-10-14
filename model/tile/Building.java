@@ -2,10 +2,11 @@ package model.tile;
 
 import model.token.CharacterToken;
 import model.player.*;
+import model.ability.*;
 
 public class Building extends Tile {
-	public Tile[] getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
-		// Must make an exception if the player has an ability that allows them to walk through stuff
+	public Tile[] getAccessibleTiles(int numMoves, Ability ability, Player player) {
+		// If the ability allows walking through things...
 		return new Tile[0];
 	}
 }

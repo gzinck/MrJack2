@@ -1,5 +1,6 @@
 package model.player;
 
-public class Player {
-
+public abstract class Player {
+	public abstract String getPlayerName();
+	public abstract boolean canExitBoard();
 }
