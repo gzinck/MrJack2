@@ -10,11 +10,18 @@ public class CharacterToken {
 	private boolean isInnocent;
 	private Ability ability;
 	
-	public CharacterToken(String charName, int minMoves, int maxMoves, Ability charAbility) {
+	public CharacterToken(String charName, int minMoves, int maxMoves) {
 		name = charName;
 		minNumMoves = minMoves;
 		maxNumMoves = maxMoves;
+	}
+	
+	public void setAbility(Ability charAbility) {
 		ability = charAbility;
+	}
+	
+	public boolean hasAbility(String abilityString) {
+		return ability.isAbility(abilityString);
 	}
 	
 	@Override
