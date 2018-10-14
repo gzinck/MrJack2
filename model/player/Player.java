@@ -1,5 +1,8 @@
 package model.player;
 
-public class Player {
+import model.token.CharacterToken;
 
+public abstract class Player {
+	public abstract String getPlayerName();
+	public abstract boolean canExitBoard(CharacterToken character);
 }
