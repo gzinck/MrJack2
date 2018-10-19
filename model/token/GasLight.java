@@ -6,4 +6,8 @@ public class GasLight extends Token
 	{
 		super(initialTile);
 	}
+	public void removeFromBoard()
+	{
+		setTile(null);
+	}
 }
