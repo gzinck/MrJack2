@@ -1,4 +1,4 @@
-package model.turnkeeper;/
+package model.turnkeeper;
 import model.token.*;
 import model.player.*;
 public class TurnKeeper
@@ -11,7 +11,7 @@ public class TurnKeeper
 	
 	public Player nextTurn()
 	{
-		
+		throw new UnsupportedOperationException("UNIMPLEMENTED");
 	}
 	
 	private void removeLight()
@@ -21,7 +21,7 @@ public class TurnKeeper
 	}
 	public boolean roundOver()
 	{
-		
+		throw new UnsupportedOperationException("UNIMPLEMENTED");
 	}
 	private void nextRound()
 	{
