@@ -2,6 +2,8 @@ package test.model.tile;
 
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,16 +33,16 @@ public class TestExit {
 	public void exitAllowsOnlyJack() {
 		// Allows Jack
 		jack.setCharacter(c1);
-		Tile[] tiles = exit.getAccessibleTiles(1, c1, jack);
-		assertEquals(tiles.length, 1);
+		HashSet<Tile> tiles = exit.getAccessibleTiles(1, c1, jack);
+		assertEquals(tiles.size(), 1);
 		
-		// Should not allow Jack
+		// Should not allow Jack when wrong character used
 		tiles = exit.getAccessibleTiles(1, c2, jack);
-		assertEquals(tiles.length, 0);
+		assertEquals(tiles.size(), 0);
 		
 		// Does not allow Detective
 		tiles = exit.getAccessibleTiles(1, null, detective);
-		assertEquals(tiles.length, 0);
+		assertEquals(tiles.size(), 0);
 	}
 
 }
