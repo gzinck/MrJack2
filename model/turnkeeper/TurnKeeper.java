@@ -4,11 +4,18 @@ import model.player.*;
 public class TurnKeeper
 {
 	private boolean[] turnCardOrder;
+	private static final int START_ROUND = 1;
+	private static final int START_TURN = 1;
 	public int currTurn;
 	public int currRound;
 	private static final int MAX_ROUNDS = 8;
 	private GasLight[] lightsToRemove;
 	
+	public TurnKeeper()
+	{
+		currTurn = START_TURN;
+		currRound = START_ROUND;
+	}
 	public Player nextTurn()
 	{
 		throw new UnsupportedOperationException("UNIMPLEMENTED");
