@@ -1,5 +1,5 @@
 package test.model.tile;
-
+import model.token.*;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
@@ -44,6 +44,14 @@ public class TestExit {
 		// Does not allow Detective
 		tiles = exit.getAccessibleTiles(1, null, detective);
 		assertEquals(tiles.size(), 0);
+	}
+	
+	@Test
+	public void testIsBarricaded()
+	{
+		Exit e1 = new Exit();
+		Barricade b1 = new Barricade(e1);
+		
 	}
 
 }

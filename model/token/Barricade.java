@@ -8,7 +8,7 @@ public class Barricade
 		currExit = initialExit;
 		initialExit.placeBarricade(this);
 	}
-	public void setBarricade(Exit inExit)
+	public void moveBarricade(Exit inExit)
 	{
 		
 		if(!inExit.isBarricaded())

@@ -21,9 +21,6 @@ public class Exit extends Tile implements Passable {
 		witnessCard = wc;
 	}
 	
-
-
-	
 	@Override
 	public HashSet<Passable> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
 
@@ -38,6 +35,7 @@ public class Exit extends Tile implements Passable {
 		}
 		return accessibleTiles;
 	}
+	
 	public void placeBarricade(Barricade inBarr)
 	{
 		barricade = inBarr;
