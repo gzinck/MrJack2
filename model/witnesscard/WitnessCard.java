@@ -1,5 +1,22 @@
 package model.witnesscard;
 
-public class WitnessCard {
+import model.token.CharacterToken;
 
+public class WitnessCard {
+	private boolean wasSeen;
+	private CharacterToken jackToken;
+	
+	public WitnessCard(CharacterToken jack) {
+		wasSeen = true;
+		jackToken = jack;
+	}
+	
+	public boolean updateWitnessed() {
+		wasSeen = jackToken.isLit();
+		return wasSeen;
+	}
+	
+	public boolean getWitnessed() {
+		return wasSeen;
+	}
 }
