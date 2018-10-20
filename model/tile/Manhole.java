@@ -6,7 +6,7 @@ import model.player.Player;
 import model.token.CharacterToken;
 import model.token.ManholeCover;
 
-public class Manhole extends Tile implements Occupiable {
+public class Manhole extends Tile implements Lightable {
 	private static Manhole[] allManholes; // Static means we can access it from any instance
 	private Occupiable[] occupiableNeighbours;
 	private Lamppost lamp;
@@ -16,7 +16,7 @@ public class Manhole extends Tile implements Occupiable {
 	public Manhole() {
 		cover = null;
 		isOccupied = false;
-		occupiableNeighbours = new Occupiable[NUM_NEIGHBOURS];
+		occupiableNeighbours = new Lightable[NUM_NEIGHBOURS];
 		lamp = null;
 	}
 	

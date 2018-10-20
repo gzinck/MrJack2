@@ -5,7 +5,7 @@ import java.util.HashSet;
 import model.player.Player;
 import model.token.CharacterToken;
 
-public class RegularTile extends Tile implements Occupiable {
+public class RegularTile extends Tile implements Lightable {
 	
 	private Occupiable[] occupiableNeighbours;
 	private Lamppost lamp;

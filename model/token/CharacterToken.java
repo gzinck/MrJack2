@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 import model.ability.Ability;
 import model.player.Player;
-import model.tile.Occupiable;
+import model.tile.Lightable;
 import model.tile.Passable;
 import model.tile.Tile;
 
@@ -14,9 +14,9 @@ public class CharacterToken {
 	private boolean isSeen;
 	private boolean isInnocent;
 	private Ability ability;
-	private Occupiable currTile;
+	private Lightable currTile;
 	
-	public CharacterToken(String charName, int maxMoves, Occupiable initialTile) {
+	public CharacterToken(String charName, int maxMoves, Lightable initialTile) {
 		name = charName;
 		maxNumMoves = maxMoves;
 		currTile = initialTile;
