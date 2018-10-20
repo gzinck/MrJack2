@@ -6,4 +6,18 @@ public class Barricade extends Token
 	{
 		super(initialTile);
 	}
+	public void setBarricade(Exit inExit)
+	{
+		
+		if(!inExit.isBarricaded())
+		{
+			currTile = inExit;
+			inExit.placeBarricade(this);
+		}
+		else
+		{
+			//throw something
+		}
+			
+	}
 }

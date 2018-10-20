@@ -4,9 +4,11 @@ import java.util.HashSet;
 import model.player.*;
 import model.token.CharacterToken;
 import model.witnesscard.WitnessCard;
+import model.token.Barricade;
 
 public class Exit extends Tile implements Passable {
 	private static WitnessCard witnessCard;
+	private Barricade barricade;
 	
 	public static void setWitnessCard(WitnessCard wc) {
 		witnessCard = wc;
@@ -24,5 +26,17 @@ public class Exit extends Tile implements Passable {
 			accessibleTiles.add(this);
 		}
 		return accessibleTiles;
+	}
+	public void placeBarricade(Barricade inBarr)
+	{
+		barricade = inBarr;
+	}
+	public void removeBarricade()
+	{
+		barricade = null;
+	}	
+	public boolean isBarricaded()
+	{
+		return(barricade!=null);
 	}
 }
