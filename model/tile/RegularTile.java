@@ -5,7 +5,11 @@ import java.util.HashSet;
 import model.player.Player;
 import model.token.CharacterToken;
 
-public class RegularTile extends Tile {
+public class RegularTile extends Tile implements Occupiable {
+	
+	private Occupiable[] occupiableNeighbours;
+	private Lamppost lamp;
+	private boolean isOccupied;
 
 	@Override
 	public HashSet<Tile> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
@@ -21,6 +25,42 @@ public class RegularTile extends Tile {
 			if(neighbours[i] != null)
 				accessibleTiles.addAll(neighbours[i].getAccessibleTiles(numMoves - 1, character, player));
 		return accessibleTiles;
+	}
+
+	@Override
+	public void setLamppost(Lamppost lamppost) {
+		lamp = lamppost;
+	}
+
+	@Override
+	public boolean isLit() {
+		if(lamp.isLit()) return true;
+		for(int i = 0; i < NUM_NEIGHBOURS; i++) {
+			if(occupiableNeighbours[i] != null && occupiableNeighbours[i].isOccupied())
+				return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void occupy() {
+		isOccupied = true;
+	}
+
+	@Override
+	public void leave() {
+		isOccupied = false;
+	}
+
+	@Override
+	public boolean isOccupied() {
+		return isOccupied;
+	}
+
+	@Override
+	public <T extends Tile & Occupiable> void setOccupiableNeighbour(T tile, int direction) {
+		neighbours[direction] = tile;
+		occupiableNeighbours[direction] = tile;
 	}
 
 }
