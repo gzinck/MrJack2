@@ -7,8 +7,4 @@ public abstract class Token {
 	public Token(Tile initialTile) {
 		currTile = initialTile;
 	}
-	public void setTile(Tile inTile)
-	{
-		currTile = inTile;
-	}
 }

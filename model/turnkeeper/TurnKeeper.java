@@ -1,7 +1,6 @@
 package model.turnkeeper;
 import model.token.*;
 import model.player.*;
-import model.player.*;
 public class TurnKeeper
 {
 	private Player[] oddRoundOrder;
@@ -14,12 +13,13 @@ public class TurnKeeper
 	private static final int MAX_TURNS = 2;
 	private GasLight[] lightsToRemove;
 	
-	public TurnKeeper(MrJack jack, Detective det)
+	public TurnKeeper(MrJack jack, Detective det, GasLight[] removableLights)
 	{
 		currTurn = START_TURN;
 		currRound = START_ROUND;
 		oddRoundOrder = new Player[] {det, jack};
 		evenRoundOrder = new Player[] {jack, det};
+		lightsToRemove = removableLights;
 	}
 	public Player nextTurn()
 	{
@@ -44,7 +44,7 @@ public class TurnKeeper
 	}
 	public boolean roundOver()
 	{
-		if(currTurn==2)
+		if(currTurn==MAX_TURNS)
 			return true;
 			
 		return false;
@@ -54,7 +54,6 @@ public class TurnKeeper
 		if(currRound<lightsToRemove.length+1)
 			removeLight();
 		currRound++;
-		//if curr round==9 then detective wins
 	}
 	
 	

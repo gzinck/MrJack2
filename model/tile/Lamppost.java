@@ -20,7 +20,7 @@ public class Lamppost extends Tile {
 		light = inGasLight;
 	}
 	
-	public void removeCover() {
+	public void removeGasLight() {
 		light.currTile=null;
 		light = null;
 		

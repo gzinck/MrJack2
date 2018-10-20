@@ -17,7 +17,7 @@ public class ManholeCover extends Token
 		}
 		else
 		{
-			//throw something
+			throw new IllegalArgumentException("Manhole already has a manhole cover");
 		}
 			
 	}

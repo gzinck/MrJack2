@@ -18,7 +18,7 @@ public class GasLight extends Token
 		}
 		else
 		{
-			//throw something
+			throw new IllegalArgumentException("Lamppost already has a gaslight");
 		}
 			
 	}

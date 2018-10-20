@@ -17,7 +17,7 @@ public class Barricade extends Token
 		}
 		else
 		{
-			//throw something
+			throw new IllegalArgumentException("Exit already has a barricade");
 		}
 			
 	}
