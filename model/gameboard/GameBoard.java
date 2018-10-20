@@ -29,7 +29,7 @@ public class GameBoard
 			{4,1},
 			{4,6}
 	};
-	private static final String[] CHAR_NAMES = {
+	public static final String[] CHAR_NAMES = {
 			"Stealthy",
 			"LeStrade",
 			"Bert",
@@ -42,6 +42,7 @@ public class GameBoard
 	
 	private static final int NUM_BARRICADES = 1;
 	private static final int NUM_GASLIGHTS = 1;
+	private static final int NUM_REMOVABLE_GASLIGHTS = 1;
 	private static final int NUM_MANCOVERS = 1;
 	
 	private Tile[][] tiles;
@@ -64,7 +65,7 @@ public class GameBoard
 		initializeCharacters();
 	}
 	
-	public void initializeTiles() {
+	private void initializeTiles() {
 		numRows = TILE_FRAMEWORK.length;
 		numCols = TILE_FRAMEWORK[0].length;
 		
@@ -117,7 +118,7 @@ public class GameBoard
 		Manhole.setManholes(manholes);
 	}
 	
-	public void addNeighbours() {
+	private void addNeighbours() {
 		// Go through every place and get the neighbours
 		for(int row = 0; row < numRows; row++) {
 			for(int col = 0; col < numCols; col++) {
@@ -127,7 +128,7 @@ public class GameBoard
 		}
 	}
 	
-	public void addLamppostNeighbour(Lightable tile, int row, int col) {
+	private void addLamppostNeighbour(Lightable tile, int row, int col) {
 		if(tile == null) return;
 		// Assumes can only have one lamppost as a neighbour
 		Lamppost l = null;
@@ -142,7 +143,7 @@ public class GameBoard
 		tile.setLamppost(l);
 	}
 	
-	public void addPassableNeighbours(Passable tile, int row, int col) {
+	private void addPassableNeighbours(Passable tile, int row, int col) {
 		if(tile == null) return;
 		int[] loc = null;
 		for(int dir = 0; dir < Tile.NUM_NEIGHBOURS; dir++) {
@@ -210,7 +211,7 @@ public class GameBoard
 		return null;
 	}
 	
-	public void initializeTokens()
+	private void initializeTokens()
 	{
 		barricades = new Barricade[NUM_BARRICADES];
 		for(int i = 0; i < NUM_BARRICADES; i++) barricades[i] = new Barricade(exits[i]);
@@ -220,7 +221,7 @@ public class GameBoard
 		for(int i = 0; i < NUM_GASLIGHTS; i++) mancovers[i] = new ManholeCover(manholes[i]);
 	}
 	
-	public void initializeCharacters()
+	private void initializeCharacters()
 	{
 		characters = new CharacterToken[NUM_CHARACTERS];
 		for(int i = 0; i < NUM_CHARACTERS; i++) {
@@ -235,5 +236,13 @@ public class GameBoard
 		for(int i = 0; i < NUM_CHARACTERS; i++) {
 			characters[i].evaluateInnocence(jackWasSeen);
 		}
+	}
+	
+	public GasLight[] getRemovableGaslights() {
+		GasLight[] removable = new GasLight[NUM_REMOVABLE_GASLIGHTS];
+		for(int i = 0; i < NUM_REMOVABLE_GASLIGHTS; i++) {
+			removable[i] = gaslights[i];
+		}
+		return removable;
 	}
 }

@@ -6,12 +6,6 @@ import model.token.CharacterToken;
 import model.witnesscard.WitnessCard;
 import model.token.Barricade;
 
-
-
-
-
-
-
 public class Exit extends Tile implements Passable {
 
 	private static WitnessCard witnessCard;

@@ -1,15 +1,20 @@
 package model.deck;
 
+import java.util.Arrays;
 import java.util.Random;
 
-public class Deck 
+import model.gameboard.GameBoard;
+
+public abstract class Deck 
 {
-	public static final String[] CHARACTERS = {"Stealthy", "Bert", "Smith", "Lestrade"};
+	public static final String[] CHARACTERS = GameBoard.CHAR_NAMES;
 	public String[] cards;
+	protected int numCardsRemaining; 
 	
 	public Deck()
 	{
-		cards = CHARACTERS;
+		cards = Arrays.copyOf(CHARACTERS, CHARACTERS.length);
+		numCardsRemaining = CHARACTERS.length;
 		shuffle();
 	}
 	public void shuffle()
@@ -23,6 +28,5 @@ public class Deck
 			cards[randNum] = cards[i];
 			cards[i] = temp;
 		}
-		
 	}
 }
