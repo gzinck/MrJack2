@@ -6,12 +6,10 @@ import model.ability.Ability;
 import model.player.Player;
 import model.tile.Lightable;
 import model.tile.Passable;
-import model.tile.Tile;
 
 public class CharacterToken {
 	private String name;
 	private int maxNumMoves;
-	private boolean isSeen;
 	private boolean isInnocent;
 	private Ability ability;
 	private Lightable currTile;
@@ -53,5 +51,9 @@ public class CharacterToken {
 			isInnocent = (jackWasSeen != isLit());
 		}
 		return isInnocent;
+	}
+	
+	public int[] getLocation() {
+		return currTile.getTileLocation();
 	}
 }

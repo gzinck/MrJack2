@@ -8,7 +8,7 @@ public class GameBoard
 		{'E', 'X', 'X', 'X', ' ', 'M', ' '},
 		{'X', ' ', 'L', 'B', ' ', 'L', ' '},
 		{' ', 'M', ' ', ' ', ' ', 'B', ' '},
-		{' ', 'B', 'B', 'B', ' ', ' ', ' '}
+		{' ', 'B', 'B', 'B', ' ', ' ', 'E'}
 	};
 	private static final char EXIT_C 	= 'E';
 	private static final char BUILD_C 	= 'B';
@@ -18,8 +18,15 @@ public class GameBoard
 	private static final char MANH_C 	= 'M';
 	
 	private static final int NUM_HOLES	= 2;
-	private static final int NUM_EXITS	= 1;
+	private static final int NUM_EXITS	= 2;
 	private static final int NUM_LAMPS	= 2;
+	
+	private static final int[][] CHAR_LOCATIONS = {
+			{1,1},
+			{1,4},
+			{4,1},
+			{4,6}
+	};
 	
 	private Tile[][] tiles;
 	private Lamppost[][] lamps;
