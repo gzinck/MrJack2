@@ -19,7 +19,9 @@ public class GameController {
 		detective = new Detective();
 		turnKeeper = new TurnKeeper(jack, detective, gb.getRemovableGaslights());
 		table = new Table();
+		jack.setCharacter(gb.getCharacter(table.getJackCard()));
 		table.startRound();
+		continueGame();
 	}
 	public void continueGame() {
 		// This runs through a turn

@@ -42,6 +42,9 @@ public class Table
 		}
 		return false;
 	}
+	public String getJackCard() {
+		return alibis.drawCard();
+	}
 //	public void discardCharacter(String character)
 //	{
 //		for(int i =0; i<charDeck.getLength(); i++)

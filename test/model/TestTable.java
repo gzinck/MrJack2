@@ -28,9 +28,5 @@ public class TestTable
 	public void testInitialize()
 	{
 		Table t1 = new Table();
-		System.out.println(t1.charDeck.getChar(0));
-		System.out.println(t1.charDeck.getChar(1));
-		System.out.println(t1.charDeck.getChar(2));
-		System.out.println(t1.charDeck.getChar(3));
 	}
 }

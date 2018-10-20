@@ -245,4 +245,10 @@ public class GameBoard
 		}
 		return removable;
 	}
+	
+	public CharacterToken getCharacter(String characterName) {
+		for(int i = 0 ; i < NUM_CHARACTERS; i++)
+			if(CHAR_NAMES[i].equals(characterName)) return characters[i];
+		return null;
+	}
 }

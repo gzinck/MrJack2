@@ -13,7 +13,7 @@ public abstract class Deck
 	
 	public Deck()
 	{
-		cards = Arrays.copyOf(CHARACTERS, CHARACTERS.length);
+		cards = Arrays.copyOf(CHARACTERS, CHARACTERS.length); // Must copy so it does not affect all decks
 		numCardsRemaining = CHARACTERS.length;
 		shuffle();
 	}
