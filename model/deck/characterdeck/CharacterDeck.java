@@ -6,20 +6,22 @@ import model.deck.Deck;
 
 public class CharacterDeck extends Deck
 {
-	public static final String[] CHARACTERS = {"Stealthy", "Bert", "Smith", "Lestrade"};
-	public String[] cards;
+	//public static final String[] CHARACTERS = {"Stealthy", "Bert", "Smith", "Lestrade"};
+	//public String[] cards;
 	public int numTurns;
 	public int numDiscards;
 	public String[] discard;
 	
 	public CharacterDeck()
 	{
-		cards = CHARACTERS;
-		discard = new String[CHARACTERS.length];
+		//cards = CHARACTERS;
+		//shuffle();
+		super();
+		discard = new String[Deck.CHARACTERS.length];
 		numDiscards=0;
-		shuffle();
 	}	
-	public void shuffle()
+	
+	/*public void shuffle()
 	{
 		Random rand = new Random();
 		
@@ -31,7 +33,8 @@ public class CharacterDeck extends Deck
 			cards[i] = temp;
 		}
 		
-	}
+	}*/
+	
 	public void drawOnTable()
 	{
 		
