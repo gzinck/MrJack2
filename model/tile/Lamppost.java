@@ -22,7 +22,9 @@ public class Lamppost extends Tile {
 	}
 	
 	public void removeCover() {
+		light.currTile=null;
 		light = null;
+		
 	}
 	
 	public boolean isLit() {

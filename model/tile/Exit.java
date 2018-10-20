@@ -3,21 +3,21 @@ package model.tile;
 import java.util.HashSet;
 import model.player.*;
 import model.token.CharacterToken;
-<<<<<<< HEAD
+import model.witnesscard.WitnessCard;
 import model.token.Barricade;
 public class Exit extends Tile {
 	private Barricade barricade;
-=======
-import model.witnesscard.WitnessCard;
 
-public class Exit extends Tile {
+
+
+
 	private static WitnessCard witnessCard;
 	
 	public static void setWitnessCard(WitnessCard wc) {
 		witnessCard = wc;
 	}
 	
->>>>>>> f8ef99080e79fe711fa928696658d05c154a0509
+
 	public HashSet<Tile> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
 		if(numMoves < 1) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 1.");
 		
@@ -36,6 +36,7 @@ public class Exit extends Tile {
 	}
 	public void removeBarricade()
 	{
+		barricade.currTile=null;
 		barricade = null;
 	}	
 	public boolean isBarricaded()

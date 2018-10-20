@@ -25,6 +25,7 @@ public class Manhole extends Tile implements Occupiable {
 	}
 	
 	public void removeCover() {
+		cover.currTile=null;
 		cover = null;
 	}
 	
