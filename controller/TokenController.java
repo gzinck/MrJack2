@@ -20,7 +20,6 @@ public class TokenController {
 	
 	private Tile[][] tiles;
 	private Lamppost[][] lamps;
-	private Passable[][] passableTiles;
 	private Lightable[][] lightableTiles;
 	private Manhole[] manholes;
 	private int numRows, numCols;
@@ -31,7 +30,6 @@ public class TokenController {
 		
 		tiles = new Tile[numRows][numCols];
 		lamps = new Lamppost[numRows][numCols];
-		passableTiles = new Passable[numRows][numCols];
 		lightableTiles = new Lightable[numRows][numCols];
 		manholes = new Manhole[NUM_HOLES];
 		int manholesSoFar = 0;
@@ -42,23 +40,19 @@ public class TokenController {
 				case REG_C:
 					RegularTile rt = new RegularTile();
 					tiles[row][col] = rt;
-					passableTiles[row][col] = rt;
 					lightableTiles[row][col] = rt;
 					break;
 				case EXIT_C:
 					Exit e = new Exit();
 					tiles[row][col] = e;
-					passableTiles[row][col] = e;
 					break;
 				case BUILD_C:
 					Building b = new Building();
 					tiles[row][col] = b;
-					passableTiles[row][col] = b;
 					break;
 				case MANH_C:
 					Manhole m = new Manhole();
 					tiles[row][col] = m;
-					passableTiles[row][col] = m;
 					lightableTiles[row][col] = m;
 					manholes[manholesSoFar++] = m;
 					break;
@@ -74,14 +68,15 @@ public class TokenController {
 			} // for col
 		} // for row
 		addNeighbours();
+		Manhole.setManholes(manholes);
 	}
 	
 	public void addNeighbours() {
 		// Go through every place and get the neighbours
 		for(int row = 0; row < numRows; row++) {
 			for(int col = 0; col < numCols; col++) {
-				if(tiles[row][col] == null) continue;
 				addLamppostNeighbour(lightableTiles[row][col], row, col);
+				addPassableNeighbours(tiles[row][col], row, col);
 			}
 		}
 	}
@@ -99,6 +94,18 @@ public class TokenController {
 			dir++;
 		}
 		tile.setLamppost(l);
+	}
+	
+	public void addPassableNeighbours(Passable tile, int row, int col) {
+		if(tile == null) return;
+		int[] loc = null;
+		for(int dir = 0; dir < Tile.NUM_NEIGHBOURS; dir++) {
+			loc = getLocation(row, col, dir);
+			if(loc != null) {
+				Passable next = tiles[loc[0]][loc[1]];
+				if(next != null) tile.setNeighbour(next, dir);
+			} // if location is not null
+		} // for every direction
 	}
 	
 	public int[] getLocation(int row, int col, int direction) {
