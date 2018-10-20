@@ -7,4 +7,18 @@ public class ManholeCover extends Token
 		super(initialTile);
 		initialTile.placeCover(this);
 	}
+	public void setManholeCover(Manhole inManhole)
+	{
+		
+		if(!inManhole.isCovered())
+		{
+			currTile = inManhole;
+			inManhole.placeCover(this);
+		}
+		else
+		{
+			//throw something
+		}
+			
+	}
 }

@@ -28,6 +28,10 @@ public class Manhole extends Tile implements Occupiable {
 		cover = null;
 	}
 	
+	public boolean isCovered()
+	{
+		return(cover!=null);
+	}
 	public boolean manholeAccessible() {
 		return (cover == null);
 	}
