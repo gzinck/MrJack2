@@ -8,7 +8,7 @@ public class GameBoard
 	private static final char[][] TILE_FRAMEWORK = new char[][] {
 		{'E', 'X', 'X', 'X', ' ', 'M', ' '},
 		{'X', ' ', 'L', 'B', ' ', 'L', ' '},
-		{' ', 'M', ' ', ' ', ' ', 'B', ' '},
+		{' ', 'M', ' ', ' ', ' ', 'B', 'M'},
 		{' ', 'B', 'B', 'B', ' ', ' ', 'E'}
 	};
 	private static final char EXIT_C 	= 'E';
@@ -18,7 +18,7 @@ public class GameBoard
 	private static final char LAMP_C 	= 'L';
 	private static final char MANH_C 	= 'M';
 	
-	private static final int NUM_HOLES	= 2;
+	private static final int NUM_MANHOLES	= 3;
 	private static final int NUM_EXITS	= 2;
 	private static final int NUM_LAMPS	= 2;
 	
@@ -40,6 +40,10 @@ public class GameBoard
 	};
 	private static final int[] CHAR_NUM_MOVES = {4, 3, 3, 3};
 	
+	private static final int NUM_BARRICADES = 1;
+	private static final int NUM_GASLIGHTS = 1;
+	private static final int NUM_MANCOVERS = 1;
+	
 	private Tile[][] tiles;
 	private Lamppost[][] lamps;
 	private Lightable[][] lightableTiles;
@@ -49,6 +53,9 @@ public class GameBoard
 	private int numRows, numCols;
 	
 	public CharacterToken[] characters;
+	private Barricade[] barricades;
+	private GasLight[] gaslights;
+	private ManholeCover[] mancovers; 
 	
 	public GameBoard()
 	{
@@ -64,7 +71,7 @@ public class GameBoard
 		tiles = new Tile[numRows][numCols];
 		lamps = new Lamppost[numRows][numCols];
 		lightableTiles = new Lightable[numRows][numCols];
-		manholes = new Manhole[NUM_HOLES];
+		manholes = new Manhole[NUM_MANHOLES];
 		exits = new Exit[NUM_EXITS];
 		lampList = new Lamppost[NUM_LAMPS];
 		int manholesSoFar = 0;
@@ -205,7 +212,12 @@ public class GameBoard
 	
 	public void initializeTokens()
 	{
-		
+		barricades = new Barricade[NUM_BARRICADES];
+		for(int i = 0; i < NUM_BARRICADES; i++) barricades[i] = new Barricade(exits[i]);
+		gaslights = new GasLight[NUM_GASLIGHTS];
+		for(int i = 0; i < NUM_GASLIGHTS; i++) gaslights[i] = new GasLight(lampList[i]);
+		mancovers = new ManholeCover[NUM_MANCOVERS];
+		for(int i = 0; i < NUM_GASLIGHTS; i++) mancovers[i] = new ManholeCover(manholes[i]);
 	}
 	
 	public void initializeCharacters()
