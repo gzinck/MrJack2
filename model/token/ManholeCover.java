@@ -2,10 +2,10 @@ package model.token;
 import model.tile.*;
 public class ManholeCover extends Token
 {
-	public ManholeCover(Manhole initialTile)
+	public ManholeCover(Manhole initialManhole)
 	{
-		super(initialTile);
-		initialTile.placeCover(this);
+		super(initialManhole);
+		initialManhole.placeCover(this);
 	}
 	public void setManholeCover(Manhole inManhole)
 	{

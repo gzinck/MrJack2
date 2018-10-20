@@ -3,10 +3,10 @@ import model.tile.*;
 public class GasLight extends Token
 {
 	
-	public GasLight(Tile initialTile)
+	public GasLight(Lamppost initialLamppost)
 	{
-		super(initialTile);
-		
+		super(initialLamppost);
+		initialLamppost.placeGasLight(this);
 	}
 	public void setGasLight(Lamppost inLamp)
 	{

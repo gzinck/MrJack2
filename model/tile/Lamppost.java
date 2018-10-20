@@ -10,11 +10,10 @@ import model.token.ManholeCover;
 public class Lamppost extends Tile {
 	
 	private GasLight light;
-	private boolean isOccupied;
+	
 	public Lamppost()
 	{
 		light = null;
-		isOccupied = false;
 	}
 	
 	public void placeGasLight(GasLight inGasLight) {

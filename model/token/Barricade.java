@@ -2,9 +2,10 @@ package model.token;
 import model.tile.*;
 public class Barricade extends Token
 {
-	public Barricade(Tile initialTile)
+	public Barricade(Exit initialExit)
 	{
-		super(initialTile);
+		super(initialExit);
+		initialExit.placeBarricade(this);
 	}
 	public void setBarricade(Exit inExit)
 	{
