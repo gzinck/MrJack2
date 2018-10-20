@@ -10,6 +10,7 @@ import org.junit.Test;
 import model.ability.Ability;
 import model.player.*;
 import model.tile.Exit;
+import model.tile.Passable;
 import model.tile.Tile;
 import model.token.CharacterToken;
 
@@ -33,7 +34,7 @@ public class TestExit {
 	public void exitAllowsOnlyJack() {
 		// Allows Jack
 		jack.setCharacter(c1);
-		HashSet<Tile> tiles = exit.getAccessibleTiles(1, c1, jack);
+		HashSet<Passable> tiles = exit.getAccessibleTiles(1, c1, jack);
 		assertEquals(tiles.size(), 1);
 		
 		// Should not allow Jack when wrong character used
