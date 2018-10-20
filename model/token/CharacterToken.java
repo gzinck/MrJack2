@@ -56,4 +56,8 @@ public class CharacterToken {
 	public int[] getLocation() {
 		return currTile.getTileLocation();
 	}
+	
+	public void moveTo(Lightable tile) {
+		currTile = tile;
+	}
 }

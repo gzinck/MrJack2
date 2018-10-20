@@ -1,4 +1,5 @@
 package model.gameboard;
+import model.ability.*;
 import model.tile.*;
 import model.token.*;
 
@@ -21,12 +22,23 @@ public class GameBoard
 	private static final int NUM_EXITS	= 2;
 	private static final int NUM_LAMPS	= 2;
 	
+	private static final int NUM_CHARACTERS	= 4;
 	private static final int[][] CHAR_LOCATIONS = {
 			{1,1},
 			{1,4},
 			{4,1},
 			{4,6}
 	};
+	private static final String[] CHAR_NAMES = {
+			"Stealthy",
+			"LeStrade",
+			"Bert",
+			"Smith"
+	};
+	private static final Ability[] CHAR_ABILITIES = {
+			new StealthyAbility(), new MoveBarricadeAbility(), new MoveCoverAbility(), new MoveLightAbility()
+	};
+	private static final int[] CHAR_NUM_MOVES = {4, 3, 3, 3};
 	
 	private Tile[][] tiles;
 	private Lamppost[][] lamps;
@@ -193,16 +205,23 @@ public class GameBoard
 	
 	public void initializeTokens()
 	{
-	
+		
 	}
 	
 	public void initializeCharacters()
 	{
-	
+		characters = new CharacterToken[NUM_CHARACTERS];
+		for(int i = 0; i < NUM_CHARACTERS; i++) {
+			int[] loc = CHAR_LOCATIONS[i];
+			characters[i] = new CharacterToken(CHAR_NAMES[i], CHAR_NUM_MOVES[i], lightableTiles[loc[0]][loc[1]]);
+			characters[i].setAbility(CHAR_ABILITIES[i]);
+		}
 	}
 	
 	public void evaluateInnocence(Boolean jackWasSeen)
 	{
-		
+		for(int i = 0; i < NUM_CHARACTERS; i++) {
+			characters[i].evaluateInnocence(jackWasSeen);
+		}
 	}
 }
