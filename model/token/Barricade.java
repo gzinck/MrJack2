@@ -1,10 +1,11 @@
 package model.token;
 import model.tile.*;
-public class Barricade extends Token
+public class Barricade
 {
+	public Exit currExit;
 	public Barricade(Exit initialExit)
 	{
-		super(initialExit);
+		currExit = initialExit;
 		initialExit.placeBarricade(this);
 	}
 	public void setBarricade(Exit inExit)
@@ -12,7 +13,7 @@ public class Barricade extends Token
 		
 		if(!inExit.isBarricaded())
 		{
-			currTile = inExit;
+			currExit = inExit;
 			inExit.placeBarricade(this);
 		}
 		else

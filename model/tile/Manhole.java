@@ -25,7 +25,7 @@ public class Manhole extends Tile implements Lightable {
 	}
 	
 	public void removeCover() {
-		cover.currTile=null;
+		cover.currManhole=null;
 		cover = null;
 	}
 	

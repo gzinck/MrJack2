@@ -44,7 +44,7 @@ public class Exit extends Tile implements Passable {
 	}
 	public void removeBarricade()
 	{
-		barricade.currTile=null;
+		barricade.currExit=null;
 		barricade = null;
 	}	
 	public boolean isBarricaded()

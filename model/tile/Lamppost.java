@@ -22,7 +22,7 @@ public class Lamppost extends Tile implements Passable {
 	}
 	
 	public void removeGasLight() {
-		light.currTile=null;
+		light.currLamppost=null;
 		light = null;
 		
 	}

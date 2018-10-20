@@ -1,10 +1,11 @@
 package model.token;
 import model.tile.*;
-public class ManholeCover extends Token
+public class ManholeCover
 {
+	public Manhole currManhole;
 	public ManholeCover(Manhole initialManhole)
 	{
-		super(initialManhole);
+		currManhole = initialManhole;
 		initialManhole.placeCover(this);
 	}
 	public void setManholeCover(Manhole inManhole)
@@ -12,7 +13,7 @@ public class ManholeCover extends Token
 		
 		if(!inManhole.isCovered())
 		{
-			currTile = inManhole;
+			currManhole = inManhole;
 			inManhole.placeCover(this);
 		}
 		else

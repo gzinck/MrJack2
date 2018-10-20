@@ -14,7 +14,7 @@ public class TestBarricade
 		Exit e1 = new Exit();
 		Barricade b1 = new Barricade(e1);
 		String excpect = "true";
-		assertEquals(excpect, "" + (e1==b1.currTile));
+		assertEquals(excpect, "" + (e1==b1.currExit));
 	}
 	@Test
 	public void testSetBarricade()
@@ -24,19 +24,25 @@ public class TestBarricade
 		Barricade b1 = new Barricade(e1);
 		b1.setBarricade(e2);
 		String excpect = "true";
-		assertEquals(excpect, "" + (e2==b1.currTile));
+		assertEquals(excpect, "" + (e2==b1.currExit));
 	}
 	@Test
 	public void testSetBarricadeThatAlreadyHasABarricade()
 	{
+		boolean didCatch = false;
+		try{
+		
 		Exit e1 = new Exit();
 		Exit e2 = new Exit();
 		Barricade b1 = new Barricade(e1);
 		Barricade b2 = new Barricade(e2);
 		b1.setBarricade(e2);
+		}catch(IllegalArgumentException e){didCatch=true;}
+		
 		String excpect = "true";
-		assertEquals(excpect, "" + (e2==b1.currTile));
+		assertEquals(excpect, "" + didCatch);
 	}
+	
 	
 }
 	
