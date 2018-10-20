@@ -21,7 +21,7 @@ public class TestBuilding {
 		// Make sure that the building has a neighbour so we can test if it can access them (only when char is Stealthy)
 		r = new RegularTile();
 		b.setNeighbour(r, 0);
-		c = new CharacterToken("Billy Bob Joe", 1, 4);
+		c = new CharacterToken("Billy Bob Joe", 1, null);
 		a = new StealthyAbility();
 	}
 

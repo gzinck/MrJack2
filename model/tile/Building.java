@@ -4,11 +4,11 @@ import model.token.CharacterToken;
 import model.player.*;
 import model.ability.*;
 
-public class Building extends Tile {
-	public HashSet<Tile> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
+public class Building extends Tile implements Passable {
+	public HashSet<Passable> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
 		if(numMoves < 1) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 1.");
 		// If the ability allows walking through things...
-		HashSet<Tile> accessibleTiles = new HashSet<Tile>();
+		HashSet<Passable> accessibleTiles = new HashSet<Passable>();
 		
 		// If out of moves, no tiles accessible (not even this tile)
 		if(numMoves - 1 == 0) return accessibleTiles;

@@ -25,8 +25,8 @@ public class TestExit {
 		jack = new MrJack();
 		detective = new Detective();
 		exit = new Exit();
-		c1 = new CharacterToken("Billy Bob Joe", 1, 4);
-		c2 = new CharacterToken("Billy Bob Jock", 1, 3);
+		c1 = new CharacterToken("Billy Bob Joe", 1, null);
+		c2 = new CharacterToken("Billy Bob Jock", 1, null);
 	}
 
 	@Test

@@ -7,15 +7,13 @@ import model.token.CharacterToken;
 public abstract class Tile {
 	
 	protected static final int NUM_NEIGHBOURS = 6; 
-	protected Tile[] neighbours;
+	protected Passable[] neighbours;
 	
 	public Tile() {
-		neighbours = new Tile[NUM_NEIGHBOURS];
+		neighbours = new Passable[NUM_NEIGHBOURS];
 	}
 	
-	public void setNeighbour(Tile t, int direction) {
+	public void setNeighbour(Passable t, int direction) {
 		neighbours[direction] = t;
 	}
-	
-	public abstract HashSet<Tile> getAccessibleTiles(int numMoves, CharacterToken character, Player player);
 }

@@ -21,7 +21,7 @@ public class TestManhole {
 		m2 = new Manhole();
 		Manhole.setManholes(m1, m2);
 		r = new RegularTile();
-		c = new CharacterToken("Something", 1, 1);
+		c = new CharacterToken("Something", 1, null);
 	}
 
 	@Test

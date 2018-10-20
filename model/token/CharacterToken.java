@@ -1,19 +1,25 @@
 package model.token;
 
+import java.util.HashSet;
+
 import model.ability.Ability;
+import model.player.Player;
+import model.tile.Occupiable;
+import model.tile.Passable;
+import model.tile.Tile;
 
 public class CharacterToken {
 	private String name;
-	private int minNumMoves;
 	private int maxNumMoves;
 	private boolean isSeen;
 	private boolean isInnocent;
 	private Ability ability;
+	private Occupiable currTile;
 	
-	public CharacterToken(String charName, int minMoves, int maxMoves) {
+	public CharacterToken(String charName, int maxMoves, Occupiable initialTile) {
 		name = charName;
-		minNumMoves = minMoves;
 		maxNumMoves = maxMoves;
+		currTile = initialTile;
 	}
 	
 	public void setAbility(Ability charAbility) {
@@ -32,5 +38,20 @@ public class CharacterToken {
 			if(this.name.equals(((CharacterToken)other).name)) return true;
 		}
 		return false;
+	}
+	
+	public HashSet<Passable> getAccessibleTiles(Player currPlayer) {
+		return currTile.getAccessibleTiles(maxNumMoves, this, currPlayer);
+	}
+	
+	public boolean isLit() {
+		return currTile.isLit();
+	}
+	
+	public boolean evaluateInnocence(boolean jackWasSeen) {
+		if(!isInnocent) {
+			isInnocent = (jackWasSeen != isLit());
+		}
+		return isInnocent;
 	}
 }
