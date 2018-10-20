@@ -1,6 +1,6 @@
 package model.tile;
 
-public abstract class Tile implements VisibleTile, Passable {
+public abstract class Tile implements Passable {
 	
 	public static final int NUM_NEIGHBOURS = 6; 
 	protected Passable[] neighbours;
