@@ -2,6 +2,7 @@ package model.tile;
 
 import java.util.HashSet;
 
+import model.player.Detective;
 import model.player.Player;
 import model.token.CharacterToken;
 import model.token.ManholeCover;
@@ -60,8 +61,8 @@ public class Manhole extends Tile implements Lightable {
 		if(numMoves < 1) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 1.");
 		HashSet<Passable> accessibleTiles = new HashSet<Passable>();
 		
-		// If curr tile is not occupied, add it as a possibility
-		if(!isOccupied) accessibleTiles.add(this);
+		// If curr tile is not occupied (or player is the Detective), add it as a possibility
+		if(!isOccupied || player.getPlayerName().equals(Detective.PLAYER_NAME)) accessibleTiles.add(this);
 		
 		// If no moves left, quit here.
 		if(numMoves - 1 == 0) return accessibleTiles;
