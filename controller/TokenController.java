@@ -12,6 +12,9 @@ public class TokenController implements Observer
 		barr = inBarr;
 		gasLight = inGasLight;
 		manholeCover = inManholeCover;
+		barr.addObserver(this);
+		gasLight.addObserver(this);
+		manholeCover.addObserver(this);
 	}
 	
 	

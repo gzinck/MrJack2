@@ -17,9 +17,10 @@ public class Barricade extends Observable
 	}
 	public void moveBarricade(Exit inExit, Player currPlayer)
 	{
-		
 		MoveBarricadeAbility barrAbility = new MoveBarricadeAbility(inExit, this);
 		barrAbility.performAbility(currPlayer);
-			
+		notifyObservers();
 	}
+	
+	
 }

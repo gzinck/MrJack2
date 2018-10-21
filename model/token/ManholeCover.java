@@ -1,6 +1,9 @@
 package model.token;
 import model.tile.*;
-public class ManholeCover
+import model.ability.*;
+import model.player.*;
+import java.util.Observable;
+public class ManholeCover extends Observable
 {
 	public Manhole currManhole;
 	public ManholeCover(Manhole initialManhole)
@@ -8,18 +11,15 @@ public class ManholeCover
 		currManhole = initialManhole;
 		initialManhole.placeCover(this);
 	}
-	public void setManholeCover(Manhole inManhole)
+	public Manhole getManhole()
+	{
+		return currManhole;
+	}
+	public void setManholeCover(Manhole inManhole, Player currPlayer)
 	{
 		
-		if(!inManhole.isCovered())
-		{
-			currManhole = inManhole;
-			inManhole.placeCover(this);
-		}
-		else
-		{
-			throw new IllegalArgumentException("Manhole already has a manhole cover");
-		}
-			
+		MoveCoverAbility coverAbility = new MoveCoverAbility(inManhole, this);
+		coverAbility.performAbility(currPlayer);
+		notifyObservers();
 	}
 }
