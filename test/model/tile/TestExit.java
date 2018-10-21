@@ -13,6 +13,8 @@ import model.tile.Exit;
 import model.tile.Passable;
 import model.tile.Tile;
 import model.token.CharacterToken;
+import model.tile.*;
+import model.witnesscard.*;
 
 public class TestExit {
 	MrJack jack;
@@ -47,10 +49,14 @@ public class TestExit {
 	}
 	
 	@Test
-	public void testIsBarricaded()
+	public void testSetWitness()
 	{
 		Exit e1 = new Exit();
-		Barricade b1 = new Barricade(e1);
+		CharacterToken t1 = new CharacterToken("Stealthy", 3, new RegularTile());
+		WitnessCard w1 = new WitnessCard(t1);
+		e1.setWitnessCard(w1);
+		String expect = "true";
+		assertEquals(expect, "" + (w1==e1.getWitnessCard()));
 		
 	}
 

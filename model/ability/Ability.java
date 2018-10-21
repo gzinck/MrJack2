@@ -1,7 +1,7 @@
 package model.ability;
 
 import model.player.*;
-
+import model.tile.*;
 public abstract class Ability {
 	public String ability;
 	static enum Timing {

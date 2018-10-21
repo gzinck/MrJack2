@@ -1,6 +1,7 @@
 package model.token;
 import model.tile.*;
-public class Barricade
+import java.util.Observable;
+public class Barricade extends Observable
 {
 	public Exit currExit;
 	public Barricade(Exit initialExit)

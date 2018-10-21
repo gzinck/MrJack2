@@ -10,8 +10,10 @@ import model.token.ManholeCover;
 
 public class Lamppost extends Tile implements Passable {
 	
+	private static int numLamps;
 	private GasLight light;
-	
+	private static Lamppost[] allLampposts;
+	private static boolean[] litLampposts;
 	public Lamppost()
 	{
 		light = null;
@@ -19,12 +21,13 @@ public class Lamppost extends Tile implements Passable {
 	
 	public void placeGasLight(GasLight inGasLight) {
 		light = inGasLight;
+		updateLit();
 	}
 	
 	public void removeGasLight() {
 		light.currLamppost=null;
 		light = null;
-		
+		updateLit();
 	}
 	
 	public boolean isLit() {
@@ -49,5 +52,23 @@ public class Lamppost extends Tile implements Passable {
 		
 		return accessibleTiles;
 	}
-
+	public void updateLit()
+	{
+		litLampposts = new boolean[numLamps];
+		for(int i = 0; i<numLamps;i++)
+		{
+			if(allLampposts[i].isLit())
+			{
+				litLampposts[i]=true;
+			}
+			else{
+				litLampposts[i]=false;
+			}
+		}
+	}
+	public static void setLampposts(Lamppost... inLampposts)
+	{
+		allLampposts = inLampposts;
+		numLamps = allLampposts.length;
+	}
 }
