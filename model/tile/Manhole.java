@@ -9,10 +9,12 @@ import model.token.ManholeCover;
 
 public class Manhole extends Tile implements Lightable {
 	private static Manhole[] allManholes; // Static means we can access it from any instance
+	private static boolean[] coveredManholes;
 	private Occupiable[] occupiableNeighbours;
 	private Lamppost lamp;
 	private ManholeCover cover;
 	private boolean isOccupied;
+	private static int numManholes;
 	
 	public Manhole() {
 		cover = null;
@@ -23,11 +25,13 @@ public class Manhole extends Tile implements Lightable {
 	
 	public void placeCover(ManholeCover mcover) {
 		cover = mcover;
+		updateCoveredManholes();
 	}
 	
 	public void removeCover() {
 		cover.currManhole=null;
 		cover = null;
+		updateCoveredManholes();
 	}
 	
 	public boolean isCovered()
@@ -37,7 +41,21 @@ public class Manhole extends Tile implements Lightable {
 	public boolean manholeAccessible() {
 		return (cover == null);
 	}
-
+	public void updateCoveredManholes()
+	{
+		coveredManholes = new boolean[numManholes];
+		for( int i =0; i<numManholes; i++)
+		{
+			if(allManholes[i].isCovered())
+			{	
+				coveredManholes[i] = true;
+			}	
+			else
+			{
+				coveredManholes[i] = false;
+			}
+		}
+	}
 	@Override
 	public HashSet<Passable> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
 		if(numMoves < 1) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 1.");
@@ -69,6 +87,7 @@ public class Manhole extends Tile implements Lightable {
 
 	public static void setManholes(Manhole... manholes) {
 		allManholes = manholes;
+		numManholes = allManholes.length;
 	}
 	
 	@Override

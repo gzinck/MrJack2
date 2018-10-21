@@ -1,6 +1,9 @@
 package model.token;
 import model.tile.*;
-public class Barricade
+import model.ability.*;
+import model.player.*;
+import java.util.Observable;
+public class Barricade extends Observable
 {
 	public Exit currExit;
 	public Barricade(Exit initialExit)
@@ -8,18 +11,15 @@ public class Barricade
 		currExit = initialExit;
 		initialExit.placeBarricade(this);
 	}
-	public void moveBarricade(Exit inExit)
+	public Exit getExit()
+	{
+		return currExit;
+	}
+	public void moveBarricade(Exit inExit, Player currPlayer)
 	{
 		
-		if(!inExit.isBarricaded())
-		{
-			currExit = inExit;
-			inExit.placeBarricade(this);
-		}
-		else
-		{
-			throw new IllegalArgumentException("Exit already has a barricade");
-		}
+		MoveBarricadeAbility barrAbility = new MoveBarricadeAbility(inExit, this);
+		barrAbility.performAbility(currPlayer);
 			
 	}
 }

@@ -1,8 +1,8 @@
 package model.ability;
-
+import java.util.Observable;
 import model.player.*;
-
-public abstract class Ability {
+import model.tile.*;
+public abstract class Ability{
 	public String ability;
 	static enum Timing {
 		BEFORE, AFTER, BEFORAFTER, INSTEAD, NONE
@@ -12,5 +12,7 @@ public abstract class Ability {
 	public boolean isAbility(String abilityString) {
 		if(ability.equals(abilityString)) return true;
 		return false;
+		
 	}
+	
 }
