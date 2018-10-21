@@ -36,7 +36,7 @@ public class GameBoard
 			"Smith"
 	};
 	private static final Ability[] CHAR_ABILITIES = {
-			new StealthyAbility(), new MoveBarricadeAbility(), new MoveCoverAbility(), new MoveLightAbility()
+			new StealthyAbility(), new MoveBarricadeAbility(new Exit(), new Barricade(new Exit())), new MoveCoverAbility(), new MoveLightAbility()
 	};
 	private static final int[] CHAR_NUM_MOVES = {4, 3, 3, 3};
 	
