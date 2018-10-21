@@ -21,6 +21,11 @@ public class TurnKeeper
 		evenRoundOrder = new Player[] {jack, det};
 		lightsToRemove = removableLights;
 	}
+	public Player getCurrPlayer() {
+		if(currRound % 2 == 1)
+			return oddRoundOrder[currTurn - 1];
+		return evenRoundOrder[currTurn - 1];
+	}
 	public Player nextTurn()
 	{
 		if(!roundOver())
@@ -40,7 +45,7 @@ public class TurnKeeper
 	
 	private void removeLight()
 	{
-			lightsToRemove[currRound-1].removeFromBoard();
+		lightsToRemove[currRound-1].removeFromBoard();
 	}
 	public boolean roundOver()
 	{
