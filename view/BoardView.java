@@ -7,10 +7,13 @@ public class BoardView extends AnchorPane {
 	private char[][] board;
 	private int numRows, numCols;
 	private TileView[][] tiles;
+	/** This is an array of 2-tuples (row, col) of the indices of highlighted tiles. */
+	private int[][] highlightedTiles;
 	private double tW, tH; // Tile positions and sizes.
 	
 	public BoardView(char[][] boardTemplate) {
 		board = boardTemplate;
+		highlightedTiles = null;
 		this.widthProperty().addListener((obs, oldVal, newVal) -> {
 			if(tiles != null)
 				resizeTiles();
@@ -68,5 +71,26 @@ public class BoardView extends AnchorPane {
 		double yOffset = getTileHeight();
 		if(col % 2 == 0) return (row + 0.5) * yOffset;
 		return row * yOffset;
+	}
+	
+	/**
+	 * Highlights all the tiles with the (row, col) coordinates
+	 * indicated array of 2-tupes passed as input.
+	 * 
+	 * @param tileLocations Array of 2-tupes (row, col) which indicate
+	 * which tile locations should be highlighted.
+	 */
+	public void highlightTiles(int[][] tileLocations) {
+		if(highlightedTiles != null)
+			unhighlightTiles();
+		highlightedTiles = tileLocations;
+		for(int i = 0; i < highlightedTiles.length; i++)
+			tiles[highlightedTiles[i][0]][highlightedTiles[i][1]].highlight();
+	}
+	
+	public void unhighlightTiles() {
+		for(int i = 0; i < highlightedTiles.length; i++)
+			tiles[highlightedTiles[i][0]][highlightedTiles[i][1]].unhighlight();
+		highlightedTiles = null;
 	}
 }

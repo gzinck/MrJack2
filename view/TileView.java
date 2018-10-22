@@ -38,4 +38,11 @@ public class TileView extends Region {
 		tileImg.setFitWidth(width);
 		tileImg.setFitHeight(height);
 	}
+	
+	public void highlight() {
+		tileImg.setStyle("-fx-opacity:0.5;");
+	}
+	public void unhighlight() {
+		tileImg.setStyle("-fx-opacity:1;");
+	}
 }
