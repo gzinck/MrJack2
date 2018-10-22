@@ -28,6 +28,7 @@ public class TurnKeeper
 	// Variables for holding the current stage in the turn
 	private int currStage;
 	private StageTiming timing;
+	private CharacterToken currCharacter;
 	
 	public TurnKeeper(MrJack jack, Detective det, GasLight[] removableLights)
 	{
@@ -37,6 +38,7 @@ public class TurnKeeper
 		evenRoundOrder = new Player[] {jack, det};
 		lightsToRemove = removableLights;
 		currStage = STAGE_TURN_NOT_STARTED;
+		currCharacter = null;
 	}
 	public Player getCurrPlayer() {
 		if(currTurn == 0)
@@ -101,5 +103,11 @@ public class TurnKeeper
 	public boolean gameOver()
 	{
 		return (currRound == MAX_ROUNDS + 1);
+	}
+	public CharacterToken getCurrCharacter() {
+		return currCharacter;
+	}
+	public void setCurrCharacter(CharacterToken newCharacter) {
+		currCharacter = newCharacter;
 	}
 }
