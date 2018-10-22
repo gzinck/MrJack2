@@ -23,7 +23,6 @@ public class GameView {
 		Platform.runLater(() -> {
 			boardView.drawBoard();
 		});
-		
 		return boardView;
 	}
 }

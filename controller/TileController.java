@@ -9,12 +9,14 @@ public class TileController implements Observer
 	private GasLight gasLight;
 	private ManholeCover manholeCover;
 	private TurnKeeper turnKeeper;
+	private TokenMover tokenMover;
 	public TileController(Barricade inBarr, GasLight inGasLight, ManholeCover inManholeCover, TurnKeeper inTurnKeeper)
 	{
 		barr = inBarr;
 		gasLight = inGasLight;
 		manholeCover = inManholeCover;
 		turnKeeper = inTurnKeeper;
+		tokenMover = new TokenMover();
 		barr.addObserver(this);
 		gasLight.addObserver(this);
 		manholeCover.addObserver(this);

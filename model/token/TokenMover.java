@@ -1,17 +1,19 @@
 package model.token;
 
 import model.ability.Ability;
+import view.BoardView;
 
 public class TokenMover {
 	private int[][] tokenLocationOptions, tileLocationOptions;
 	private int[] selectedToken, selectedTile;
+	private BoardView boardView;
 	
 	private Ability currAbility;
 	// Given a tile location, we want to identify the token clicked on.
 	// With this token, we want to get the tiles that are accessible and
 	// highlight those. Returns false if there are no options, given the
 	// ability and the token chosen.
-	public int[][] getTokenOptions(Ability ability) {
+	public int[][] getTokenOptions(Ability ability, BoardView board) {
 		currAbility = ability;
 		tokenLocationOptions = ability.getAbilityTokenOptions();
 		return tokenLocationOptions;
@@ -47,5 +49,11 @@ public class TokenMover {
 	}
 	private void performMove() {
 		currAbility.performAbility(selectedToken, selectedTile);
+	}
+	public boolean tokenSelected() {
+		return (selectedToken != null);
+	}
+	public boolean tileSelected() {
+		return (selectedTile != null);
 	}
 }
