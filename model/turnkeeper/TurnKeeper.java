@@ -21,7 +21,7 @@ public class TurnKeeper
 	private static final int START_TURN = 0;
 	public int currTurn;
 	public int currRound;
-	private static final int MAX_ROUNDS = 8;
+	public static final int MAX_ROUNDS = 8;
 	public static final int MAX_TURNS = 2;
 	private GasLight[] lightsToRemove;
 	
@@ -39,7 +39,11 @@ public class TurnKeeper
 		currStage = STAGE_TURN_NOT_STARTED;
 	}
 	public Player getCurrPlayer() {
-		if(currRound % 2 == 1)
+		if(currTurn == 0)
+		{
+			throw new IllegalArgumentException("Turn has not started");
+		}	
+		else if(currRound % 2 == 1)
 			return oddRoundOrder[currTurn - 1];
 		return evenRoundOrder[currTurn - 1];
 	}
@@ -56,6 +60,14 @@ public class TurnKeeper
 	public int getStage() {
 		return currStage;
 	}
+	public int getRound()
+	{
+		return currRound;
+	}
+	public int getTurn()
+	{
+		return currTurn;
+	}	
 	public void setActionTiming(StageTiming time) {
 		timing = time;
 	}
