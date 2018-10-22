@@ -16,7 +16,7 @@ public class GasLight extends Observable implements Token
 		return currLamppost;
 		
 	}
-	public void setGasLight(Lamppost inLamp, Player currPlayer)
+	public void moveGasLight(Lamppost inLamp)
 	{
 		currLamppost.removeGasLight();
 		currLamppost = inLamp;

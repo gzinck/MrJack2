@@ -15,11 +15,11 @@ public class ManholeCover extends Observable implements Token
 	{
 		return currManhole;
 	}
-	public void setManholeCover(Manhole inManhole, Player currPlayer)
+	public void moveManholeCover(Manhole inManhole)
 	{
-		
-		MoveCoverAbility coverAbility = new MoveCoverAbility(inManhole, this);
-		coverAbility.performAbility(currPlayer);
+		currManhole.removeCover();
+		inManhole.placeCover(this);
+		currManhole = inManhole;
 		notifyObservers();
 	}
 	@Override

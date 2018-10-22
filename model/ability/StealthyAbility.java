@@ -3,11 +3,12 @@ package model.ability;
 import model.ability.Ability.Timing;
 import model.player.Player;
 import model.token.CharacterToken;
-
-public class StealthyAbility extends Ability {
+import model.gameboard.*;
+public class StealthyAbility implements Ability {
 	public static final String ABILITY = "Stealthy";
-	public StealthyAbility() {
-		super.ability = ABILITY;
+	private TokenFinder tokenFinder;
+	public StealthyAbility(TokenFinder finder) {
+		tokenFinder = finder;
 	}
 	
 	public void performAbility(Player currPlayer) {
@@ -18,5 +19,29 @@ public class StealthyAbility extends Ability {
 	}
 	public Timing whenUseAbility() {
 		return Timing.NONE;
+	}
+
+	@Override
+	public void performAbility(int[] tokenLocation, int[] tileLocation) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int[][] getAbilityTokenOptions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[][] getAbilityTileOptions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAbility(String abilityString) {
+		// TODO Auto-generated method stub
+		return (abilityString == ABILITY);
 	}
 }

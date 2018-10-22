@@ -1,35 +1,60 @@
 package model.ability;
 
+import model.ability.Ability.Timing;
+import model.gameboard.TokenFinder;
 import model.player.Player;
 import model.token.*;
 import model.tile.*;
-public class MoveCoverAbility extends Ability {
-	public Manhole currManhole;
-	public ManholeCover currCover;
+public class MoveCoverAbility implements Ability {
+private TokenFinder tokenFinder;
+	
 	public static final String ABILITY = "MoveCover";
-	public MoveCoverAbility(Manhole inManhole, ManholeCover inManholeCover) {
-		super.ability = ABILITY;
-		currManhole = inManhole;
-		currCover = inManholeCover;
+	public MoveCoverAbility(TokenFinder finder) {
+		tokenFinder = finder;
 	}
-
-	@Override
-	public void performAbility(Player currPlayer) {
-		// TODO Auto-generated method stub
-		if(!currManhole.isCovered())
-		{
-			currManhole.placeCover(currCover);
-		}
-		else
-		{
-			throw new IllegalArgumentException("Manhole already has a manhole cover");
-		}
-	}
-
+	
 	@Override
 	public Timing whenUseAbility() {
-		// TODO Auto-generated method stub
+		
 		return Timing.BEFORAFTER;
+	}
+
+	@Override
+	public void performAbility(int[] tokenLocation, int[] tileLocation) {
+		ManholeCover c = tokenFinder.getManholeCover(tokenLocation);
+		c.moveManholeCover(tokenFinder.getManhole(tileLocation));
+	}
+
+	@Override
+	public int[][] getAbilityTokenOptions() {
+		ManholeCover[] manholeCovers = tokenFinder.getManholeCovers();
+		int[][] locations = new int[manholeCovers.length][];
+		for(int i = 0; i < manholeCovers.length; i++) {
+			locations[i] = manholeCovers[i].getTokenLocation();
+		}
+		return locations;
+		
+	}
+
+	@Override
+	public int[][] getAbilityTileOptions() {
+		Manhole[] manholes= tokenFinder.getManholes();
+		int numManholes = 0;
+		for(int i = 0; i < manholes.length; i++)
+			if(!manholes[i].isCovered()) numManholes++;
+		int[][] locations = new int[numManholes][2];
+		numManholes = 0;
+		
+		// Place locations into an array.
+		for(int i = 0; i < locations.length; i++)
+			if(!manholes[i].isCovered()) locations[numManholes++] = manholes[i].getTileLocation();
+		
+		return locations;
+	}
+
+	@Override
+	public boolean isAbility(String abilityString) {
+		return abilityString.equals(ABILITY);
 	}
 
 }
