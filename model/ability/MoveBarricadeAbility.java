@@ -14,20 +14,6 @@ public class MoveBarricadeAbility implements Ability{
 		tokenFinder = finder;
 	}
 	
-//	@Override
-//	public void performAbility(Player currPlayer) {
-//		
-//		
-//		if(!currExit.isBarricaded())
-//		{
-//			currExit.placeBarricade(currBarricade);
-//		}
-//		else
-//		{
-//			throw new IllegalArgumentException("Exit already has a barricade");
-//		}
-//	}
-
 	@Override
 	public Timing whenUseAbility() {
 		// TODO Auto-generated method stub

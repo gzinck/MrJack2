@@ -5,6 +5,7 @@ import model.player.*;
 import model.token.CharacterToken;
 import model.witnesscard.WitnessCard;
 import model.token.Barricade;
+import model.gameboard.*;
 
 public class Exit extends Tile implements Passable {
 
@@ -60,6 +61,11 @@ public class Exit extends Tile implements Passable {
 				barricadedExits[i]=false;
 			}
 		}
+	}
+	public Exit[] availableExits()
+	{
+		Exit[] availableExits = new Exit[GameBoard.NUM_BARRICADES];
+		return availableExits;
 	}
 	public static void setExits(Exit... inExits)
 	{

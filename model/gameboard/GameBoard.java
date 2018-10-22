@@ -36,11 +36,11 @@ public class GameBoard implements TokenFinder
 			"Smith"
 	};
 	private final Ability[] CHAR_ABILITIES = {
-			new StealthyAbility(), new MoveBarricadeAbility(this), new MoveCoverAbility(), new MoveLightAbility()
+			new StealthyAbility(), new MoveBarricadeAbility(this), new MoveCoverAbility(new Manhole(), new ManholeCover(new Manhole())), new MoveLightAbility(new Lamppost(), new GasLight(new Lamppost()))
 	};
 	private static final int[] CHAR_NUM_MOVES = {4, 3, 3, 3};
 	
-	private static final int NUM_BARRICADES = 1;
+	public static final int NUM_BARRICADES = 1;
 	private static final int NUM_GASLIGHTS = 1;
 	private static final int NUM_REMOVABLE_GASLIGHTS = 1;
 	private static final int NUM_MANCOVERS = 1;

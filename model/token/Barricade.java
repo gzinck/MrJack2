@@ -16,6 +16,7 @@ public class Barricade extends Observable implements Token
 	}
 	public void moveBarricade(Exit inExit)
 	{
+<<<<<<< HEAD
 		currExit.removeBarricade();
 		inExit.placeBarricade(this);
 		currExit = inExit;
@@ -24,5 +25,12 @@ public class Barricade extends Observable implements Token
 	@Override
 	public int[] getTokenLocation() {
 		return currExit.getTileLocation();
+=======
+		MoveBarricadeAbility barrAbility = new MoveBarricadeAbility(inExit, this);
+		barrAbility.performAbility(currPlayer);
+		notifyObservers();
+>>>>>>> fd1311bfbdf18ce6efc15be2dec2826dc1b1c073
 	}
+	
+	
 }
