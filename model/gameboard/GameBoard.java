@@ -3,9 +3,9 @@ import model.ability.*;
 import model.tile.*;
 import model.token.*;
 
-public class GameBoard 
+public class GameBoard implements TokenFinder
 {
-	private static final char[][] TILE_FRAMEWORK = new char[][] {
+	public static final char[][] TILE_FRAMEWORK = new char[][] {
 		{'E', 'X', 'X', 'X', ' ', 'M', ' '},
 		{'X', ' ', 'L', 'B', ' ', 'L', ' '},
 		{' ', 'M', ' ', ' ', ' ', 'B', 'M'},
@@ -35,8 +35,8 @@ public class GameBoard
 			"Bert",
 			"Smith"
 	};
-	private static final Ability[] CHAR_ABILITIES = {
-			new StealthyAbility(), new MoveBarricadeAbility(new Exit(), new Barricade(new Exit())), new MoveCoverAbility(), new MoveLightAbility()
+	private final Ability[] CHAR_ABILITIES = {
+			new StealthyAbility(), new MoveBarricadeAbility(this), new MoveCoverAbility(), new MoveLightAbility()
 	};
 	private static final int[] CHAR_NUM_MOVES = {4, 3, 3, 3};
 	
@@ -249,6 +249,100 @@ public class GameBoard
 	public CharacterToken getCharacter(String characterName) {
 		for(int i = 0 ; i < NUM_CHARACTERS; i++)
 			if(CHAR_NAMES[i].equals(characterName)) return characters[i];
+		return null;
+	}
+
+	public <T extends Token> T getToken(T[] tokenArr, int[] location) {
+		for(int i = 0; i < tokenArr.length; i++) {
+			int[] thisLoc = tokenArr[i].getTokenLocation();
+			if(thisLoc[0] == location[0] && thisLoc[1] == location[1]) return tokenArr[i];
+		}
+		return null;
+	}
+	
+	@Override
+	public ManholeCover getManholeCover(int[] location) {
+		return getToken(mancovers, location);
+	}
+
+	@Override
+	public Barricade getBarricade(int[] location) {
+		return getToken(barricades, location);
+	}
+
+	@Override
+	public GasLight getGasLight(int[] location) {
+		return getToken(gaslights, location);
+	}
+
+	@Override
+	public CharacterToken getCharacter(int[] location) {
+		return getToken(characters, location);
+	}
+
+	@Override
+	public ManholeCover[] getManholeCovers() {
+		return mancovers;
+	}
+
+	@Override
+	public Barricade[] getBarricades() {
+		return barricades;
+	}
+
+	@Override
+	public GasLight[] getGasLights() {
+		return gaslights;
+	}
+
+	@Override
+	public CharacterToken[] getCharacters() {
+		return characters;
+	}
+
+	public <T extends VisibleTile> T getTile(T[] tileArr, int[] location) {
+		for(int i = 0; i < tileArr.length; i++) {
+			int[] thisLoc = tileArr[i].getTileLocation();
+			if(thisLoc[0] == location[0] && thisLoc[1] == location[1]) return tileArr[i];
+		}
+		return null;
+	}
+	
+	@Override
+	public Manhole getManhole(int[] location) {
+		return getTile(manholes, location);
+	}
+
+	@Override
+	public Exit getExit(int[] location) {
+		return getTile(exits, location);
+	}
+
+	@Override
+	public Lamppost getLamp(int[] location) {
+		return getTile(lampList, location);
+	}
+
+	@Override
+	public Lightable getTile(int[] location) {
+		return lightableTiles[location[0]][location[1]];
+	}
+
+	@Override
+	public Manhole[] getManholes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Exit[] getExits() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Lamppost[] getLamps() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

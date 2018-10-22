@@ -3,7 +3,7 @@ import model.tile.*;
 import model.ability.*;
 import model.player.*;
 import java.util.Observable;
-public class Barricade extends Observable
+public class Barricade extends Observable implements Token
 {
 	public Exit currExit;
 	public Barricade(Exit initialExit)
@@ -11,15 +11,18 @@ public class Barricade extends Observable
 		currExit = initialExit;
 		initialExit.placeBarricade(this);
 	}
-	public Exit getExit()
-	{
+	public Exit getExit() {
 		return currExit;
 	}
-	public void moveBarricade(Exit inExit, Player currPlayer)
+	public void moveBarricade(Exit inExit)
 	{
-		
-		MoveBarricadeAbility barrAbility = new MoveBarricadeAbility(inExit, this);
-		barrAbility.performAbility(currPlayer);
-			
+		currExit.removeBarricade();
+		inExit.placeBarricade(this);
+		currExit = inExit;
+	}
+	
+	@Override
+	public int[] getTokenLocation() {
+		return currExit.getTileLocation();
 	}
 }

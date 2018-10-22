@@ -28,9 +28,27 @@ public class GameController {
 		if(turnKeeper.roundOver()) {
 			table.startRound();
 		}
-	}
-	public void updateTurn() {
-		
+		Player currentPlayer;
+		if(turnKeeper.roundOver())
+			currentPlayer = turnKeeper.nextTurn();
+		else
+			currentPlayer = turnKeeper.getCurrPlayer();
+		int turnStage = turnKeeper.nextStage();
+		switch(turnStage) {
+		case TurnKeeper.STAGE_CHOOSE_CHAR:
+			break;
+		case TurnKeeper.STAGE_CHOOSE_IFACTIONFIRST:
+			// TurnKeeper.setActionTiming(enum);
+			break;
+		case TurnKeeper.STAGE_CHOOSE_ACTIONMOVEBEFORE:
+			break;
+		case TurnKeeper.STAGE_CHOOSE_CHARMOVE:
+			break;
+		case TurnKeeper.STAGE_CHOOSE_ACTIONMOVEAFTER:
+			break;
+		default:
+			break;
+		}
 	}
 	public boolean gameIsOver() {
 		return false;

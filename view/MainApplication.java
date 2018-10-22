@@ -4,9 +4,10 @@ import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.gameboard.GameBoard;
 import javafx.application.*;
 
-public class GameApplication extends Application {
+public class MainApplication extends Application {
 	private static final String GAME_NAME = "Mr Jack";
 
 	public static void main(String[] args) {
@@ -20,7 +21,7 @@ public class GameApplication extends Application {
 		stage.setScene(new Scene(root));
 		stage.setTitle(GAME_NAME);
 		stage.show();
-		gv.drawBoard();
+		gv.drawBoard(GameBoard.TILE_FRAMEWORK);
 	}
 
 }

@@ -1,7 +1,6 @@
 package model.token;
 import model.tile.*;
-public class GasLight
-{
+public class GasLight implements Token {
 	public Lamppost currLamppost;
 	public GasLight(Lamppost initialLamppost)
 	{
@@ -23,5 +22,9 @@ public class GasLight
 	public void removeFromBoard()
 	{
 		currLamppost.removeGasLight();
+	}
+	@Override
+	public int[] getTokenLocation() {
+		return currLamppost.getTileLocation();
 	}
 }

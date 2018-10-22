@@ -12,8 +12,8 @@ public class GameView {
 		// Initialize here
     }
 	
-	public BoardView drawBoard() {
-		boardView = new BoardView();
+	public BoardView drawBoard(char[][] boardTemplate) {
+		boardView = new BoardView(boardTemplate);
 		AnchorPane.setTopAnchor(boardView, 0.0);
 		AnchorPane.setBottomAnchor(boardView, 0.0);
 		AnchorPane.setRightAnchor(boardView, 0.0);

@@ -1,7 +1,6 @@
 package model.token;
 import model.tile.*;
-public class ManholeCover
-{
+public class ManholeCover implements Token {
 	public Manhole currManhole;
 	public ManholeCover(Manhole initialManhole)
 	{
@@ -21,5 +20,9 @@ public class ManholeCover
 			throw new IllegalArgumentException("Manhole already has a manhole cover");
 		}
 			
+	}
+	@Override
+	public int[] getTokenLocation() {
+		return currManhole.getTileLocation();
 	}
 }

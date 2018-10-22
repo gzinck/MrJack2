@@ -7,7 +7,7 @@ import model.player.Player;
 import model.tile.Lightable;
 import model.tile.Passable;
 
-public class CharacterToken {
+public class CharacterToken implements Token {
 	private String name;
 	private int maxNumMoves;
 	private boolean isInnocent;
@@ -53,11 +53,12 @@ public class CharacterToken {
 		return isInnocent;
 	}
 	
-	public int[] getLocation() {
-		return currTile.getTileLocation();
-	}
-	
 	public void moveTo(Lightable tile) {
 		currTile = tile;
+	}
+	
+	@Override
+	public int[] getTokenLocation() {
+		return currTile.getTileLocation();
 	}
 }

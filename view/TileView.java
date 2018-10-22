@@ -20,6 +20,7 @@ public class TileView extends Region {
 	private ImageView characterImg;
 	
 	public TileView(char tileType, double width, double height) {
+		this.setStyle("-fx-cursor: hand;");
 		char c = '`';
 		int index = -1;
 		while(c != tileType)
@@ -27,6 +28,10 @@ public class TileView extends Region {
 		tileImg = new ImageView(TILE_IMGS[index]);
 		tileResize(width, height);
 		this.getChildren().add(tileImg);
+		
+		this.setOnMouseClicked(e -> {
+			
+		});
 	}
 	
 	public void tileResize(double width, double height) {

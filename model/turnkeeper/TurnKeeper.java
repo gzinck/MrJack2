@@ -3,6 +3,18 @@ import model.token.*;
 import model.player.*;
 public class TurnKeeper
 {
+	public static enum StageTiming {
+		ACTION_BEFORE, ACTION_AFTER, NO_ACTION
+	}
+	
+	public static final int STAGE_TURN_NOT_STARTED = -1;
+	public static final int STAGE_CHOOSE_CHAR = 0;
+	public static final int STAGE_CHOOSE_IFACTIONFIRST = 1;
+	public static final int STAGE_CHOOSE_ACTIONMOVEBEFORE = 2;
+	public static final int STAGE_CHOOSE_CHARMOVE = 3;
+	public static final int STAGE_CHOOSE_ACTIONMOVEAFTER = 4;
+	public static final int STAGE_TURN_OVER = 5;
+	
 	private Player[] oddRoundOrder;
 	private Player[] evenRoundOrder;
 	private static final int START_ROUND = 1;
@@ -13,6 +25,10 @@ public class TurnKeeper
 	public static final int MAX_TURNS = 2;
 	private GasLight[] lightsToRemove;
 	
+	// Variables for holding the current stage in the turn
+	private int currStage;
+	private StageTiming timing;
+	
 	public TurnKeeper(MrJack jack, Detective det, GasLight[] removableLights)
 	{
 		currTurn = START_TURN;
@@ -20,6 +36,7 @@ public class TurnKeeper
 		oddRoundOrder = new Player[] {det, jack};
 		evenRoundOrder = new Player[] {jack, det};
 		lightsToRemove = removableLights;
+		currStage = STAGE_TURN_NOT_STARTED;
 	}
 	public Player getCurrPlayer() {
 		if(currRound % 2 == 1)
@@ -28,21 +45,32 @@ public class TurnKeeper
 	}
 	public Player nextTurn()
 	{
-		if(!roundOver())
-		{
-			if(currRound%2==1)
-			{
-				return oddRoundOrder[currTurn++];
-			}
-			else
-			{
-				return evenRoundOrder[currTurn++];
-			}
+		currStage = STAGE_TURN_NOT_STARTED;
+		if(!roundOver()) {
+			if(currRound%2==1) return oddRoundOrder[currTurn++];
+			else return evenRoundOrder[currTurn++];
 		}
 		nextRound();
 		return nextTurn();
 	}
-	
+	public int getStage() {
+		return currStage;
+	}
+	public void setActionTiming(StageTiming time) {
+		timing = time;
+	}
+	public int nextStage() {
+		currStage++;
+		// Skip the stage if not applicable
+		if(currStage == STAGE_CHOOSE_ACTIONMOVEAFTER && (timing == StageTiming.ACTION_BEFORE || timing == StageTiming.NO_ACTION))
+			currStage++;
+		if(currStage == STAGE_CHOOSE_ACTIONMOVEBEFORE && (timing == StageTiming.ACTION_AFTER || timing == StageTiming.NO_ACTION))
+			currStage++;
+		return currStage;
+	}
+	public boolean turnOver() {
+		return (currStage == TurnKeeper.STAGE_TURN_OVER);
+	}
 	private void removeLight()
 	{
 		lightsToRemove[currRound-1].removeFromBoard();
@@ -55,6 +83,7 @@ public class TurnKeeper
 	{
 		if(currRound<=lightsToRemove.length)
 			removeLight();
+		currTurn = 0;
 		currRound++;
 	}
 	public boolean gameOver()

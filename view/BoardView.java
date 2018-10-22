@@ -3,19 +3,14 @@ package view;
 import javafx.scene.layout.AnchorPane;
 
 public class BoardView extends AnchorPane {
-	private static final char[][] TILE_FRAMEWORK = new char[][] {
-		{'E', 'X', 'X', 'X', ' ', 'M', ' '},
-		{'X', ' ', 'L', 'B', ' ', 'L', ' '},
-		{' ', 'M', ' ', ' ', ' ', 'B', 'M'},
-		{' ', 'B', 'B', 'B', ' ', ' ', 'E'}
-	};
 	
 	private char[][] board;
 	private int numRows, numCols;
 	private TileView[][] tiles;
 	private double tW, tH; // Tile positions and sizes.
 	
-	public BoardView() {
+	public BoardView(char[][] boardTemplate) {
+		board = boardTemplate;
 		this.widthProperty().addListener((obs, oldVal, newVal) -> {
 			if(tiles != null)
 				resizeTiles();
@@ -27,9 +22,8 @@ public class BoardView extends AnchorPane {
 	}
 	
 	public void drawBoard() {
-		board = TILE_FRAMEWORK; // TODO: Should just be a parameter
-		numRows = TILE_FRAMEWORK.length;
-		numCols = TILE_FRAMEWORK[0].length;
+		numRows = board.length;
+		numCols = board[0].length;
 		tiles = new TileView[numRows][numCols];
 		tW = getTileWidth();
 		tH = getTileHeight();

@@ -16,10 +16,6 @@ public class Exit extends Tile implements Passable {
 	public static void setWitnessCard(WitnessCard wc) {
 		witnessCard = wc;
 	}
-	public WitnessCard getWitnessCard()
-	{
-		return witnessCard;
-	}
 	
 	@Override
 	public HashSet<Passable> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
