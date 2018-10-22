@@ -36,7 +36,7 @@ public class GameBoard implements TokenFinder
 			"Smith"
 	};
 	private final Ability[] CHAR_ABILITIES = {
-			new StealthyAbility(), new MoveBarricadeAbility(this), new MoveCoverAbility(new Manhole(), new ManholeCover(new Manhole())), new MoveLightAbility(new Lamppost(), new GasLight(new Lamppost()))
+			new StealthyAbility(this), new MoveBarricadeAbility(this), new MoveCoverAbility(this), new MoveLightAbility(this)
 	};
 	private static final int[] CHAR_NUM_MOVES = {4, 3, 3, 3};
 	

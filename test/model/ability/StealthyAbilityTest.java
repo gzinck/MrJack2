@@ -6,12 +6,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.ability.StealthyAbility;
-
+import model.gameboard.*;
 public class StealthyAbilityTest {
 	StealthyAbility sa;
 
 	@Before
 	public void setUp() throws Exception {
+	
 		sa = new StealthyAbility();
 	}
 
