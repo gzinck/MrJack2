@@ -6,7 +6,6 @@ import view.BoardView;
 public class TokenMover {
 	private int[][] tokenLocationOptions, tileLocationOptions;
 	private int[] selectedToken, selectedTile;
-	private BoardView boardView;
 	
 	private Ability currAbility;
 	// Given a tile location, we want to identify the token clicked on.
