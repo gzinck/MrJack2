@@ -15,6 +15,9 @@ public class TileController implements Observer
 		gasLight = inGasLight;
 		manholeCover = inManholeCover;
 		turnKeeper = inTurnKeeper;
+		barr.addObserver(this);
+		gasLight.addObserver(this);
+		manholeCover.addObserver(this);
 	}
 	
 	@Override

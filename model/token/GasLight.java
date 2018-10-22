@@ -1,14 +1,10 @@
 package model.token;
 import model.tile.*;
-<<<<<<< HEAD
-public class GasLight implements Token {
-=======
 import model.ability.*;
 import model.player.*;
 import java.util.Observable;
-public class GasLight extends Observable
+public class GasLight extends Observable implements Token 
 {
->>>>>>> fd1311bfbdf18ce6efc15be2dec2826dc1b1c073
 	public Lamppost currLamppost;
 	public GasLight(Lamppost initialLamppost)
 	{

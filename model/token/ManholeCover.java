@@ -1,14 +1,10 @@
 package model.token;
 import model.tile.*;
-<<<<<<< HEAD
-public class ManholeCover implements Token {
-=======
 import model.ability.*;
 import model.player.*;
 import java.util.Observable;
-public class ManholeCover extends Observable
+public class ManholeCover extends Observable implements Token 
 {
->>>>>>> fd1311bfbdf18ce6efc15be2dec2826dc1b1c073
 	public Manhole currManhole;
 	public ManholeCover(Manhole initialManhole)
 	{
