@@ -22,7 +22,7 @@ public class TestGasLight {
 		Lamppost l1 = new Lamppost();
 		Lamppost l2 = new Lamppost();
 		GasLight g1 = new GasLight(l1);
-		g1.setGasLight(l2);
+		g1.moveGasLight(l2);
 		String excpect = "true";
 		assertEquals(excpect, "" + (l2==g1.currLamppost));
 	}
@@ -36,7 +36,7 @@ public class TestGasLight {
 		Lamppost l2 = new Lamppost();
 		GasLight g1 = new GasLight(l1);
 		GasLight g2 = new GasLight(l2);
-		g1.setGasLight(l2);
+		g1.moveGasLight(l2);
 		}catch(IllegalArgumentException e){didCatch=true;}
 		
 		String excpect = "true";

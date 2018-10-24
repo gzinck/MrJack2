@@ -40,20 +40,22 @@ public class TestTurnKeeper
 		}catch(IllegalArgumentException e){b = true;}
 		assertEquals(b, true);
 	}
-	@Test
-	public void testCurrPlayerR1T1()
+	@Test 
+	public void testCurrPlayerAllRounds()
 	{
 		boolean t = false;
 		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
+		tk.nextTurn();
 		for(int i =0; i<tk.MAX_ROUNDS;i++)
 		{
 			for(int j = 0; j<tk.MAX_TURNS;j++)
 			{
-				tk.nextTurn();
-				if(i%2==1)
+				
+				if(i%2==0)
 				{
 					if(j==0)
 					{
+						
 						 t = (dec==tk.getCurrPlayer() && tk.getRound()==i+1 && tk.getTurn()==j+1);
 					}
 					else
@@ -72,40 +74,20 @@ public class TestTurnKeeper
 						t = (dec==tk.getCurrPlayer() && tk.getRound()==i+1 && tk.getTurn()==j+1);
 					}
 				}
-				assertEquals(t, true);
+				assertEquals(true, t);
+				
+				tk.nextTurn();
 			}
 		}
 
 
 	}
 	@Test
-	public void testCurrPlayerR1T2()
+	public void testGetStageAtStart()
 	{
 		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
-		tk.nextTurn();
-		tk.nextTurn();
-		boolean t = (mrJack==tk.getCurrPlayer() && tk.getRound()==1 && tk.getTurn()==2);
-		assertEquals(t, true);
+		assertEquals(-1, tk.getStage());
 	}
-	@Test
-	public void testCurrPlayerR2T1()
-	{
-		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
-		tk.nextTurn();
-		tk.nextTurn();
-		tk.nextTurn();
-		boolean t = (mrJack==tk.getCurrPlayer() && tk.getRound()==2 && tk.getTurn()==1 );
-		assertEquals(t, true);
-	}
-	@Test
-	public void testCurrPlayerR2T2()
-	{
-		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
-		tk.nextTurn();
-		tk.nextTurn();
-		tk.nextTurn();
-		tk.nextTurn();
-		boolean t = (dec==tk.getCurrPlayer() && tk.getRound()==2 && tk.getTurn()==2 );
-		assertEquals(t, true);
-	}
+	
+	
 }

@@ -1,5 +1,5 @@
 package test.model.ability;
-
+import model.gameboard.*;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -12,8 +12,8 @@ public class StealthyAbilityTest {
 
 	@Before
 	public void setUp() throws Exception {
-	
-		sa = new StealthyAbility();
+
+		
 	}
 
 	@Test

@@ -22,7 +22,7 @@ public class TestBuilding {
 		r = new RegularTile();
 		b.setNeighbour(r, 0);
 		c = new CharacterToken("Billy Bob Joe", 1, null);
-		a = new StealthyAbility();
+		//a = new StealthyAbility();
 	}
 
 	@Test

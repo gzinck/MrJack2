@@ -73,4 +73,8 @@ public class Exit extends Tile implements Passable {
 		numExits = allExits.length;
 		
 	}
+	public WitnessCard getWitnessCard()
+	{
+		return witnessCard;
+	}
 }
