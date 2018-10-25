@@ -31,7 +31,6 @@ public class CharTokenMover {
 			for(int j = 0 ; j < location.length; j++) if(tileLocationOptions[i][j] != location[j]) isEqual = false;
 			if(isEqual) {
 				selectedTile = location;
-				performMove();
 				return true;
 			}
 		}
@@ -43,7 +42,7 @@ public class CharTokenMover {
 	 * 
 	 * @return True if the move reached an exit
 	 */
-	private boolean performMove() {
+	public boolean performMove() {
 		Lightable tile = finder.getTile(selectedTile);
 		if(tile == null) return true;
 		character.moveTo(tile);

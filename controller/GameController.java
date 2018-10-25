@@ -50,6 +50,9 @@ public class GameController implements GameContinuer {
 			break;
 		}
 	}
+	public void jackWins() {
+		// Do something to indicate that Jack won.
+	}
 	public boolean gameIsOver() {
 		return false;
 	}

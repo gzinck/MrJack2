@@ -11,6 +11,7 @@ public class TileController implements Observer
 	private ManholeCover manholeCover;
 	private TurnKeeper turnKeeper;
 	private TokenMover tokenMover;
+	private CharTokenMover charMover;
 	
 	// VIEW items
 	private BoardView boardView;
@@ -24,12 +25,16 @@ public class TileController implements Observer
 		gasLight = inGasLight;
 		manholeCover = inManholeCover;
 		turnKeeper = inTurnKeeper;
+		boardView = inBoardView;
+		gameContinuer = inGameContinuer;
+		
 		tokenMover = new TokenMover();
+		charMover = new CharTokenMover();
+		
 		barr.addObserver(this);
 		gasLight.addObserver(this);
 		manholeCover.addObserver(this);
-		boardView = inBoardView;
-		gameContinuer = inGameContinuer;
+		
 	}
 	
 	@Override
@@ -53,6 +58,7 @@ public class TileController implements Observer
 			continueChoosingAction(row, col);
 			break;
 		case TurnKeeper.STAGE_CHOOSE_CHARMOVE:
+			continueChoosingCharacterMove(row, col);
 			break;
 		case TurnKeeper.STAGE_CHOOSE_ACTIONMOVEAFTER:
 			continueChoosingAction(row, col);
@@ -75,6 +81,18 @@ public class TileController implements Observer
 				// Then, we just perform the ability and move to next stage!
 				tokenMover.performMove();
 				boardView.unhighlightTiles();
+				turnKeeper.nextStage();
+				gameContinuer.continueGame();
+			}
+		}
+	}
+	private void continueChoosingCharacterMove(int row, int col) {
+		boolean success = charMover.selectTile(new int[] {row, col});
+		if(success) {
+			boolean foundExit = charMover.performMove();
+			if(foundExit) {
+				gameContinuer.jackWins();
+			} else {
 				turnKeeper.nextStage();
 				gameContinuer.continueGame();
 			}
