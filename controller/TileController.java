@@ -3,6 +3,7 @@ import java.util.Observable;
 import java.util.Observer;
 import model.token.*;
 import model.turnkeeper.TurnKeeper;
+import view.BoardView;
 public class TileController implements Observer
 {
 	private Barricade barr;
@@ -10,7 +11,14 @@ public class TileController implements Observer
 	private ManholeCover manholeCover;
 	private TurnKeeper turnKeeper;
 	private TokenMover tokenMover;
-	public TileController(Barricade inBarr, GasLight inGasLight, ManholeCover inManholeCover, TurnKeeper inTurnKeeper)
+	
+	// VIEW items
+	private BoardView boardView;
+	
+	// CONTROLLER items
+	private GameContinuer gameContinuer;
+	
+	public TileController(Barricade inBarr, GasLight inGasLight, ManholeCover inManholeCover, TurnKeeper inTurnKeeper, BoardView inBoardView, GameContinuer inGameContinuer)
 	{
 		barr = inBarr;
 		gasLight = inGasLight;
@@ -20,6 +28,8 @@ public class TileController implements Observer
 		barr.addObserver(this);
 		gasLight.addObserver(this);
 		manholeCover.addObserver(this);
+		boardView = inBoardView;
+		gameContinuer = inGameContinuer;
 	}
 	
 	@Override
@@ -36,15 +46,38 @@ public class TileController implements Observer
 //			break;
 //		case TurnKeeper.STAGE_CHOOSE_IFACTIONFIRST:
 //			break;
+//		Do this before moving to the action time...
+//		int[][] options = tokenMover.getTokenOptions(turnKeeper.getCurrCharacter().getAbility());
+//		boardView.highlightTiles(options);
 		case TurnKeeper.STAGE_CHOOSE_ACTIONMOVEBEFORE:
-			
+			continueChoosingAction(row, col);
 			break;
 		case TurnKeeper.STAGE_CHOOSE_CHARMOVE:
 			break;
 		case TurnKeeper.STAGE_CHOOSE_ACTIONMOVEAFTER:
+			continueChoosingAction(row, col);
 			break;
 		default:
 			break;
+		}
+	}
+	private void continueChoosingAction(int row, int col) {
+		if(!tokenMover.tokenSelected()) {
+			boolean success = tokenMover.selectToken(new int[]{row, col});
+			if(success) {
+				// Then highlight all the new places that can be clicked...
+				int[][] tileOptions = tokenMover.getTileOptions();
+				boardView.highlightTiles(tileOptions);
+			}
+		} else if(!tokenMover.tileSelected()) {
+			boolean success = tokenMover.selectTile(new int[] {row, col});
+			if(success) {
+				// Then, we just perform the ability and move to next stage!
+				tokenMover.performMove();
+				boardView.unhighlightTiles();
+				turnKeeper.nextStage();
+				gameContinuer.continueGame();
+			}
 		}
 	}
 }

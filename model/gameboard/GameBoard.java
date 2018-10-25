@@ -333,19 +333,16 @@ public class GameBoard implements TokenFinder
 
 	@Override
 	public Manhole[] getManholes() {
-		// TODO Auto-generated method stub
-		return null;
+		return manholes;
 	}
 
 	@Override
 	public Exit[] getExits() {
-		// TODO Auto-generated method stub
-		return null;
+		return exits;
 	}
 
 	@Override
 	public Lamppost[] getLamps() {
-		// TODO Auto-generated method stub
-		return null;
+		return lampList;
 	}
 }

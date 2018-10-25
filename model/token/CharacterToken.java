@@ -24,6 +24,10 @@ public class CharacterToken implements Token {
 		ability = charAbility;
 	}
 	
+	public Ability getAbility() {
+		return ability;
+	}
+	
 	public boolean hasAbility(String abilityString) {
 		if(ability == null) return false;
 		return ability.isAbility(abilityString);

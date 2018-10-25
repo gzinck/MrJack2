@@ -5,7 +5,7 @@ import model.player.*;
 import model.table.Table;
 import model.turnkeeper.TurnKeeper;
 
-public class GameController {
+public class GameController implements GameContinuer {
 	private GameBoard gb;
 	private MrJack jack;
 	private Detective detective;

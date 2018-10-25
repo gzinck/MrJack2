@@ -1,7 +1,6 @@
 package model.token;
 
 import model.ability.Ability;
-import view.BoardView;
 
 public class TokenMover {
 	private int[][] tokenLocationOptions, tileLocationOptions;
@@ -12,7 +11,7 @@ public class TokenMover {
 	// With this token, we want to get the tiles that are accessible and
 	// highlight those. Returns false if there are no options, given the
 	// ability and the token chosen.
-	public int[][] getTokenOptions(Ability ability, BoardView board) {
+	public int[][] getTokenOptions(Ability ability) {
 		currAbility = ability;
 		tokenLocationOptions = ability.getAbilityTokenOptions();
 		return tokenLocationOptions;
@@ -40,14 +39,19 @@ public class TokenMover {
 			for(int j = 0 ; j < location.length; j++) if(tileLocationOptions[i][j] != location[j]) isEqual = false;
 			if(isEqual) {
 				selectedTile = location;
-				performMove();
 				return true;
 			}
 		}
 		return false;
 	}
-	private void performMove() {
+	public void performMove() {
 		currAbility.performAbility(selectedToken, selectedTile);
+		// Reset variables so that logic still works
+		currAbility = null;
+		tokenLocationOptions = null;
+		tileLocationOptions = null;
+		selectedToken = null;
+		selectedTile = null;
 	}
 	public boolean tokenSelected() {
 		return (selectedToken != null);
