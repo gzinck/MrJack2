@@ -11,12 +11,6 @@ public class GameBoard implements TokenFinder
 		{' ', 'M', ' ', ' ', ' ', 'B', 'M'},
 		{' ', 'B', 'B', 'B', ' ', ' ', 'E'}
 	};
-	private static final char EXIT_C 	= 'E';
-	private static final char BUILD_C 	= 'B';
-	private static final char NONE_C 	= 'X';
-	private static final char REG_C 		= ' ';
-	private static final char LAMP_C 	= 'L';
-	private static final char MANH_C 	= 'M';
 	
 	private static final int NUM_MANHOLES	= 3;
 	private static final int NUM_EXITS	= 2;
@@ -29,16 +23,8 @@ public class GameBoard implements TokenFinder
 			{4,1},
 			{4,6}
 	};
-	public static final String[] CHAR_NAMES = {
-			"Stealthy",
-			"LeStrade",
-			"Bert",
-			"Smith"
-	};
-
 
 	private Ability[] CHAR_ABILITIES = {
-
 			new StealthyAbility(this), new MoveBarricadeAbility(this), new MoveCoverAbility(this), new MoveLightAbility(this)
 	};
 	private static final int[] CHAR_NUM_MOVES = {4, 3, 3, 3};
@@ -85,27 +71,27 @@ public class GameBoard implements TokenFinder
 		for(int row = 0; row < numRows; row++) {
 			for(int col = 0; col < numCols; col++) {
 				switch(TILE_FRAMEWORK[row][col]) {
-				case REG_C:
+				case TokenConstants.REG_C:
 					RegularTile rt = new RegularTile();
 					tiles[row][col] = rt;
 					lightableTiles[row][col] = rt;
 					break;
-				case EXIT_C:
+				case TokenConstants.EXIT_C:
 					Exit e = new Exit();
 					tiles[row][col] = e;
 					exits[exitsSoFar++] = e;
 					break;
-				case BUILD_C:
+				case TokenConstants.BUILD_C:
 					Building b = new Building();
 					tiles[row][col] = b;
 					break;
-				case MANH_C:
+				case TokenConstants.MANH_C:
 					Manhole m = new Manhole();
 					tiles[row][col] = m;
 					lightableTiles[row][col] = m;
 					manholes[manholesSoFar++] = m;
 					break;
-				case LAMP_C:
+				case TokenConstants.LAMP_C:
 					Lamppost l = new Lamppost();
 					tiles[row][col] = l;
 					lamps[row][col] = l;
@@ -229,7 +215,7 @@ public class GameBoard implements TokenFinder
 		characters = new CharacterToken[NUM_CHARACTERS];
 		for(int i = 0; i < NUM_CHARACTERS; i++) {
 			int[] loc = CHAR_LOCATIONS[i];
-			characters[i] = new CharacterToken(CHAR_NAMES[i], CHAR_NUM_MOVES[i], lightableTiles[loc[0]][loc[1]]);
+			characters[i] = new CharacterToken(TokenConstants.CHAR_NAMES[i], CHAR_NUM_MOVES[i], lightableTiles[loc[0]][loc[1]]);
 			characters[i].setAbility(CHAR_ABILITIES[i]);
 		}
 	}
@@ -251,7 +237,7 @@ public class GameBoard implements TokenFinder
 	
 	public CharacterToken getCharacter(String characterName) {
 		for(int i = 0 ; i < NUM_CHARACTERS; i++)
-			if(CHAR_NAMES[i].equals(characterName)) return characters[i];
+			if(TokenConstants.CHAR_NAMES[i].equals(characterName)) return characters[i];
 		return null;
 	}
 

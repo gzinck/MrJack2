@@ -4,8 +4,9 @@ import java.util.HashMap;
 import javafx.scene.image.*;
 import javafx.scene.layout.Region;
 
+import model.token.TokenConstants;
+
 public class TileView extends Region {
-	private static final char[] TILE_CHARS = {'E', 'B', 'X', ' ', 'L', 'M'};
 	private static final Image[] TILE_IMGS = {
 			new Image("/res/img/tiles/exit-tile.png"),
 			new Image("/res/img/tiles/building-tile.png"),
@@ -14,15 +15,12 @@ public class TileView extends Region {
 			new Image("/res/img/tiles/lamppost-tile.png"),
 			new Image("/res/img/tiles/manhole-tile.png"),
 	};
-	private static final char[] CHARACTER_CHARS = {'B', 'L', 'S', 's'};
 	private static final Image[] CHARACTER_IMGS = {
 			new Image("/res/img/character-tokens/bert.png"),
 			new Image("/res/img/character-tokens/lestrade.png"),
 			new Image("/res/img/character-tokens/smith.png"),
 			new Image("/res/img/character-tokens/stealthy.png")
 	};
-	
-	private static final char[] TOKEN_CHARS = {'B', 'M', 'G', '1', '2', '3', '4'};
 	private static final Image[] TOKEN_IMGS = {
 			new Image("/res/img/tokens/barricade-token.png"),
 			new Image("/res/img/tokens/mc-token.png"),
@@ -42,7 +40,7 @@ public class TileView extends Region {
 		char c = '`';
 		int index = -1;
 		while(c != tileType)
-			c = TILE_CHARS[++index];
+			c = TokenConstants.TILE_CHARS[++index];
 		tileImg = new ImageView(TILE_IMGS[index]);
 		tokenImg = new ImageView();
 		characterImg = new ImageView();
@@ -54,7 +52,7 @@ public class TileView extends Region {
 		char c = '`';
 		int index = -1;
 		while(c != tokenType)
-			c = TOKEN_CHARS[++index];
+			c = TokenConstants.TOKEN_CHARS[++index];
 		tokenImg.setImage(TOKEN_IMGS[index]);
 		tokenImg = new ImageView(TOKEN_IMGS[index]);
 	}
@@ -66,7 +64,7 @@ public class TileView extends Region {
 		char c = '`';
 		int index = -1;
 		while(c != tokenType)
-			c = CHARACTER_CHARS[++index];
+			c = TokenConstants.CHARACTER_CHARS[++index];
 		characterImg.setImage(CHARACTER_IMGS[index]);
 		characterImg = new ImageView(TILE_IMGS[index]);
 	}

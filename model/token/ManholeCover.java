@@ -5,10 +5,11 @@ import model.player.*;
 import java.util.Observable;
 public class ManholeCover extends Observable implements Token 
 {
-	public Manhole currManhole;
+	public Manhole currManhole, prevManhole;
 	public ManholeCover(Manhole initialManhole)
 	{
 		currManhole = initialManhole;
+		prevManhole = initialManhole;
 		initialManhole.placeCover(this);
 	}
 	public Manhole getManhole()
@@ -17,13 +18,19 @@ public class ManholeCover extends Observable implements Token
 	}
 	public void moveManholeCover(Manhole inManhole)
 	{
+		prevManhole = currManhole;
 		currManhole.removeCover();
 		inManhole.placeCover(this);
 		currManhole = inManhole;
+		setChanged();
 		notifyObservers();
 	}
 	@Override
 	public int[] getTokenLocation() {
 		return currManhole.getTileLocation();
+	}
+	@Override
+	public int[] getPrevTokenLocation() {
+		return prevManhole.getTileLocation();
 	}
 }
