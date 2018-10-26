@@ -1,6 +1,10 @@
 package controller;
 import java.util.Observable;
 import java.util.Observer;
+
+import model.ability.Ability;
+import model.gameboard.TokenFinder;
+import model.player.Player;
 import model.token.*;
 import model.turnkeeper.TurnKeeper;
 import view.BoardView;
@@ -43,6 +47,14 @@ public class TileController implements Observer
 		
 		
 	}
+	public void showCharMoveOptions(CharacterToken character, Player currPlayer, TokenFinder tokenFinder) {
+		int[][] options = charMover.getTileOptions(character, currPlayer, tokenFinder);
+		boardView.highlightTiles(options);
+	}
+	public void showActionOptions(Ability a) {
+		int[][] options = tokenMover.getTokenOptions(a);
+		boardView.highlightTiles(options);
+	}
 	public void tileClicked(int row, int col) {
 		int turnStage = turnKeeper.getStage();
 		switch(turnStage) {
@@ -81,7 +93,6 @@ public class TileController implements Observer
 				// Then, we just perform the ability and move to next stage!
 				tokenMover.performMove();
 				boardView.unhighlightTiles();
-				turnKeeper.nextStage();
 				gameContinuer.continueGame();
 			}
 		}
@@ -91,9 +102,9 @@ public class TileController implements Observer
 		if(success) {
 			boolean foundExit = charMover.performMove();
 			if(foundExit) {
+				boardView.unhighlightTiles();
 				gameContinuer.jackWins();
 			} else {
-				turnKeeper.nextStage();
 				gameContinuer.continueGame();
 			}
 		}

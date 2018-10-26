@@ -11,6 +11,7 @@ public class GameController implements GameContinuer {
 	private Detective detective;
 	private TurnKeeper turnKeeper;
 	private Table table;
+	private TileController tileController; // TODO: actually make this an instance variable
 	
 	public void initializeGame()  {
 		// First, we need to instantiate everything.
@@ -29,10 +30,11 @@ public class GameController implements GameContinuer {
 			table.startRound();
 		}
 		Player currentPlayer;
-		if(turnKeeper.roundOver())
-			currentPlayer = turnKeeper.nextTurn();
-		else
-			currentPlayer = turnKeeper.getCurrPlayer();
+		
+		// Go to next turn if the turn is over
+		if(turnKeeper.turnOver()) currentPlayer = turnKeeper.nextTurn();
+		else currentPlayer = turnKeeper.getCurrPlayer();
+		
 		int turnStage = turnKeeper.nextStage();
 		switch(turnStage) {
 		case TurnKeeper.STAGE_CHOOSE_CHAR:
@@ -41,10 +43,13 @@ public class GameController implements GameContinuer {
 			// TurnKeeper.setActionTiming(enum);
 			break;
 		case TurnKeeper.STAGE_CHOOSE_ACTIONMOVEBEFORE:
+			tileController.showActionOptions(turnKeeper.getCurrCharacter().getAbility());
 			break;
 		case TurnKeeper.STAGE_CHOOSE_CHARMOVE:
+			tileController.showCharMoveOptions(turnKeeper.getCurrCharacter(), currentPlayer, gb);
 			break;
 		case TurnKeeper.STAGE_CHOOSE_ACTIONMOVEAFTER:
+			tileController.showActionOptions(turnKeeper.getCurrCharacter().getAbility());
 			break;
 		default:
 			break;
