@@ -17,7 +17,7 @@ public class TurnKeeper
 	
 	private Player[] oddRoundOrder;
 	private Player[] evenRoundOrder;
-	private static final int START_ROUND = 1;
+	private static final int START_ROUND = 0;
 	private static final int START_TURN = 0;
 	public int currTurn;
 	public int currRound;
@@ -32,7 +32,7 @@ public class TurnKeeper
 	
 	public TurnKeeper(MrJack jack, Detective det, GasLight[] removableLights)
 	{
-		currTurn = START_TURN;
+		currTurn = MAX_TURNS;
 		currRound = START_ROUND;
 		oddRoundOrder = new Player[] {det, jack};
 		evenRoundOrder = new Player[] {jack, det};
@@ -95,9 +95,9 @@ public class TurnKeeper
 	}
 	private void nextRound()
 	{
-		if(currRound<=lightsToRemove.length)
+		if(currRound<=lightsToRemove.length && currRound > 0)
 			removeLight();
-		currTurn = 0;
+		currTurn = START_TURN;
 		currRound++;
 	}
 	public boolean gameOver()

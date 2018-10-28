@@ -23,7 +23,7 @@ public class MainApplication extends Application {
 		stage.setScene(new Scene(root));
 		stage.setTitle(GAME_NAME);
 		stage.show();
-		controller = new GameController(gv.drawBoard(GameBoard.TILE_FRAMEWORK));
+		controller = new GameController(gv.drawBoard(GameBoard.TILE_FRAMEWORK), gv);
 	}
 
 }

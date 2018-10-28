@@ -1,14 +1,12 @@
 package model.table;
 
+import java.util.Observable;
+
 import model.deck.alibideck.*;
 import model.deck.characterdeck.*;
-
-import model.gameboard.GameBoard;
 import model.turnkeeper.TurnKeeper;
-import model.witnesscard.WitnessCard;
 
-public class Table 
-{
+public class Table extends Observable {
 	public String[] characters = new String[TurnKeeper.MAX_TURNS];
 	public CharacterDeck charDeck;
 	public AlibiDeck alibis;
@@ -18,10 +16,13 @@ public class Table
 		charDeck = new CharacterDeck();
 		alibis = new AlibiDeck();
 	}
+	
 	public void startRound() {
 		for(int i = 0; i < TurnKeeper.MAX_TURNS; i++) {
 			characters[i] = charDeck.drawCard();
 		}
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**
@@ -37,6 +38,8 @@ public class Table
 		for(int i = 0; i < characters.length; i++) {
 			if(characters[i].equals(character)) {
 				characters[i] = null;
+				setChanged();
+				notifyObservers();
 				return true;
 			}
 		}
@@ -45,21 +48,7 @@ public class Table
 	public String getJackCard() {
 		return alibis.drawCard();
 	}
-//	public void discardCharacter(String character)
-//	{
-//		for(int i =0; i<charDeck.getLength(); i++)
-//		{
-//			if(charDeck.getChar(i).equals(character))
-//			{
-//				charDeck.setChar(i, null);
-//				charDeck.discard(character);
-//				charDeck.numDiscards++;
-//			}
-//			
-//		}
-//	}
-	public void initializeTable()
-	{
-		
+	public String[] getCards() {
+		return characters;
 	}
 }
