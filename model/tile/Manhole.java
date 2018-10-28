@@ -20,7 +20,7 @@ public class Manhole extends Tile implements Lightable {
 		super(row, col);
 		cover = null;
 		isOccupied = false;
-		occupiableNeighbours = new Lightable[NUM_NEIGHBOURS];
+		occupiableNeighbours = new Occupiable[NUM_NEIGHBOURS];
 		lamp = null;
 	}
 	

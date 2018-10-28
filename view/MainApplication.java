@@ -4,7 +4,7 @@ import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.gameboard.GameBoard;
+import model.token.TokenConstants;
 import controller.GameController;
 import javafx.application.*;
 
@@ -23,7 +23,7 @@ public class MainApplication extends Application {
 		stage.setScene(new Scene(root));
 		stage.setTitle(GAME_NAME);
 		stage.show();
-		controller = new GameController(gv.drawBoard(GameBoard.TILE_FRAMEWORK), gv);
+		controller = new GameController(gv.drawBoard(TokenConstants.TILE_FRAMEWORK), gv);
 	}
 
 }

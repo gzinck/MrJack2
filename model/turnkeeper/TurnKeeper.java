@@ -89,7 +89,7 @@ public class TurnKeeper
 		return currStage;
 	}
 	public boolean turnOver() {
-		return (currStage == STAGE_TURN_OVER);
+		return (currStage >= STAGE_TURN_OVER);
 	}
 	private void removeLight()
 	{

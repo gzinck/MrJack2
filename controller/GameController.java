@@ -3,7 +3,10 @@ package controller;
 import model.gameboard.GameBoard;
 import model.player.*;
 import model.table.Table;
+import model.tile.Exit;
+import model.token.CharacterToken;
 import model.turnkeeper.TurnKeeper;
+import model.witnesscard.WitnessCard;
 import view.GameView;
 import view.board.BoardView;
 
@@ -13,6 +16,7 @@ public class GameController implements GameContinuer {
 	private Detective detective;
 	private TurnKeeper turnKeeper;
 	private Table table;
+	private WitnessCard witness;
 	
 	private TileController tileController; // TODO: actually make this an instance variable
 	private CharTokenController charTokenController;
@@ -33,6 +37,11 @@ public class GameController implements GameContinuer {
 		detective = new Detective();
 		turnKeeper = new TurnKeeper(jack, detective, gb.getRemovableGaslights());
 		table = new Table();
+		CharacterToken jackChar = gb.getCharacter(table.getJackCard());
+		witness = new WitnessCard(jackChar);
+		Exit.setWitnessCard(witness);
+		
+		jack.setCharacter(jackChar);
 		
 		tileController = new TileController(turnKeeper, boardView, this);
 		boardView.setClickResponder(tileController);
@@ -56,19 +65,26 @@ public class GameController implements GameContinuer {
 	}
 	public void continueGame() {
 		// This runs through a turn
-		if(turnKeeper.roundOver()) {
-			table.startRound();
-		}
+		
 		Player currentPlayer;
 		
 		// Go to next turn if the turn is over
-		if(turnKeeper.turnOver()) currentPlayer = turnKeeper.nextTurn();
+		int turnStage = turnKeeper.nextStage();
+		if(turnKeeper.turnOver()) {
+			if(turnKeeper.roundOver()) {
+				table.startRound();
+				gb.evaluateInnocence(witness.updateWitnessed());
+			}
+			currentPlayer = turnKeeper.nextTurn();
+			turnStage = turnKeeper.nextStage();
+		}
 		else currentPlayer = turnKeeper.getCurrPlayer();
 		
-		int turnStage = turnKeeper.nextStage();
+		
 		System.out.println(turnStage);
 		switch(turnStage) {
 		case TurnKeeper.STAGE_CHOOSE_CHAR:
+			boardView.unhighlightTiles();
 			break;
 		case TurnKeeper.STAGE_CHOOSE_IFACTIONFIRST:
 			gameView.activateActionBtns();

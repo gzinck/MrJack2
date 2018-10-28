@@ -16,10 +16,10 @@ public class TileView extends Region {
 			new Image("/res/img/tiles/manhole-tile.png"),
 	};
 	private static final Image[] CHARACTER_IMGS = {
-			new Image("/res/img/character-tokens/bert.png"),
+			new Image("/res/img/character-tokens/stealthy.png"),
 			new Image("/res/img/character-tokens/lestrade.png"),
+			new Image("/res/img/character-tokens/bert.png"),
 			new Image("/res/img/character-tokens/smith.png"),
-			new Image("/res/img/character-tokens/stealthy.png")
 	};
 	private static final Image[] TOKEN_IMGS = {
 			new Image("/res/img/tokens/barricade-token.png"),

@@ -100,8 +100,9 @@ public class BoardView extends AnchorPane implements CharTokenViewModifier, Toke
 	}
 	
 	public void unhighlightTiles() {
-		for(int i = 0; i < highlightedTiles.length; i++)
-			tiles[highlightedTiles[i][0]][highlightedTiles[i][1]].unhighlight();
+		if(highlightedTiles != null)
+			for(int i = 0; i < highlightedTiles.length; i++)
+				tiles[highlightedTiles[i][0]][highlightedTiles[i][1]].unhighlight();
 		highlightedTiles = null;
 	}
 	

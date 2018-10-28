@@ -7,29 +7,15 @@ import model.token.*;
 
 public class GameBoard implements TokenFinder, CharacterFinder
 {
-	public static final char[][] TILE_FRAMEWORK = new char[][] {
-		{'E', 'X', 'X', 'X', ' ', 'M', ' '},
-		{'X', ' ', 'L', 'B', ' ', 'L', ' '},
-		{' ', 'M', ' ', ' ', ' ', 'B', 'M'},
-		{' ', 'B', 'B', 'B', ' ', ' ', 'E'}
-	};
-	
 	private static final int NUM_MANHOLES	= 3;
 	private static final int NUM_EXITS	= 2;
 	private static final int NUM_LAMPS	= 2;
 	
 	private static final int NUM_CHARACTERS	= 4;
-	private static final int[][] CHAR_LOCATIONS = {
-			{1,1},
-			{1,4},
-			{3,0},
-			{3,5}
-	};
 
 	private Ability[] CHAR_ABILITIES = {
 			new StealthyAbility(this), new MoveBarricadeAbility(this), new MoveCoverAbility(this), new MoveLightAbility(this)
 	};
-	private static final int[] CHAR_NUM_MOVES = {4, 3, 3, 3};
 	
 	public static final int NUM_BARRICADES = 1;
 	private static final int NUM_GASLIGHTS = 1;
@@ -57,8 +43,8 @@ public class GameBoard implements TokenFinder, CharacterFinder
 	}
 	
 	private void initializeTiles() {
-		numRows = TILE_FRAMEWORK.length;
-		numCols = TILE_FRAMEWORK[0].length;
+		numRows = TokenConstants.TILE_FRAMEWORK.length;
+		numCols = TokenConstants.TILE_FRAMEWORK[0].length;
 		
 		tiles = new Tile[numRows][numCols];
 		lamps = new Lamppost[numRows][numCols];
@@ -72,7 +58,7 @@ public class GameBoard implements TokenFinder, CharacterFinder
 		
 		for(int row = 0; row < numRows; row++) {
 			for(int col = 0; col < numCols; col++) {
-				switch(TILE_FRAMEWORK[row][col]) {
+				switch(TokenConstants.TILE_FRAMEWORK[row][col]) {
 				case TokenConstants.REG_C:
 					RegularTile rt = new RegularTile(row, col);
 					tiles[row][col] = rt;
@@ -218,8 +204,8 @@ public class GameBoard implements TokenFinder, CharacterFinder
 	{
 		characters = new CharacterToken[NUM_CHARACTERS];
 		for(int i = 0; i < NUM_CHARACTERS; i++) {
-			int[] loc = CHAR_LOCATIONS[i];
-			characters[i] = new CharacterToken(TokenConstants.CHAR_NAMES[i], CHAR_NUM_MOVES[i], lightableTiles[loc[0]][loc[1]]);
+			int[] loc = TokenConstants.CHAR_LOCATIONS[i];
+			characters[i] = new CharacterToken(TokenConstants.CHAR_NAMES[i], TokenConstants.CHAR_NUM_MOVES[i], lightableTiles[loc[0]][loc[1]]);
 			characters[i].setAbility(CHAR_ABILITIES[i]);
 		}
 	}
