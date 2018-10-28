@@ -1,5 +1,4 @@
 package test.model.tile;
-import model.token.*;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
@@ -11,10 +10,7 @@ import model.ability.Ability;
 import model.player.*;
 import model.tile.Exit;
 import model.tile.Passable;
-import model.tile.Tile;
 import model.token.CharacterToken;
-import model.tile.*;
-import model.witnesscard.*;
 
 public class TestExit {
 	MrJack jack;
@@ -46,18 +42,6 @@ public class TestExit {
 		// Does not allow Detective
 		tiles = exit.getAccessibleTiles(1, null, detective);
 		assertEquals(tiles.size(), 0);
-	}
-	
-	@Test
-	public void testSetWitness()
-	{
-		Exit e1 = new Exit(0,0);
-		CharacterToken t1 = new CharacterToken("Stealthy", 3, new RegularTile(0,0));
-		WitnessCard w1 = new WitnessCard(t1);
-		e1.setWitnessCard(w1);
-		String expect = "true";
-		assertEquals(expect, "" + (w1==e1.getWitnessCard()));
-		
 	}
 
 }

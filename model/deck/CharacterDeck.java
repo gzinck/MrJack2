@@ -1,6 +1,4 @@
-package model.deck.characterdeck;
-
-import model.deck.Deck;
+package model.deck;
 
 public class CharacterDeck extends Deck
 {

@@ -5,15 +5,10 @@ import model.player.*;
 import model.token.CharacterToken;
 import model.witnesscard.WitnessCard;
 import model.token.Barricade;
-//import model.gameboard.*;
 
 public class Exit extends Tile implements Passable {
-
-//	private static Exit[] allExits;
-//	private static boolean[] barricadedExits;
 	private static WitnessCard witnessCard;
 	private Barricade barricade;
-//	private static int numExits;
 	
 	public Exit(int row, int col) {
 		super(row, col);
@@ -41,45 +36,14 @@ public class Exit extends Tile implements Passable {
 	public void placeBarricade(Barricade inBarr)
 	{
 		barricade = inBarr;
-//		updateBarricaded();
 	}
 	public void removeBarricade()
 	{
 		barricade.currExit=null;
 		barricade = null;
-//		updateBarricaded();
 	}	
 	public boolean isBarricaded()
 	{
 		return(barricade!=null);
 	}
-//	public void updateBarricaded()
-//	{
-//		barricadedExits =  new boolean[numExits];
-//		for(int i = 0; i<numExits;i++)
-//		{
-//			if(allExits[i].isBarricaded())
-//			{
-//				barricadedExits[i]=true;
-//			}
-//			else{
-//				barricadedExits[i]=false;
-//			}
-//		}
-//	}
-//	public Exit[] availableExits()
-//	{
-//		Exit[] availableExits = new Exit[GameBoard.NUM_BARRICADES];
-//		return availableExits;
-//	}
-//	public static void setExits(Exit... inExits)
-//	{
-//		allExits = inExits;
-//		numExits = allExits.length;
-//		
-//	}
-//	public WitnessCard getWitnessCard()
-//	{
-//		return witnessCard;
-//	}
 }

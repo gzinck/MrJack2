@@ -1,6 +1,5 @@
-package model.deck.alibideck;
+package model.deck;
 
-import model.deck.Deck;
 import model.player.Player;
 
 public class AlibiDeck extends Deck

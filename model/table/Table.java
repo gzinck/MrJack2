@@ -2,8 +2,8 @@ package model.table;
 
 import java.util.Observable;
 
-import model.deck.alibideck.*;
-import model.deck.characterdeck.*;
+import model.deck.AlibiDeck;
+import model.deck.CharacterDeck;
 import model.turnkeeper.TurnKeeper;
 
 public class Table extends Observable {
