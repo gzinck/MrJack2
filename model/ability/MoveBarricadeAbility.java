@@ -47,8 +47,9 @@ public class MoveBarricadeAbility implements Ability{
 		numExits = 0;
 		
 		// Place locations into an array.
-		for(int i = 0; i < locations.length; i++)
-			if(!exits[i].isBarricaded()) locations[numExits++] = exits[i].getTileLocation();
+		for(int i = 0; i < exits.length; i++)
+			if(!exits[i].isBarricaded())
+				locations[numExits++] = exits[i].getTileLocation();
 		
 		return locations;
 	}

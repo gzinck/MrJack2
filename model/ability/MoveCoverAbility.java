@@ -46,7 +46,7 @@ private TokenFinder tokenFinder;
 		numManholes = 0;
 		
 		// Place locations into an array.
-		for(int i = 0; i < locations.length; i++)
+		for(int i = 0; i < manholes.length; i++)
 			if(!manholes[i].isCovered()) locations[numManholes++] = manholes[i].getTileLocation();
 		
 		return locations;

@@ -3,7 +3,6 @@ package model.deck;
 import java.util.Arrays;
 import java.util.Random;
 
-import model.gameboard.GameBoard;
 import model.token.TokenConstants;
 
 public abstract class Deck 
@@ -22,7 +21,7 @@ public abstract class Deck
 	{
 		Random rand = new Random();
 		
-		for(int i =0; i<cards.length;i++)
+		for(int i = 0; i < cards.length; i++)
 		{
 			int randNum = rand.nextInt(cards.length);
 			String temp = cards[randNum];

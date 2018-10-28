@@ -1,8 +1,7 @@
 package model.ability;
 
-import model.ability.Ability.Timing;
+
 import model.gameboard.TokenFinder;
-import model.player.Player;
 import model.tile.*;
 import model.token.*;
 
@@ -29,12 +28,19 @@ private TokenFinder tokenFinder;
 	@Override
 	public int[][] getAbilityTokenOptions() {
 		GasLight[] gasLights = tokenFinder.getGasLights();
-		int[][] locations = new int[gasLights.length][];
+		
+		// Some gaslights might be extinguished, so don't consider those...
+		int numLights = 0;
 		for(int i = 0; i < gasLights.length; i++) {
-			locations[i] = gasLights[i].getTokenLocation();
+			if(!gasLights[i].isExtinguished()) numLights++;
+		}
+		int[][] locations = new int[numLights][];
+		numLights = 0;
+		for(int i = 0; i < gasLights.length; i++) {
+			if(!gasLights[i].isExtinguished())
+				locations[numLights++] = gasLights[i].getTokenLocation();
 		}
 		return locations;
-		
 	}
 
 	@Override
@@ -43,13 +49,13 @@ private TokenFinder tokenFinder;
 		int numLamps = 0;
 		for(int i = 0; i < lampposts.length; i++)
 			if(!lampposts[i].isLit()) numLamps++;
+		System.out.println("There are " + numLamps + " available lamps.");
 		int[][] locations = new int[numLamps][2];
 		numLamps = 0;
 		
 		// Place locations into an array.
-		for(int i = 0; i < locations.length; i++)
+		for(int i = 0; i < lampposts.length; i++)
 			if(!lampposts[i].isLit()) locations[numLamps++] = lampposts[i].getTileLocation();
-		
 		return locations;
 	}
 

@@ -48,7 +48,7 @@ public class TestGasLight {
 	{
 		Lamppost l1 = new Lamppost(0,0);
 		GasLight g1 = new GasLight(l1);
-		g1.removeFromBoard();
+		g1.extinguish();
 		String excpect = "true";
 		assertEquals(excpect, "" + (null==g1.currLamppost));
 	}

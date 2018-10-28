@@ -59,14 +59,14 @@ public class Manhole extends Tile implements Lightable {
 	}
 	@Override
 	public HashSet<Passable> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
-		if(numMoves < 1) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 1.");
+		if(numMoves < 0) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 0.");
 		HashSet<Passable> accessibleTiles = new HashSet<Passable>();
 		
 		// If curr tile is not occupied (or player is the Detective), add it as a possibility
 		if(!isOccupied || player.getPlayerName().equals(Detective.PLAYER_NAME)) accessibleTiles.add(this);
 		
 		// If no moves left, quit here.
-		if(numMoves - 1 == 0) return accessibleTiles;
+		if(numMoves == 0) return accessibleTiles;
 		
 		// We just need to get all the tiles around us!
 		for(int i = 0; i < NUM_NEIGHBOURS; i++)

@@ -1,7 +1,5 @@
 package model.token;
 import model.tile.*;
-import model.ability.*;
-import model.player.*;
 import java.util.Observable;
 public class GasLight extends Observable implements Token 
 {
@@ -26,13 +24,16 @@ public class GasLight extends Observable implements Token
 		setChanged();
 		notifyObservers();
 	}
-	public void removeFromBoard()
+	public void extinguish()
 	{
 		prevLamppost = currLamppost;
 		currLamppost.removeGasLight();
 		currLamppost = null;
 		setChanged();
 		notifyObservers();
+	}
+	public boolean isExtinguished() {
+		return (currLamppost == null);
 	}
 	@Override
 	public int[] getTokenLocation() {

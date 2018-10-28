@@ -1,5 +1,7 @@
 package model.token;
 
+import java.util.Arrays;
+
 import model.ability.Ability;
 
 public class TokenMover {
@@ -30,6 +32,9 @@ public class TokenMover {
 	}
 	public int[][] getTileOptions() {
 		tileLocationOptions = currAbility.getAbilityTileOptions();
+		for(int i = 0; i < tileLocationOptions.length; i++) {
+			System.out.println(Arrays.toString(tileLocationOptions[i]));
+		}
 		return tileLocationOptions;
 	}
 	public boolean selectTile(int[] location) {

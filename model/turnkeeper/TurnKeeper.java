@@ -93,7 +93,7 @@ public class TurnKeeper
 	}
 	private void removeLight()
 	{
-		lightsToRemove[currRound-1].removeFromBoard();
+		lightsToRemove[currRound-1].extinguish();
 	}
 	public boolean roundOver()
 	{

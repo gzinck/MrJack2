@@ -7,20 +7,9 @@ import model.token.*;
 
 public class GameBoard implements TokenFinder, CharacterFinder
 {
-	private static final int NUM_MANHOLES	= 3;
-	private static final int NUM_EXITS	= 2;
-	private static final int NUM_LAMPS	= 2;
-	
-	private static final int NUM_CHARACTERS	= 4;
-
 	private Ability[] CHAR_ABILITIES = {
 			new StealthyAbility(this), new MoveBarricadeAbility(this), new MoveCoverAbility(this), new MoveLightAbility(this)
 	};
-	
-	public static final int NUM_BARRICADES = 1;
-	private static final int NUM_GASLIGHTS = 1;
-	private static final int NUM_REMOVABLE_GASLIGHTS = 1;
-	private static final int NUM_MANCOVERS = 1;
 	
 	private Tile[][] tiles;
 	private Lamppost[][] lamps;
@@ -49,9 +38,9 @@ public class GameBoard implements TokenFinder, CharacterFinder
 		tiles = new Tile[numRows][numCols];
 		lamps = new Lamppost[numRows][numCols];
 		lightableTiles = new Lightable[numRows][numCols];
-		manholes = new Manhole[NUM_MANHOLES];
-		exits = new Exit[NUM_EXITS];
-		lampList = new Lamppost[NUM_LAMPS];
+		manholes = new Manhole[TokenConstants.NUM_MANHOLES];
+		exits = new Exit[TokenConstants.NUM_EXITS];
+		lampList = new Lamppost[TokenConstants.NUM_LAMPS];
 		int manholesSoFar = 0;
 		int lampsSoFar = 0;
 		int exitsSoFar = 0;
@@ -192,18 +181,18 @@ public class GameBoard implements TokenFinder, CharacterFinder
 	
 	private void initializeTokens()
 	{
-		barricades = new Barricade[NUM_BARRICADES];
-		for(int i = 0; i < NUM_BARRICADES; i++) barricades[i] = new Barricade(exits[i]);
-		gaslights = new GasLight[NUM_GASLIGHTS];
-		for(int i = 0; i < NUM_GASLIGHTS; i++) gaslights[i] = new GasLight(lampList[i]);
-		mancovers = new ManholeCover[NUM_MANCOVERS];
-		for(int i = 0; i < NUM_GASLIGHTS; i++) mancovers[i] = new ManholeCover(manholes[i]);
+		barricades = new Barricade[TokenConstants.NUM_BARRICADES];
+		for(int i = 0; i < TokenConstants.NUM_BARRICADES; i++) barricades[i] = new Barricade(exits[i]);
+		gaslights = new GasLight[TokenConstants.NUM_GASLIGHTS];
+		for(int i = 0; i < TokenConstants.NUM_GASLIGHTS; i++) gaslights[i] = new GasLight(lampList[i]);
+		mancovers = new ManholeCover[TokenConstants.NUM_MANCOVERS];
+		for(int i = 0; i < TokenConstants.NUM_MANCOVERS; i++) mancovers[i] = new ManholeCover(manholes[i]);
 	}
 	
 	private void initializeCharacters()
 	{
-		characters = new CharacterToken[NUM_CHARACTERS];
-		for(int i = 0; i < NUM_CHARACTERS; i++) {
+		characters = new CharacterToken[TokenConstants.NUM_CHARACTERS];
+		for(int i = 0; i < TokenConstants.NUM_CHARACTERS; i++) {
 			int[] loc = TokenConstants.CHAR_LOCATIONS[i];
 			characters[i] = new CharacterToken(TokenConstants.CHAR_NAMES[i], TokenConstants.CHAR_NUM_MOVES[i], lightableTiles[loc[0]][loc[1]]);
 			characters[i].setAbility(CHAR_ABILITIES[i]);
@@ -211,7 +200,7 @@ public class GameBoard implements TokenFinder, CharacterFinder
 	}
 	
 	public void addCharTokenObserver(Observer obs) {
-		for(int i = 0; i < NUM_CHARACTERS; i++) {
+		for(int i = 0; i < TokenConstants.NUM_CHARACTERS; i++) {
 			characters[i].addObserver(obs);
 			characters[i].initializeObservers();
 		}
@@ -233,14 +222,14 @@ public class GameBoard implements TokenFinder, CharacterFinder
 	}
 	
 	public void evaluateInnocence(Boolean jackWasSeen) {
-		for(int i = 0; i < NUM_CHARACTERS; i++) {
+		for(int i = 0; i < TokenConstants.NUM_CHARACTERS; i++) {
 			characters[i].evaluateInnocence(jackWasSeen);
 		}
 	}
 	
 	public GasLight[] getRemovableGaslights() {
-		GasLight[] removable = new GasLight[NUM_REMOVABLE_GASLIGHTS];
-		for(int i = 0; i < NUM_REMOVABLE_GASLIGHTS; i++) {
+		GasLight[] removable = new GasLight[TokenConstants.NUM_REMOVABLE_GASLIGHTS];
+		for(int i = 0; i < TokenConstants.NUM_REMOVABLE_GASLIGHTS; i++) {
 			removable[i] = gaslights[i];
 		}
 		return removable;
@@ -248,7 +237,7 @@ public class GameBoard implements TokenFinder, CharacterFinder
 	
 	@Override
 	public CharacterToken getCharacter(String characterName) {
-		for(int i = 0 ; i < NUM_CHARACTERS; i++)
+		for(int i = 0 ; i < TokenConstants.NUM_CHARACTERS; i++)
 			if(TokenConstants.CHAR_NAMES[i].equals(characterName)) return characters[i];
 		return null;
 	}
@@ -256,7 +245,9 @@ public class GameBoard implements TokenFinder, CharacterFinder
 	public <T extends Token> T getToken(T[] tokenArr, int[] location) {
 		for(int i = 0; i < tokenArr.length; i++) {
 			int[] thisLoc = tokenArr[i].getTokenLocation();
-			if(thisLoc[0] == location[0] && thisLoc[1] == location[1]) return tokenArr[i];
+			// Check only if the token wasn't removed from the board.
+			if(thisLoc != null)
+				if(thisLoc[0] == location[0] && thisLoc[1] == location[1]) return tokenArr[i];
 		}
 		return null;
 	}
