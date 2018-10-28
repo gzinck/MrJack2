@@ -21,6 +21,7 @@ public class GameController implements GameContinuer {
 	private TileController tileController; // TODO: actually make this an instance variable
 	private CharTokenController charTokenController;
 	private TokenController tokenController;
+	private TurnKeeperController turnController;
 	private TableController tableController;
 	private ActionTimingController actionController;
 	
@@ -51,6 +52,9 @@ public class GameController implements GameContinuer {
 		
 		tokenController = new TokenController(boardView);
 		gb.addTokenObserver(tokenController);
+		
+		turnController = new TurnKeeperController(gameView);
+		turnKeeper.addObserver(turnController);
 		
 		tableController = new TableController(gameView, table, turnKeeper, gb, this);
 		table.addObserver(tableController);

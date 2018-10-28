@@ -34,17 +34,17 @@
                   <Font name="Avenir Next Regular" size="18.0" />
                </font>
             </Text>
-            <Text id="whoseturntxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Player's Turn" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <Text id="whoseturntxt" fx:id="playerText" strokeType="OUTSIDE" strokeWidth="0.0" text="Player's Turn" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <font>
                   <Font name="Avenir Next Bold" size="18.0" />
                </font>
             </Text>
-            <Text id="roundnumtxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1">
+            <Text id="roundnumtxt" fx:id="roundText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1">
                <font>
                   <Font name="Avenir Next Bold" size="18.0" />
                </font>
             </Text>
-            <Text id="turnnumtxt" layoutX="110.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Text id="turnnumtxt" fx:id="turnText" layoutX="110.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Avenir Next Bold" size="18.0" />
                </font>

@@ -1,9 +1,11 @@
 package model.turnkeeper;
 import model.token.*;
+
+import java.util.Observable;
+
 import model.ability.Ability;
 import model.player.*;
-public class TurnKeeper
-{
+public class TurnKeeper extends Observable {
 	public static enum StageTiming {
 		ACTION_BEFORE, ACTION_AFTER, NO_ACTION
 	}
@@ -54,8 +56,12 @@ public class TurnKeeper
 	{
 		currStage = STAGE_TURN_NOT_STARTED;
 		if(!roundOver()) {
-			if(currRound%2==1) return oddRoundOrder[currTurn++];
-			else return evenRoundOrder[currTurn++];
+			Player nextPlayer = null;
+			if(currRound % 2 == 1) nextPlayer = oddRoundOrder[currTurn++];
+			else nextPlayer = evenRoundOrder[currTurn++];
+			setChanged();
+			notifyObservers();
+			return nextPlayer;
 		}
 		nextRound();
 		return nextTurn();

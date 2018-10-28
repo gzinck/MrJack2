@@ -8,15 +8,19 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import model.token.TokenConstants;
 import view.board.BoardView;
 
-public class GameView implements CardView {
+public class GameView implements CardView, TurnKeeperView {
 	@FXML private AnchorPane board;
 	@FXML private Button actionBeforeBtn;
 	@FXML private Button actionAfterBtn;
 	@FXML private ImageView card1;
 	@FXML private ImageView card2;
+	@FXML private Text roundText;
+	@FXML private Text turnText;
+	@FXML private Text playerText;
 	private ImageView[] cards;
 	private BoardView boardView;
 	
@@ -100,5 +104,21 @@ public class GameView implements CardView {
 			i++;
 		}
 		cards[index].setImage(CARD_IMGS[i]);
+	}
+
+	@Override
+	public void updatePlayer(String playerName) {
+		playerText.setText(playerName);
+	}
+
+	@Override
+	public void updateTurn(int turn) {
+		turnText.setText(turn + "");
+		
+	}
+
+	@Override
+	public void updateRound(int round) {
+		roundText.setText(round + "");
 	}
 }
