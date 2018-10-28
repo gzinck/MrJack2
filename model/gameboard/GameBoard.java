@@ -5,7 +5,7 @@ import model.ability.*;
 import model.tile.*;
 import model.token.*;
 
-public class GameBoard implements TokenFinder
+public class GameBoard implements TokenFinder, CharacterFinder
 {
 	public static final char[][] TILE_FRAMEWORK = new char[][] {
 		{'E', 'X', 'X', 'X', ' ', 'M', ' '},
@@ -260,6 +260,7 @@ public class GameBoard implements TokenFinder
 		return removable;
 	}
 	
+	@Override
 	public CharacterToken getCharacter(String characterName) {
 		for(int i = 0 ; i < NUM_CHARACTERS; i++)
 			if(TokenConstants.CHAR_NAMES[i].equals(characterName)) return characters[i];

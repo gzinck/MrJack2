@@ -1,5 +1,6 @@
 package model.turnkeeper;
 import model.token.*;
+import model.ability.Ability;
 import model.player.*;
 public class TurnKeeper
 {
@@ -75,6 +76,11 @@ public class TurnKeeper
 	}
 	public int nextStage() {
 		currStage++;
+		// Skip if the character doesn't have any action...
+		if(currStage == STAGE_CHOOSE_IFACTIONFIRST && currCharacter.getAbility().whenUseAbility() == Ability.Timing.NONE) {
+			timing = StageTiming.NO_ACTION;
+			currStage++;
+		}
 		// Skip the stage if not applicable
 		if(currStage == STAGE_CHOOSE_ACTIONMOVEAFTER && (timing == StageTiming.ACTION_BEFORE || timing == StageTiming.NO_ACTION))
 			currStage++;

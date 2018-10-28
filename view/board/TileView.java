@@ -1,4 +1,4 @@
-package view;
+package view.board;
 
 import javafx.scene.image.*;
 import javafx.scene.layout.Region;

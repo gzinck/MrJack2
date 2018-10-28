@@ -2,7 +2,6 @@ package view.board;
 
 import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
-import view.TileView;
 
 public class BoardView extends AnchorPane implements CharTokenViewModifier, TokenViewModifier {
 	

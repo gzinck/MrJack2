@@ -18,6 +18,7 @@ public class GameController implements GameContinuer {
 	private CharTokenController charTokenController;
 	private TokenController tokenController;
 	private TableController tableController;
+	private ActionTimingController actionController;
 	
 	private BoardView boardView;
 	private GameView gameView;
@@ -41,8 +42,12 @@ public class GameController implements GameContinuer {
 		tokenController = new TokenController(boardView);
 		gb.addTokenObserver(tokenController);
 		
-		tableController = new TableController(gameView);
+		tableController = new TableController(gameView, table, turnKeeper, gb, this);
 		table.addObserver(tableController);
+		
+		actionController = new ActionTimingController(turnKeeper, this);
+		
+		gameView.initializeClickResponders(tableController, actionController);
 		
 		jack.setCharacter(gb.getCharacter(table.getJackCard()));
 		table.startRound();
@@ -60,11 +65,12 @@ public class GameController implements GameContinuer {
 		else currentPlayer = turnKeeper.getCurrPlayer();
 		
 		int turnStage = turnKeeper.nextStage();
+		System.out.println(turnStage);
 		switch(turnStage) {
 		case TurnKeeper.STAGE_CHOOSE_CHAR:
 			break;
 		case TurnKeeper.STAGE_CHOOSE_IFACTIONFIRST:
-			// TurnKeeper.setActionTiming(enum);
+			gameView.activateActionBtns();
 			break;
 		case TurnKeeper.STAGE_CHOOSE_ACTIONMOVEBEFORE:
 			tileController.showActionOptions(turnKeeper.getCurrCharacter().getAbility());
