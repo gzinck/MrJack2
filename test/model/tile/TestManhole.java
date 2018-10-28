@@ -17,10 +17,10 @@ public class TestManhole {
 
 	@Before
 	public void setUp() throws Exception {
-		m1 = new Manhole();
-		m2 = new Manhole();
+		m1 = new Manhole(0,0);
+		m2 = new Manhole(0,0);
 		Manhole.setManholes(m1, m2);
-		r = new RegularTile();
+		r = new RegularTile(0,0);
 		c = new CharacterToken("Something", 1, null);
 	}
 

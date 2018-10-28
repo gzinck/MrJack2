@@ -7,9 +7,9 @@ import model.turnkeeper.*;
 import org.junit.Test;
 public class TestTurnKeeper 
 {
-	Lamppost l1 = new Lamppost();
-	Lamppost l2 = new Lamppost();
-	Lamppost l3 = new Lamppost();
+	Lamppost l1 = new Lamppost(0,0);
+	Lamppost l2 = new Lamppost(0,0);
+	Lamppost l3 = new Lamppost(0,0);
 	GasLight g1 = new GasLight(l1);
 	GasLight g2 = new GasLight(l2);
 	GasLight g3 = new GasLight(l3);

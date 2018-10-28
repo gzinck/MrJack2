@@ -27,7 +27,7 @@ public class TestExit {
 	public void before() throws Exception {
 		jack = new MrJack();
 		detective = new Detective();
-		exit = new Exit();
+		exit = new Exit(0,0);
 		c1 = new CharacterToken("Billy Bob Joe", 1, null);
 		c2 = new CharacterToken("Billy Bob Jock", 1, null);
 	}
@@ -51,8 +51,8 @@ public class TestExit {
 	@Test
 	public void testSetWitness()
 	{
-		Exit e1 = new Exit();
-		CharacterToken t1 = new CharacterToken("Stealthy", 3, new RegularTile());
+		Exit e1 = new Exit(0,0);
+		CharacterToken t1 = new CharacterToken("Stealthy", 3, new RegularTile(0,0));
 		WitnessCard w1 = new WitnessCard(t1);
 		e1.setWitnessCard(w1);
 		String expect = "true";

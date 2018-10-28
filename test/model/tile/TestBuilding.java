@@ -17,9 +17,9 @@ public class TestBuilding {
 
 	@Before
 	public void setUp() throws Exception {
-		b = new Building();
+		b = new Building(0,0);
 		// Make sure that the building has a neighbour so we can test if it can access them (only when char is Stealthy)
-		r = new RegularTile();
+		r = new RegularTile(0,0);
 		b.setNeighbour(r, 0);
 		c = new CharacterToken("Billy Bob Joe", 1, null);
 		//a = new StealthyAbility();

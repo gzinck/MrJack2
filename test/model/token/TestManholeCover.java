@@ -11,7 +11,7 @@ public class TestManholeCover {
 	@Test
 	public void testHasTile()
 	{
-		Manhole m1 = new Manhole();
+		Manhole m1 = new Manhole(0,0);
 		ManholeCover mc1 = new ManholeCover(m1);
 		String excpect = "true";
 		assertEquals(excpect, "" + (m1==mc1.currManhole));
@@ -20,8 +20,8 @@ public class TestManholeCover {
 	@Test
 	public void testSetManholeCover()
 	{
-		Manhole m1 = new Manhole();
-		Manhole m2 = new Manhole();
+		Manhole m1 = new Manhole(0,0);
+		Manhole m2 = new Manhole(0,0);
 		ManholeCover mc1 = new ManholeCover(m1);
 		mc1.moveManholeCover(m2);
 		String excpect = "true";
@@ -32,8 +32,8 @@ public class TestManholeCover {
 	{
 		boolean didCatch = false;
 		try{
-		Manhole m1 = new Manhole();
-		Manhole m2 = new Manhole();
+		Manhole m1 = new Manhole(0,0);
+		Manhole m2 = new Manhole(0,0);
 		ManholeCover mc1 = new ManholeCover(m1);
 		ManholeCover mc2 = new ManholeCover(m2);
 		mc1.moveManholeCover(m2);

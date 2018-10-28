@@ -10,7 +10,7 @@ public class TestGasLight {
 	@Test
 	public void testHasTile()
 	{
-		Lamppost l1 = new Lamppost();
+		Lamppost l1 = new Lamppost(0,0);
 		GasLight g1 = new GasLight(l1);
 		String excpect = "true";
 		assertEquals(excpect, "" + (l1==g1.currLamppost));
@@ -19,8 +19,8 @@ public class TestGasLight {
 	@Test
 	public void testSetGasLight()
 	{
-		Lamppost l1 = new Lamppost();
-		Lamppost l2 = new Lamppost();
+		Lamppost l1 = new Lamppost(0,0);
+		Lamppost l2 = new Lamppost(0,0);
 		GasLight g1 = new GasLight(l1);
 		g1.moveGasLight(l2);
 		String excpect = "true";
@@ -32,8 +32,8 @@ public class TestGasLight {
 		boolean didCatch = false;
 		try{
 		
-		Lamppost l1 = new Lamppost();
-		Lamppost l2 = new Lamppost();
+		Lamppost l1 = new Lamppost(0,0);
+		Lamppost l2 = new Lamppost(0,0);
 		GasLight g1 = new GasLight(l1);
 		GasLight g2 = new GasLight(l2);
 		g1.moveGasLight(l2);
@@ -46,7 +46,7 @@ public class TestGasLight {
 	@Test
 	public void testRemoveFromBoard()
 	{
-		Lamppost l1 = new Lamppost();
+		Lamppost l1 = new Lamppost(0,0);
 		GasLight g1 = new GasLight(l1);
 		g1.removeFromBoard();
 		String excpect = "true";
