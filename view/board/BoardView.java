@@ -1,6 +1,6 @@
 package view.board;
 
-import javafx.application.Platform;
+import controller.clickresponders.TileClickResponder;
 import javafx.scene.layout.AnchorPane;
 
 public class BoardView extends AnchorPane implements CharTokenViewModifier, TokenViewModifier {
@@ -11,6 +11,7 @@ public class BoardView extends AnchorPane implements CharTokenViewModifier, Toke
 	/** This is an array of 2-tuples (row, col) of the indices of highlighted tiles. */
 	private int[][] highlightedTiles;
 	private double tW, tH; // Tile positions and sizes.
+	TileClickResponder responder;
 	
 	public BoardView(char[][] boardTemplate) {
 		board = boardTemplate;
@@ -39,6 +40,14 @@ public class BoardView extends AnchorPane implements CharTokenViewModifier, Toke
 		} // for each row
 	}
 	
+	public void setClickResponder(TileClickResponder clickResponder) {
+		responder = clickResponder;
+		for(TileView[] tileArr : tiles) for(TileView tile : tileArr) {
+			if(tile != null)
+				tile.addClickResponder(clickResponder);
+		}
+	}
+	
 	private void resizeTiles() {
 		tW = getTileWidth();
 		tH = getTileHeight();
@@ -51,7 +60,7 @@ public class BoardView extends AnchorPane implements CharTokenViewModifier, Toke
 	}
 	
 	private void addTile(int row, int col) {
-		tiles[row][col] = new TileView(board[row][col], tW, tH);
+		tiles[row][col] = new TileView(board[row][col], tW, tH, row, col);
 		tiles[row][col].resizeRelocate(getTileX(col), getTileY(row, col), tW, tH);
 		this.getChildren().add(tiles[row][col]);
 	}

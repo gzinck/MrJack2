@@ -35,6 +35,7 @@ public class GameController implements GameContinuer {
 		table = new Table();
 		
 		tileController = new TileController(turnKeeper, boardView, this);
+		boardView.setClickResponder(tileController);
 		
 		charTokenController = new CharTokenController(boardView);
 		gb.addCharTokenObserver(charTokenController);

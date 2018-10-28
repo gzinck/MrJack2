@@ -2,14 +2,14 @@ package controller;
 import java.util.Observable;
 import java.util.Observer;
 
+import controller.clickresponders.TileClickResponder;
 import model.ability.Ability;
 import model.gameboard.TokenFinder;
 import model.player.Player;
 import model.token.*;
 import model.turnkeeper.TurnKeeper;
 import view.board.BoardView;
-public class TileController implements Observer
-{
+public class TileController implements Observer, TileClickResponder {
 	private TurnKeeper turnKeeper;
 	private TokenMover tokenMover;
 	private CharTokenMover charMover;
@@ -44,6 +44,7 @@ public class TileController implements Observer
 		int[][] options = tokenMover.getTokenOptions(a);
 		boardView.highlightTiles(options);
 	}
+	@Override
 	public void tileClicked(int row, int col) {
 		int turnStage = turnKeeper.getStage();
 		switch(turnStage) {

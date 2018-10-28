@@ -2,6 +2,7 @@ package view;
 
 import controller.clickresponders.ActionBtnClickResponder;
 import controller.clickresponders.CardClickResponder;
+import controller.clickresponders.TileClickResponder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -29,15 +30,9 @@ public class GameView implements CardView {
 			new Image("/res/img/characters-cards/smith.jpg")
 	};
 	
-//	public static final String[] CHAR_NAMES = {
-//			"Stealthy",
-//			"LeStrade",
-//			"Bert",
-//			"Smith"
-//	};
-	
 	public void initialize() {
 		// Initialize here
+		deactivateActionBtns();
     }
 	
 	public BoardView drawBoard(char[][] boardTemplate) {
@@ -51,6 +46,10 @@ public class GameView implements CardView {
 		return boardView;
 	}
 	
+	public void setClickResponder(TileClickResponder clickResponder) {
+		
+	}
+	
 	public void initializeClickResponders(CardClickResponder inCardClicker, ActionBtnClickResponder inActionClicker) {
 		cardClicker = inCardClicker;
 		actionClicker = inActionClicker;
@@ -61,17 +60,20 @@ public class GameView implements CardView {
 		actionAfterBtn.setDisable(false);
 	}
 	
-	@FXML
-	private void onClickActionBefore() {
+	private void deactivateActionBtns() {
 		actionBeforeBtn.setDisable(true);
 		actionAfterBtn.setDisable(true);
+	}
+	
+	@FXML
+	private void onClickActionBefore() {
+		deactivateActionBtns();
 		actionClicker.actionBeforeOnClick();
 	}
 	
 	@FXML
 	private void onClickActionAfter() {
-		actionBeforeBtn.setDisable(true);
-		actionAfterBtn.setDisable(true);
+		deactivateActionBtns();
 		actionClicker.actionAfterOnClick();
 	}
 	

@@ -1,5 +1,6 @@
 package view.board;
 
+import controller.clickresponders.TileClickResponder;
 import javafx.scene.image.*;
 import javafx.scene.layout.Region;
 
@@ -34,7 +35,13 @@ public class TileView extends Region {
 	private ImageView tokenImg;
 	private ImageView characterImg;
 	
-	public TileView(char tileType, double width, double height) {
+	private TileClickResponder responder;
+	private int row, col;
+	
+	public TileView(char tileType, double width, double height, int inRow, int inCol) {
+		row = inRow;
+		col = inCol;
+		
 		this.setStyle("-fx-cursor: hand;");
 		char c = '`';
 		int index = -1;
@@ -45,6 +52,17 @@ public class TileView extends Region {
 		characterImg = new ImageView();
 		tileResize(width, height);
 		this.getChildren().addAll(tileImg, tokenImg, characterImg);
+	}
+	
+	public void addClickResponder(TileClickResponder clickResponder) {
+		responder = clickResponder;
+		addActionListener();
+	}
+	
+	private void addActionListener() {
+		this.setOnMouseClicked(e -> {
+			responder.tileClicked(row, col);
+		});
 	}
 	
 	public void addToken(int tokenIndex) {
