@@ -28,12 +28,15 @@ public class GasLight extends Observable implements Token
 	}
 	public void removeFromBoard()
 	{
-		setChanged();
+		prevLamppost = currLamppost;
 		currLamppost.removeGasLight();
+		currLamppost = null;
+		setChanged();
 		notifyObservers();
 	}
 	@Override
 	public int[] getTokenLocation() {
+		if(currLamppost == null) return null;
 		return currLamppost.getTileLocation();
 	}
 	@Override
@@ -45,5 +48,10 @@ public class GasLight extends Observable implements Token
 		int index = 0;
 		while(TokenConstants.TOKEN_CHARS[index] != TokenConstants.GASLIGHT_C) index++;
 		return index;
+	}
+	@Override
+	public void initializeObservers() {
+		setChanged();
+		notifyObservers();
 	}
 }

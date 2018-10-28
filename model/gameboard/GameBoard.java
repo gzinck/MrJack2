@@ -231,8 +231,22 @@ public class GameBoard implements TokenFinder
 		}
 	}
 	
-	public void evaluateInnocence(Boolean jackWasSeen)
-	{
+	public void addTokenObserver(Observer obs) {
+		for(Barricade b : barricades) {
+			b.addObserver(obs);
+			b.initializeObservers();
+		}
+		for(GasLight g : gaslights) {
+			g.addObserver(obs);
+			g.initializeObservers();
+		}
+		for(ManholeCover m : mancovers) {
+			m.addObserver(obs);
+			m.initializeObservers();
+		}
+	}
+	
+	public void evaluateInnocence(Boolean jackWasSeen) {
 		for(int i = 0; i < NUM_CHARACTERS; i++) {
 			characters[i].evaluateInnocence(jackWasSeen);
 		}

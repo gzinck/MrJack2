@@ -4,7 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
 import view.TileView;
 
-public class BoardView extends AnchorPane implements CharTokenViewModifier {
+public class BoardView extends AnchorPane implements CharTokenViewModifier, TokenViewModifier {
 	
 	private char[][] board;
 	private int numRows, numCols;
@@ -106,5 +106,13 @@ public class BoardView extends AnchorPane implements CharTokenViewModifier {
 	@Override
 	public void setInnocence(int[] location, boolean isInnocent) {
 		tiles[location[0]][location[1]].setInnocence(isInnocent);
+	}
+	
+	@Override
+	public void moveToken(int tokenIndex, int[] prevLocation, int[] newLocation) {
+		tiles[prevLocation[0]][prevLocation[1]].removeToken();
+		// If newLocation is null, token is removed from board.
+		if(newLocation != null)
+			tiles[newLocation[0]][newLocation[1]].addToken(tokenIndex);
 	}
 }

@@ -47,12 +47,8 @@ public class TileView extends Region {
 		this.getChildren().addAll(tileImg, tokenImg, characterImg);
 	}
 	
-	public void addToken(char tokenType) {
-		char c = '`';
-		int index = -1;
-		while(c != tokenType)
-			c = TokenConstants.TOKEN_CHARS[++index];
-		tokenImg.setImage(TOKEN_IMGS[index]);
+	public void addToken(int tokenIndex) {
+		tokenImg.setImage(TOKEN_IMGS[tokenIndex]);
 	}
 	public void removeToken() {
 		tokenImg.setImage(null);

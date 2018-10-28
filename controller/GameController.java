@@ -14,6 +14,7 @@ public class GameController implements GameContinuer {
 	private Table table;
 	private TileController tileController; // TODO: actually make this an instance variable
 	private CharTokenController charTokenController;
+	private TokenController tokenController;
 	private BoardView boardView;
 	
 	public GameController(BoardView inBoardView) {
@@ -24,9 +25,15 @@ public class GameController implements GameContinuer {
 		detective = new Detective();
 		turnKeeper = new TurnKeeper(jack, detective, gb.getRemovableGaslights());
 		table = new Table();
+		
 		tileController = new TileController(turnKeeper, boardView, this);
+		
 		charTokenController = new CharTokenController(boardView);
 		gb.addCharTokenObserver(charTokenController);
+		
+		tokenController = new TokenController(boardView);
+		gb.addTokenObserver(tokenController);
+		
 		jack.setCharacter(gb.getCharacter(table.getJackCard()));
 		table.startRound();
 		continueGame();

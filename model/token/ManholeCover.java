@@ -39,4 +39,9 @@ public class ManholeCover extends Observable implements Token
 		while(TokenConstants.TOKEN_CHARS[index] != TokenConstants.MANCOVER_C) index++;
 		return index;
 	}
+	@Override
+	public void initializeObservers() {
+		setChanged();
+		notifyObservers();
+	}
 }
