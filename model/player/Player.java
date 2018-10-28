@@ -1,14 +1,14 @@
 package model.player;
 
-import model.gameboard.GameBoard;
 import model.token.CharacterToken;
+import model.token.TokenConstants;
 
 public abstract class Player {
 	protected String[] alibiCards;
 	protected int numCards;
 	
 	public Player() {
-		alibiCards = new String[GameBoard.CHAR_NAMES.length];
+		alibiCards = new String[TokenConstants.CHAR_NAMES.length];
 		numCards = 0;
 	}
 	

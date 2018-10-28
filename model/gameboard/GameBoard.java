@@ -1,4 +1,6 @@
 package model.gameboard;
+import java.util.Observer;
+
 import model.ability.*;
 import model.tile.*;
 import model.token.*;
@@ -20,8 +22,8 @@ public class GameBoard implements TokenFinder
 	private static final int[][] CHAR_LOCATIONS = {
 			{1,1},
 			{1,4},
-			{4,1},
-			{4,6}
+			{3,1},
+			{3,6}
 	};
 
 	private Ability[] CHAR_ABILITIES = {
@@ -180,19 +182,21 @@ public class GameBoard implements TokenFinder
 			return null;
 		case 4:
 			if(col % 2 == 0) {
-				if(col - 1 >= 0 && row + 1 < numRows)
+				if(col - 1 >= 0 && row + 1 < numRows) {
 					return new int[] {row + 1, col - 1};
+				}
 			} else {
-				if(col - 1 >= 0)
+				if(col - 1 >= 0) {
 					return new int[] {row, col - 1};
+				}
 			}
 			return null;
 		case 5:
 			if(col % 2 == 0) {
-				if(col - 1 < numCols)
+				if(col - 1 >= 0)
 					return new int[] {row, col - 1};
 			} else {
-				if(col - 1 < numCols && row - 1 >= 0)
+				if(col - 1 >= 0 && row - 1 >= 0)
 					return new int[] {row - 1, col - 1};
 			}
 			return null;
@@ -217,6 +221,12 @@ public class GameBoard implements TokenFinder
 			int[] loc = CHAR_LOCATIONS[i];
 			characters[i] = new CharacterToken(TokenConstants.CHAR_NAMES[i], CHAR_NUM_MOVES[i], lightableTiles[loc[0]][loc[1]]);
 			characters[i].setAbility(CHAR_ABILITIES[i]);
+		}
+	}
+	
+	public void addCharTokenObserver(Observer obs) {
+		for(int i = 0; i < NUM_CHARACTERS; i++) {
+			characters[i].addObserver(obs);
 		}
 	}
 	

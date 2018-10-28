@@ -7,12 +7,9 @@ import model.gameboard.TokenFinder;
 import model.player.Player;
 import model.token.*;
 import model.turnkeeper.TurnKeeper;
-import view.BoardView;
+import view.board.BoardView;
 public class TileController implements Observer
 {
-	private Barricade barr;
-	private GasLight gasLight;
-	private ManholeCover manholeCover;
 	private TurnKeeper turnKeeper;
 	private TokenMover tokenMover;
 	private CharTokenMover charMover;
@@ -23,22 +20,14 @@ public class TileController implements Observer
 	// CONTROLLER items
 	private GameContinuer gameContinuer;
 	
-	public TileController(Barricade inBarr, GasLight inGasLight, ManholeCover inManholeCover, TurnKeeper inTurnKeeper, BoardView inBoardView, GameContinuer inGameContinuer)
+	public TileController(TurnKeeper inTurnKeeper, BoardView inBoardView, GameContinuer inGameContinuer)
 	{
-		barr = inBarr;
-		gasLight = inGasLight;
-		manholeCover = inManholeCover;
 		turnKeeper = inTurnKeeper;
 		boardView = inBoardView;
 		gameContinuer = inGameContinuer;
 		
 		tokenMover = new TokenMover();
 		charMover = new CharTokenMover();
-		
-		barr.addObserver(this);
-		gasLight.addObserver(this);
-		manholeCover.addObserver(this);
-		
 	}
 	
 	@Override
@@ -58,14 +47,6 @@ public class TileController implements Observer
 	public void tileClicked(int row, int col) {
 		int turnStage = turnKeeper.getStage();
 		switch(turnStage) {
-//		The below two cases have nothing to do with tiles
-//		case TurnKeeper.STAGE_CHOOSE_CHAR:
-//			break;
-//		case TurnKeeper.STAGE_CHOOSE_IFACTIONFIRST:
-//			break;
-//		Do this before moving to the action time...
-//		int[][] options = tokenMover.getTokenOptions(turnKeeper.getCurrCharacter().getAbility());
-//		boardView.highlightTiles(options);
 		case TurnKeeper.STAGE_CHOOSE_ACTIONMOVEBEFORE:
 			continueChoosingAction(row, col);
 			break;

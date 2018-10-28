@@ -5,10 +5,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.gameboard.GameBoard;
+import controller.GameController;
 import javafx.application.*;
 
 public class MainApplication extends Application {
 	private static final String GAME_NAME = "Mr Jack";
+	private static GameController controller;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -21,7 +23,7 @@ public class MainApplication extends Application {
 		stage.setScene(new Scene(root));
 		stage.setTitle(GAME_NAME);
 		stage.show();
-		gv.drawBoard(GameBoard.TILE_FRAMEWORK);
+		controller = new GameController(gv.drawBoard(GameBoard.TILE_FRAMEWORK));
 	}
 
 }

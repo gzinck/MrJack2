@@ -4,6 +4,7 @@ import model.gameboard.GameBoard;
 import model.player.*;
 import model.table.Table;
 import model.turnkeeper.TurnKeeper;
+import view.board.BoardView;
 
 public class GameController implements GameContinuer {
 	private GameBoard gb;
@@ -12,14 +13,20 @@ public class GameController implements GameContinuer {
 	private TurnKeeper turnKeeper;
 	private Table table;
 	private TileController tileController; // TODO: actually make this an instance variable
+	private CharTokenController charTokenController;
+	private BoardView boardView;
 	
-	public void initializeGame()  {
+	public GameController(BoardView inBoardView) {
 		// First, we need to instantiate everything.
+		boardView = inBoardView;
 		gb = new GameBoard();
 		jack = new MrJack();
 		detective = new Detective();
 		turnKeeper = new TurnKeeper(jack, detective, gb.getRemovableGaslights());
 		table = new Table();
+		tileController = new TileController(turnKeeper, boardView, this);
+		charTokenController = new CharTokenController(boardView);
+		gb.addCharTokenObserver(charTokenController);
 		jack.setCharacter(gb.getCharacter(table.getJackCard()));
 		table.startRound();
 		continueGame();

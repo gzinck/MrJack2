@@ -91,4 +91,12 @@ public class CharacterToken extends Observable implements Token {
 	public int[] getPrevTokenLocation() {
 		return prevTile.getTileLocation();
 	}
+	
+	@Override
+	public int getTokenType() {
+		// First, find the character name is charNames
+		int index = 0;
+		while(!TokenConstants.CHAR_NAMES[index].equals(name)) index++;
+		return index;
+	}
 }

@@ -37,7 +37,7 @@ public class TurnKeeper
 		oddRoundOrder = new Player[] {det, jack};
 		evenRoundOrder = new Player[] {jack, det};
 		lightsToRemove = removableLights;
-		currStage = STAGE_TURN_NOT_STARTED;
+		currStage = STAGE_TURN_OVER;
 		currCharacter = null;
 	}
 	public Player getCurrPlayer() {
@@ -83,7 +83,7 @@ public class TurnKeeper
 		return currStage;
 	}
 	public boolean turnOver() {
-		return (currStage == TurnKeeper.STAGE_TURN_OVER);
+		return (currStage == STAGE_TURN_OVER);
 	}
 	private void removeLight()
 	{

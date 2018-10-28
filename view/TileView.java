@@ -1,6 +1,5 @@
 package view;
 
-import java.util.HashMap;
 import javafx.scene.image.*;
 import javafx.scene.layout.Region;
 
@@ -54,22 +53,22 @@ public class TileView extends Region {
 		while(c != tokenType)
 			c = TokenConstants.TOKEN_CHARS[++index];
 		tokenImg.setImage(TOKEN_IMGS[index]);
-		tokenImg = new ImageView(TOKEN_IMGS[index]);
 	}
 	public void removeToken() {
 		tokenImg.setImage(null);
 	}
 	
-	public void addCharacterToken(char tokenType) {
-		char c = '`';
-		int index = -1;
-		while(c != tokenType)
-			c = TokenConstants.CHARACTER_CHARS[++index];
-		characterImg.setImage(CHARACTER_IMGS[index]);
-		characterImg = new ImageView(TILE_IMGS[index]);
+	public void addCharacterToken(int tokenIndex) {
+		characterImg.setImage(CHARACTER_IMGS[tokenIndex]);
 	}
 	public void removeCharToken() {
 		characterImg.setImage(null);
+	}
+	public void setInnocence(boolean isInnocent) {
+		if(isInnocent)
+			characterImg.setStyle("-fx-opacity: 0.5;");
+		else
+			characterImg.setStyle("-fx-opacity: 1;");
 	}
 	
 	public void tileResize(double width, double height) {

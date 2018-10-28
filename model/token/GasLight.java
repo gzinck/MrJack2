@@ -40,4 +40,10 @@ public class GasLight extends Observable implements Token
 	public int[] getPrevTokenLocation() {
 		return prevLamppost.getTileLocation();
 	}
+	@Override
+	public int getTokenType() {
+		int index = 0;
+		while(TokenConstants.TOKEN_CHARS[index] != TokenConstants.GASLIGHT_C) index++;
+		return index;
+	}
 }

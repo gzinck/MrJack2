@@ -33,4 +33,10 @@ public class ManholeCover extends Observable implements Token
 	public int[] getPrevTokenLocation() {
 		return prevManhole.getTileLocation();
 	}
+	@Override
+	public int getTokenType() {
+		int index = 0;
+		while(TokenConstants.TOKEN_CHARS[index] != TokenConstants.MANCOVER_C) index++;
+		return index;
+	}
 }

@@ -4,10 +4,11 @@ import java.util.Arrays;
 import java.util.Random;
 
 import model.gameboard.GameBoard;
+import model.token.TokenConstants;
 
 public abstract class Deck 
 {
-	public static final String[] CHARACTERS = GameBoard.CHAR_NAMES;
+	public static final String[] CHARACTERS = TokenConstants.CHAR_NAMES;
 	public String[] cards;
 	protected int numCardsRemaining; 
 	

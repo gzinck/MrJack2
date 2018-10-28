@@ -16,9 +16,14 @@ public class TokenConstants {
 	};
 	// Characters for individual tiles
 	public static final char EXIT_C 	= 'E';
-	public static final char BUILD_C 	= 'B';
+	public static final char BUILD_C = 'B';
 	public static final char NONE_C 	= 'X';
-	public static final char REG_C 		= ' ';
+	public static final char REG_C 	= ' ';
 	public static final char LAMP_C 	= 'L';
 	public static final char MANH_C 	= 'M';
+	
+	// Characters for individual tokens
+	public static final char BARRICADE_C = 'B';
+	public static final char MANCOVER_C = 'M';
+	public static final char GASLIGHT_C = 'G';
 }
