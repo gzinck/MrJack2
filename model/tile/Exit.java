@@ -14,6 +14,11 @@ public class Exit extends Tile implements Passable {
 	private static WitnessCard witnessCard;
 	private Barricade barricade;
 	private static int numExits;
+	
+	public Exit(int row, int col) {
+		super(row, col);
+	}
+	
 	public static void setWitnessCard(WitnessCard wc) {
 		witnessCard = wc;
 	}

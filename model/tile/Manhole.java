@@ -16,7 +16,8 @@ public class Manhole extends Tile implements Lightable {
 	private boolean isOccupied;
 	private static int numManholes;
 	
-	public Manhole() {
+	public Manhole(int row, int col) {
+		super(row, col);
 		cover = null;
 		isOccupied = false;
 		occupiableNeighbours = new Lightable[NUM_NEIGHBOURS];

@@ -11,7 +11,11 @@ public class RegularTile extends Tile implements Lightable {
 	private Occupiable[] occupiableNeighbours;
 	private Lamppost lamp;
 	private boolean isOccupied;
-
+	
+	public RegularTile(int row, int col) {
+		super(row, col);
+	}
+	
 	@Override
 	public HashSet<Passable> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
 		if(numMoves < 1) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 1.");

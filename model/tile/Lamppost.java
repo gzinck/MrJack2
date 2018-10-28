@@ -14,8 +14,10 @@ public class Lamppost extends Tile implements Passable {
 	private GasLight light;
 	private static Lamppost[] allLampposts;
 	private static boolean[] litLampposts;
-	public Lamppost()
+	
+	public Lamppost(int row, int col)
 	{
+		super(row, col);
 		light = null;
 	}
 	

@@ -6,8 +6,9 @@ public abstract class Tile implements Passable {
 	protected Passable[] neighbours;
 	private int[] tileLocation;
 	
-	public Tile() {
+	public Tile(int row, int col) {
 		neighbours = new Passable[NUM_NEIGHBOURS];
+		tileLocation = new int[]{row, col};
 	}
 	
 	@Override

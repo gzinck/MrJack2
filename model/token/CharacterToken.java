@@ -99,4 +99,8 @@ public class CharacterToken extends Observable implements Token {
 		while(!TokenConstants.CHAR_NAMES[index].equals(name)) index++;
 		return index;
 	}
+	public void initializeObservers() {
+		setChanged();
+		notifyObservers();
+	}
 }

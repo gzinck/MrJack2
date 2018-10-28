@@ -20,10 +20,6 @@ public class GameView {
 		AnchorPane.setRightAnchor(boardView, 0.0);
 		AnchorPane.setLeftAnchor(boardView, 0.0);
 		board.getChildren().add(boardView);
-		// This runs later so that the appropriate sizes apply
-		Platform.runLater(() -> {
-			boardView.drawBoard();
-		});
 		return boardView;
 	}
 }

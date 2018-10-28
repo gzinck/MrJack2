@@ -22,8 +22,8 @@ public class GameBoard implements TokenFinder
 	private static final int[][] CHAR_LOCATIONS = {
 			{1,1},
 			{1,4},
-			{3,1},
-			{3,6}
+			{3,0},
+			{3,5}
 	};
 
 	private Ability[] CHAR_ABILITIES = {
@@ -74,27 +74,27 @@ public class GameBoard implements TokenFinder
 			for(int col = 0; col < numCols; col++) {
 				switch(TILE_FRAMEWORK[row][col]) {
 				case TokenConstants.REG_C:
-					RegularTile rt = new RegularTile();
+					RegularTile rt = new RegularTile(row, col);
 					tiles[row][col] = rt;
 					lightableTiles[row][col] = rt;
 					break;
 				case TokenConstants.EXIT_C:
-					Exit e = new Exit();
+					Exit e = new Exit(row, col);
 					tiles[row][col] = e;
 					exits[exitsSoFar++] = e;
 					break;
 				case TokenConstants.BUILD_C:
-					Building b = new Building();
+					Building b = new Building(row, col);
 					tiles[row][col] = b;
 					break;
 				case TokenConstants.MANH_C:
-					Manhole m = new Manhole();
+					Manhole m = new Manhole(row, col);
 					tiles[row][col] = m;
 					lightableTiles[row][col] = m;
 					manholes[manholesSoFar++] = m;
 					break;
 				case TokenConstants.LAMP_C:
-					Lamppost l = new Lamppost();
+					Lamppost l = new Lamppost(row, col);
 					tiles[row][col] = l;
 					lamps[row][col] = l;
 					lampList[lampsSoFar++] = l;
@@ -227,6 +227,7 @@ public class GameBoard implements TokenFinder
 	public void addCharTokenObserver(Observer obs) {
 		for(int i = 0; i < NUM_CHARACTERS; i++) {
 			characters[i].addObserver(obs);
+			characters[i].initializeObservers();
 		}
 	}
 	

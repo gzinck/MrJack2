@@ -1,5 +1,6 @@
 package view.board;
 
+import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
 import view.TileView;
 
@@ -15,6 +16,7 @@ public class BoardView extends AnchorPane implements CharTokenViewModifier {
 	public BoardView(char[][] boardTemplate) {
 		board = boardTemplate;
 		highlightedTiles = null;
+		drawBoard();
 		this.widthProperty().addListener((obs, oldVal, newVal) -> {
 			if(tiles != null)
 				resizeTiles();
@@ -25,7 +27,7 @@ public class BoardView extends AnchorPane implements CharTokenViewModifier {
 		});
 	}
 	
-	public void drawBoard() {
+	private void drawBoard() {
 		numRows = board.length;
 		numCols = board[0].length;
 		tiles = new TileView[numRows][numCols];

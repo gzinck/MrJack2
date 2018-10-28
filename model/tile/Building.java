@@ -5,6 +5,11 @@ import model.player.*;
 import model.ability.*;
 
 public class Building extends Tile implements Passable {
+	
+	public Building(int row, int col) {
+		super(row, col);
+	}
+	
 	public HashSet<Passable> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
 		if(numMoves < 1) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 1.");
 		// If the ability allows walking through things...
