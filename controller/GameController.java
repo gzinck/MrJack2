@@ -29,7 +29,10 @@ public class GameController implements GameContinuer {
 	private BoardView boardView;
 	private GameView gameView;
 	
+	private boolean gameIsOver;
+	
 	public GameController(BoardView inBoardView, GameView inGameView) {
+		gameIsOver = false;
 		// First, we need to instantiate everything.
 		boardView = inBoardView;
 		gameView = inGameView;
@@ -67,13 +70,16 @@ public class GameController implements GameContinuer {
 		
 		gameView.initializeClickResponders(tableController, actionController);
 		
-		jack.setCharacter(gb.getCharacter(table.getJackCard()));
+		String jackCard = table.getJackCard();
+		System.out.println(jackCard);
+		jack.setCharacter(gb.getCharacter(jackCard));
 		
 		// Then start the turn
 		turnKeeper.startGame();
 		table.startRound();
 	}
 	public void continueGame() {
+		if(gameIsOver) return;
 		// This runs through a turn
 		
 		Player currentPlayer;
@@ -90,6 +96,10 @@ public class GameController implements GameContinuer {
 		}
 		else currentPlayer = turnKeeper.getCurrPlayer();
 		
+		if(turnKeeper.gameOver()) {
+			jackWins();
+			return;
+		}
 		
 		System.out.println(turnStage);
 		switch(turnStage) {
@@ -112,10 +122,21 @@ public class GameController implements GameContinuer {
 			break;
 		}
 	}
+	@Override
+	public void detectiveWins() {
+		gameIsOver = true;
+		gameView.endGame(false);
+		System.out.println("DETECTIVE WINS");
+	}
+	@Override
 	public void jackWins() {
 		// Do something to indicate that Jack won.
+		gameIsOver = true;
+		gameView.endGame(true);
+		System.out.println("JACK WINS");
 	}
+	@Override
 	public boolean gameIsOver() {
-		return false;
+		return gameIsOver;
 	}
 }

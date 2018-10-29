@@ -2,7 +2,7 @@ package model.token;
 
 import java.util.HashSet;
 
-import model.gameboard.TokenFinder;
+import model.gameboard.CharTokenFinder;
 import model.player.Player;
 import model.tile.Lightable;
 import model.tile.Passable;
@@ -11,9 +11,9 @@ public class CharTokenMover {
 	private int[][] tileLocationOptions;
 	private int[] selectedTile;
 	private CharacterToken character;
-	private TokenFinder finder;
+	private CharTokenFinder finder;
 	
-	public int[][] getTileOptions(CharacterToken inCharacter, Player currPlayer, TokenFinder tokenFinder) {
+	public int[][] getTileOptions(CharacterToken inCharacter, Player currPlayer, CharTokenFinder tokenFinder) {
 		character = inCharacter;
 		finder = tokenFinder;
 		HashSet<Passable> tiles = character.getAccessibleTiles(currPlayer);
@@ -48,6 +48,15 @@ public class CharTokenMover {
 		character.moveTo(tile);
 		return false;
 	}
+	
+	public boolean wasCollision() {
+		return finder.characterCollision(character);
+	}
+	
+	public boolean wasCollisionWithJack() {
+		return finder.collisionWithJack(character);
+	}
+	
 	public boolean tileSelected() {
 		return (selectedTile != null);
 	}

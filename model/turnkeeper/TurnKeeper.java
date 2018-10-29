@@ -55,7 +55,10 @@ public class TurnKeeper extends Observable {
 	public Player startGame() {
 		currRound++; // Make the round equal to 1
 		currStage = STAGE_CHOOSE_CHAR; // Go to the first stage
-		return oddRoundOrder[currTurn++];
+		Player nextPlayer = oddRoundOrder[currTurn++];
+		setChanged();
+		notifyObservers();
+		return nextPlayer;
 	}
 	public Player nextTurn() {
 		currStage = STAGE_TURN_NOT_STARTED;

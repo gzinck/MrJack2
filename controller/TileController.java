@@ -1,15 +1,14 @@
 package controller;
-import java.util.Observable;
-import java.util.Observer;
 
 import controller.clickresponders.TileClickResponder;
 import model.ability.Ability;
-import model.gameboard.TokenFinder;
+import model.gameboard.CharTokenFinder;
 import model.player.Player;
 import model.token.*;
 import model.turnkeeper.TurnKeeper;
 import view.board.BoardView;
-public class TileController implements Observer, TileClickResponder {
+
+public class TileController implements TileClickResponder {
 	private TurnKeeper turnKeeper;
 	private TokenMover tokenMover;
 	private CharTokenMover charMover;
@@ -30,13 +29,7 @@ public class TileController implements Observer, TileClickResponder {
 		charMover = new CharTokenMover();
 	}
 	
-	@Override
-	public void update(Observable arg0, Object arg1) 
-	{
-		
-		
-	}
-	public void showCharMoveOptions(CharacterToken character, Player currPlayer, TokenFinder tokenFinder) {
+	public void showCharMoveOptions(CharacterToken character, Player currPlayer, CharTokenFinder tokenFinder) {
 		int[][] options = charMover.getTileOptions(character, currPlayer, tokenFinder);
 		boardView.highlightTiles(options);
 	}
@@ -46,6 +39,8 @@ public class TileController implements Observer, TileClickResponder {
 	}
 	@Override
 	public void tileClicked(int row, int col) {
+		if(gameContinuer.gameIsOver()) return;
+		
 		int turnStage = turnKeeper.getStage();
 		switch(turnStage) {
 		case TurnKeeper.STAGE_CHOOSE_ACTIONMOVEBEFORE:
@@ -83,12 +78,18 @@ public class TileController implements Observer, TileClickResponder {
 		boolean success = charMover.selectTile(new int[] {row, col});
 		if(success) {
 			boolean foundExit = charMover.performMove();
+			boardView.unhighlightTiles();
 			if(foundExit) {
-				boardView.unhighlightTiles();
 				gameContinuer.jackWins();
 			} else {
-				gameContinuer.continueGame();
+				if(charMover.wasCollision()) {
+					if(charMover.wasCollisionWithJack())
+						gameContinuer.detectiveWins();
+					else
+						gameContinuer.jackWins();
+				}
 			}
+			gameContinuer.continueGame();
 		}
 	}
 }

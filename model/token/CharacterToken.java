@@ -12,6 +12,7 @@ public class CharacterToken extends Observable implements Token {
 	private String name;
 	private int maxNumMoves;
 	private boolean isInnocent;
+	private boolean isMrJack;
 	private Ability ability;
 	private Lightable currTile, prevTile;
 	
@@ -20,6 +21,15 @@ public class CharacterToken extends Observable implements Token {
 		maxNumMoves = maxMoves;
 		currTile = initialTile;
 		prevTile = initialTile;
+		isMrJack = false;
+	}
+	
+	public void selectMrJack() {
+		isMrJack = true;
+	}
+	
+	public boolean isMrJack() {
+		return isMrJack;
 	}
 	
 	public void setAbility(Ability charAbility) {

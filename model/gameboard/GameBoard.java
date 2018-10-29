@@ -5,7 +5,7 @@ import model.ability.*;
 import model.tile.*;
 import model.token.*;
 
-public class GameBoard implements TokenFinder, CharacterFinder
+public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 {
 	private Ability[] CHAR_ABILITIES = {
 			new StealthyAbility(this), new MoveBarricadeAbility(this), new MoveCoverAbility(this), new MoveLightAbility(this)
@@ -250,6 +250,32 @@ public class GameBoard implements TokenFinder, CharacterFinder
 				if(thisLoc[0] == location[0] && thisLoc[1] == location[1]) return tokenArr[i];
 		}
 		return null;
+	}
+	
+	@Override
+	public boolean characterCollision(CharacterToken recentlyMoved) {
+		int[] loc = recentlyMoved.getTokenLocation();
+		for(CharacterToken t : characters) {
+			if(!t.equals(recentlyMoved)) {
+				int[] currLoc = t.getTokenLocation();
+				if(currLoc[0] == loc[0] && currLoc[1] == loc[1]) return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean collisionWithJack(CharacterToken recentlyMoved) {
+		int[] loc = recentlyMoved.getTokenLocation();
+		for(CharacterToken t : characters) {
+			if(!t.equals(recentlyMoved)) {
+				int[] currLoc = t.getTokenLocation();
+				if(currLoc[0] == loc[0] && currLoc[1] == loc[1]) {
+					return t.isMrJack();
+				}
+			}
+		}
+		return false;
 	}
 	
 	@Override

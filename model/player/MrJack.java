@@ -9,6 +9,7 @@ public class MrJack extends Player
 	
 	public void setCharacter(CharacterToken character) {
 		jackChar = character;
+		jackChar.selectMrJack();
 	}
 	
 	public String getPlayerName() {

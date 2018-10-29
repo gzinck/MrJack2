@@ -65,5 +65,10 @@
          </image>
       </ImageView>
       <ImageView fx:id="witnessCard" fitHeight="105.0" fitWidth="75.0" layoutX="602.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="250.0" />
+      <StackPane fx:id="winPane" disable="true" layoutX="130.0" layoutY="466.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <ImageView fx:id="winImg" fitHeight="450.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

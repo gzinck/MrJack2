@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import model.token.TokenConstants;
 import view.board.BoardView;
@@ -21,6 +22,8 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 	@FXML private Text turnText;
 	@FXML private Text playerText;
 	@FXML private ImageView witnessCard;
+	@FXML private StackPane winPane;
+	@FXML private ImageView winImg;
 	private ImageView[] cards;
 	private BoardView boardView;
 	
@@ -37,6 +40,11 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 	private static final Image[] WITNESS_IMGS = {
 			new Image("/res/img/witness-cards/unseen.png"),
 			new Image("/res/img/witness-cards/seen.png")
+	};
+	
+	private static final Image[] WIN_IMGS = {
+			new Image("/res/img/win-imgs/jack-win.png"),
+			new Image("/res/img/win-imgs/detective-win.png")
 	};
 	
 	public void initialize() {
@@ -70,6 +78,11 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 		actionAfterBtn.setDisable(true);
 	}
 	
+	public void endGame(boolean jackWon) {
+		winPane.setDisable(false);
+		if(jackWon) winImg.setImage(WIN_IMGS[0]);
+		else winImg.setImage(WIN_IMGS[1]);
+	}
 	@FXML
 	private void onClickActionBefore() {
 		deactivateActionBtns();
