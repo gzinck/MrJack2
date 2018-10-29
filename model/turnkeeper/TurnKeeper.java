@@ -35,12 +35,12 @@ public class TurnKeeper extends Observable {
 	
 	public TurnKeeper(MrJack jack, Detective det, GasLight[] removableLights)
 	{
-		currTurn = MAX_TURNS;
+		currTurn = START_TURN;
 		currRound = START_ROUND;
 		oddRoundOrder = new Player[] {det, jack};
 		evenRoundOrder = new Player[] {jack, det};
 		lightsToRemove = removableLights;
-		currStage = STAGE_TURN_OVER;
+		currStage = STAGE_TURN_NOT_STARTED;
 		currCharacter = null;
 	}
 	public Player getCurrPlayer() {
@@ -52,8 +52,12 @@ public class TurnKeeper extends Observable {
 			return oddRoundOrder[currTurn - 1];
 		return evenRoundOrder[currTurn - 1];
 	}
-	public Player nextTurn()
-	{
+	public Player startGame() {
+		currRound++; // Make the round equal to 1
+		currStage = STAGE_CHOOSE_CHAR; // Go to the first stage
+		return oddRoundOrder[currTurn++];
+	}
+	public Player nextTurn() {
 		currStage = STAGE_TURN_NOT_STARTED;
 		if(!roundOver()) {
 			Player nextPlayer = null;

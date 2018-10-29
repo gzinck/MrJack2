@@ -1,8 +1,10 @@
 package model.witnesscard;
 
+import java.util.Observable;
+
 import model.token.CharacterToken;
 
-public class WitnessCard {
+public class WitnessCard extends Observable {
 	private boolean wasSeen;
 	private CharacterToken jackToken;
 	
@@ -13,6 +15,8 @@ public class WitnessCard {
 	
 	public boolean updateWitnessed() {
 		wasSeen = jackToken.isLit();
+		setChanged();
+		notifyObservers();
 		return wasSeen;
 	}
 	

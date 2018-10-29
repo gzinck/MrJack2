@@ -24,6 +24,7 @@ public class GameController implements GameContinuer {
 	private TurnKeeperController turnController;
 	private TableController tableController;
 	private ActionTimingController actionController;
+	private WitnessController witnessController;
 	
 	private BoardView boardView;
 	private GameView gameView;
@@ -61,11 +62,16 @@ public class GameController implements GameContinuer {
 		
 		actionController = new ActionTimingController(turnKeeper, this);
 		
+		witnessController = new WitnessController(gameView);
+		witness.addObserver(witnessController);
+		
 		gameView.initializeClickResponders(tableController, actionController);
 		
 		jack.setCharacter(gb.getCharacter(table.getJackCard()));
+		
+		// Then start the turn
+		turnKeeper.startGame();
 		table.startRound();
-		continueGame();
 	}
 	public void continueGame() {
 		// This runs through a turn

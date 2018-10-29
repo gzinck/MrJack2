@@ -2,7 +2,6 @@ package view;
 
 import controller.clickresponders.ActionBtnClickResponder;
 import controller.clickresponders.CardClickResponder;
-import controller.clickresponders.TileClickResponder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -12,7 +11,7 @@ import javafx.scene.text.Text;
 import model.token.TokenConstants;
 import view.board.BoardView;
 
-public class GameView implements CardView, TurnKeeperView {
+public class GameView implements CardView, TurnKeeperView, WitnessView {
 	@FXML private AnchorPane board;
 	@FXML private Button actionBeforeBtn;
 	@FXML private Button actionAfterBtn;
@@ -21,6 +20,7 @@ public class GameView implements CardView, TurnKeeperView {
 	@FXML private Text roundText;
 	@FXML private Text turnText;
 	@FXML private Text playerText;
+	@FXML private ImageView witnessCard;
 	private ImageView[] cards;
 	private BoardView boardView;
 	
@@ -34,8 +34,13 @@ public class GameView implements CardView, TurnKeeperView {
 			new Image("/res/img/characters-cards/smith.jpg")
 	};
 	
+	private static final Image[] WITNESS_IMGS = {
+			new Image("/res/img/witness-cards/unseen.png"),
+			new Image("/res/img/witness-cards/seen.png")
+	};
+	
 	public void initialize() {
-		// Initialize here
+		witnessCard.setImage(WITNESS_IMGS[1]);
 		deactivateActionBtns();
     }
 	
@@ -48,10 +53,6 @@ public class GameView implements CardView, TurnKeeperView {
 		AnchorPane.setLeftAnchor(boardView, 0.0);
 		board.getChildren().add(boardView);
 		return boardView;
-	}
-	
-	public void setClickResponder(TileClickResponder clickResponder) {
-		
 	}
 	
 	public void initializeClickResponders(CardClickResponder inCardClicker, ActionBtnClickResponder inActionClicker) {
@@ -114,11 +115,16 @@ public class GameView implements CardView, TurnKeeperView {
 	@Override
 	public void updateTurn(int turn) {
 		turnText.setText(turn + "");
-		
 	}
 
 	@Override
 	public void updateRound(int round) {
 		roundText.setText(round + "");
+	}
+
+	@Override
+	public void updateWitnessed(boolean wasWitnessed) {
+		if(wasWitnessed) witnessCard.setImage(WITNESS_IMGS[1]);
+		else witnessCard.setImage(WITNESS_IMGS[0]);
 	}
 }
