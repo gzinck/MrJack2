@@ -14,25 +14,55 @@ import javafx.util.Duration;
 import model.token.TokenConstants;
 import view.board.BoardView;
 
+/**
+ * GameView is the main component of the view, pulling in the XML of the
+ * GUI and interacting with the controllers. It handles showing the cards,
+ * showing the turn/round, showing the status of the witness card, showing
+ * the end game, and instantiating the game board.
+ * 
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ *
+ */
 public class GameView implements CardView, TurnKeeperView, WitnessView {
+	/** The pane containing the view for the game board. */
 	@FXML private AnchorPane board;
+	/**
+	 * The button to let the user perform an action before their move.
+	 * This is enabled/disabled depending on the turn stage. 
+	 */
 	@FXML private Button actionBeforeBtn;
+	/** The button to let the user perform an action after their move. */
 	@FXML private Button actionAfterBtn;
+	/** First character card visible on the game board. */
 	@FXML private ImageView card1;
+	/** Second character card visible on the game board. */
 	@FXML private ImageView card2;
+	/** Text indicating the round number. */
 	@FXML private Text roundText;
+	/** Text indicating the turn number. */
 	@FXML private Text turnText;
+	/** Text indicating the current player. */
 	@FXML private Text playerText;
+	/** Image with the current state of the witness card. */
 	@FXML private ImageView witnessCard;
+	/** Pane for the winning image at the end of the game. This is initially disabled. */
 	@FXML private StackPane winPane;
+	/** Image for the end-game celebration. */
 	@FXML private ImageView winImg;
+	/** Image showing the card recently drawn from the alibi deck. */
 	@FXML private ImageView cardDrawn;
+	/** Convenient array of image views allowing quick reference to cards on the table. */
 	private ImageView[] cards;
+	/** The board view which gets instantiated and placed in the game view. */
 	private BoardView boardView;
 	
+	/** Responder to clicks on cards. */
 	private CardClickResponder cardClicker;
+	/** Responder to clicks on the action before/after buttons. */
 	private ActionBtnClickResponder actionClicker;
 	
+	/** Images for all the character cards. */
 	private static final Image[] CARD_IMGS = {
 			new Image("/res/img/characters-cards/stealthy.jpg"),
 			new Image("/res/img/characters-cards/lestrade.jpg"),
@@ -40,21 +70,31 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 			new Image("/res/img/characters-cards/smith.jpg")
 	};
 	
+	/** Images for both of the possible witness states. */
 	private static final Image[] WITNESS_IMGS = {
 			new Image("/res/img/witness-cards/unseen.png"),
 			new Image("/res/img/witness-cards/seen.png")
 	};
 	
+	/** Images for whichever character wins the game. */
 	private static final Image[] WIN_IMGS = {
 			new Image("/res/img/win-imgs/jack-win.png"),
 			new Image("/res/img/win-imgs/detective-win.png")
 	};
 	
+	/** Initializes the game view upon loading the FXML. */
 	public void initialize() {
 		witnessCard.setImage(WITNESS_IMGS[1]);
 		deactivateActionBtns();
     }
 	
+	/**
+	 * Draws the game board on the screen and places it appropriately.
+	 * 
+	 * @param boardTemplate 2D character array indicating what tiles are in what
+	 * locations
+	 * @return the boardview that is created
+	 */
 	public BoardView drawBoard(char[][] boardTemplate) {
 		cards = new ImageView[] {card1, card2};
 		boardView = new BoardView(boardTemplate);
@@ -66,21 +106,41 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 		return boardView;
 	}
 	
+	/**
+	 * Initializes the click responders for the game view, responding
+	 * to actions in the GUI. This must be done for actions to actually
+	 * cause reactions in the controllers.
+	 * 
+	 * @param inCardClicker controller for when cards on the table get clicked.
+	 * @param inActionClicker controller for when the action before /
+	 * after buttons are clicked.
+	 */
 	public void initializeClickResponders(CardClickResponder inCardClicker, ActionBtnClickResponder inActionClicker) {
 		cardClicker = inCardClicker;
 		actionClicker = inActionClicker;
 	}
 	
+	/**
+	 * Activates the action before/after buttons.
+	 */
 	public void activateActionBtns() {
 		actionBeforeBtn.setDisable(false);
 		actionAfterBtn.setDisable(false);
 	}
 	
+	/**
+	 * Deactivates the action before/after buttons.
+	 */
 	private void deactivateActionBtns() {
 		actionBeforeBtn.setDisable(true);
 		actionAfterBtn.setDisable(true);
 	}
 	
+	/**
+	 * Draws an alibi card and shows it for 10 seconds, gradually fading out.
+	 * 
+	 * @param card string representing the character card drawn.
+	 */
 	public void drawAlibiCard(String card) {
 		int cardIndex = 0;
 		while(!TokenConstants.CHAR_NAMES[cardIndex].equals(card)) cardIndex++;
@@ -91,33 +151,49 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 		ft.play();
 	}
 	
+	/**
+	 * Ends the game with an image representing who won the game.
+	 * 
+	 * @param jackWon <code>true</code> if Jack won
+	 */
 	public void endGame(boolean jackWon) {
 		winPane.setDisable(false);
 		if(jackWon) winImg.setImage(WIN_IMGS[0]);
 		else winImg.setImage(WIN_IMGS[1]);
 	}
+	
+	/**
+	 * Response to when the action before button is clicked.
+	 */
 	@FXML
 	private void onClickActionBefore() {
 		deactivateActionBtns();
 		actionClicker.actionBeforeOnClick();
 	}
 	
+	/**
+	 * Response to when the action after button is clicked.
+	 */
 	@FXML
 	private void onClickActionAfter() {
 		deactivateActionBtns();
 		actionClicker.actionAfterOnClick();
 	}
 	
+	/**
+	 * Response to when the first card on the table is clicked.
+	 */
 	@FXML
 	private void onClickCard1() {
 		cardClicker.cardClicked(0);
-		System.out.println("card1 was clicked");
 	}
 	
+	/**
+	 * Response to when the second card on the table is clicked.
+	 */
 	@FXML
 	private void onClickCard2() {
 		cardClicker.cardClicked(1);
-		System.out.println("card2 was clicked");
 	}
 
 	@Override
