@@ -24,6 +24,10 @@ public class CharacterToken extends Observable implements Token {
 		isMrJack = false;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public void selectMrJack() {
 		isMrJack = true;
 	}

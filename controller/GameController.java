@@ -42,7 +42,12 @@ public class GameController implements GameContinuer {
 		detective = new Detective();
 		turnKeeper = new TurnKeeper(jack, detective, gb.getRemovableGaslights());
 		table = new Table();
-		CharacterToken jackChar = gb.getCharacter(table.getJackCard());
+		
+		String jackCard = table.getJackCard();
+		System.out.println(jackCard);
+		gameView.drawAlibiCard(jackCard);
+		
+		CharacterToken jackChar = gb.getCharacter(jackCard);
 		witness = new WitnessCard(jackChar);
 		Exit.setWitnessCard(witness);
 		
@@ -70,10 +75,6 @@ public class GameController implements GameContinuer {
 		
 		gameView.initializeClickResponders(tableController, actionController);
 		
-		String jackCard = table.getJackCard();
-		System.out.println(jackCard);
-		jack.setCharacter(gb.getCharacter(jackCard));
-		
 		// Then start the turn
 		turnKeeper.startGame();
 		table.startRound();
@@ -88,8 +89,8 @@ public class GameController implements GameContinuer {
 		int turnStage = turnKeeper.nextStage();
 		if(turnKeeper.turnOver()) {
 			if(turnKeeper.roundOver()) {
-				table.startRound();
 				gb.evaluateInnocence(witness.updateWitnessed());
+				table.startRound();
 			}
 			currentPlayer = turnKeeper.nextTurn();
 			turnStage = turnKeeper.nextStage();

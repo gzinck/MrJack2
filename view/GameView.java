@@ -2,6 +2,7 @@ package view;
 
 import controller.clickresponders.ActionBtnClickResponder;
 import controller.clickresponders.CardClickResponder;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -9,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import model.token.TokenConstants;
 import view.board.BoardView;
 
@@ -24,6 +26,7 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 	@FXML private ImageView witnessCard;
 	@FXML private StackPane winPane;
 	@FXML private ImageView winImg;
+	@FXML private ImageView cardDrawn;
 	private ImageView[] cards;
 	private BoardView boardView;
 	
@@ -76,6 +79,16 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 	private void deactivateActionBtns() {
 		actionBeforeBtn.setDisable(true);
 		actionAfterBtn.setDisable(true);
+	}
+	
+	public void drawAlibiCard(String card) {
+		int cardIndex = 0;
+		while(!TokenConstants.CHAR_NAMES[cardIndex].equals(card)) cardIndex++;
+		cardDrawn.setImage(CARD_IMGS[cardIndex]);
+		FadeTransition ft = new FadeTransition(Duration.millis(15000), cardDrawn);
+		ft.setFromValue(1.0);
+		ft.setToValue(0.0);
+		ft.play();
 	}
 	
 	public void endGame(boolean jackWon) {

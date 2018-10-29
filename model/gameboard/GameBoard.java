@@ -237,8 +237,8 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 	
 	@Override
 	public CharacterToken getCharacter(String characterName) {
-		for(int i = 0 ; i < TokenConstants.NUM_CHARACTERS; i++)
-			if(TokenConstants.CHAR_NAMES[i].equals(characterName)) return characters[i];
+		for(int i = 0 ; i < characters.length; i++)
+			if(characters[i].getName().equals(characterName)) return characters[i];
 		return null;
 	}
 
