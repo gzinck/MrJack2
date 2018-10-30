@@ -1,8 +1,6 @@
 package model.ability;
 
-import model.ability.Ability.Timing;
 import model.player.Player;
-import model.token.CharacterToken;
 import model.gameboard.*;
 public class StealthyAbility implements Ability {
 	public static final String ABILITY = "Stealthy";
@@ -23,8 +21,6 @@ public class StealthyAbility implements Ability {
 
 	@Override
 	public void performAbility(int[] tokenLocation, int[] tileLocation) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

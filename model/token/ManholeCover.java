@@ -1,7 +1,5 @@
 package model.token;
 import model.tile.*;
-import model.ability.*;
-import model.player.*;
 import java.util.Observable;
 public class ManholeCover extends Observable implements Token 
 {

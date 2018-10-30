@@ -1,7 +1,6 @@
 package model.ability;
 
 import model.gameboard.TokenFinder;
-import model.player.Player;
 import model.tile.*;
 import model.token.*;
 

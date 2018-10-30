@@ -1,8 +1,6 @@
 package model.ability;
 
-import model.ability.Ability.Timing;
 import model.gameboard.TokenFinder;
-import model.player.Player;
 import model.token.*;
 import model.tile.*;
 public class MoveCoverAbility implements Ability {
@@ -15,7 +13,6 @@ private TokenFinder tokenFinder;
 	
 	@Override
 	public Timing whenUseAbility() {
-		
 		return Timing.BEFORAFTER;
 	}
 

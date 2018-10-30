@@ -44,7 +44,6 @@ public class GameController implements GameContinuer {
 		table = new Table();
 		
 		String jackCard = table.getJackCard();
-		System.out.println(jackCard);
 		gameView.drawAlibiCard(jackCard);
 		
 		CharacterToken jackChar = gb.getCharacter(jackCard);
