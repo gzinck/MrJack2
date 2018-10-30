@@ -49,7 +49,6 @@ private TokenFinder tokenFinder;
 		int numLamps = 0;
 		for(int i = 0; i < lampposts.length; i++)
 			if(!lampposts[i].isLit()) numLamps++;
-		System.out.println("There are " + numLamps + " available lamps.");
 		int[][] locations = new int[numLamps][2];
 		numLamps = 0;
 		
