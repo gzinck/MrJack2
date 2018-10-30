@@ -23,4 +23,9 @@ public class WitnessCard extends Observable {
 	public boolean getWitnessed() {
 		return wasSeen;
 	}
+	
+	public CharacterToken getCharacterToken()
+	{
+		return jackToken;
+	}
 }

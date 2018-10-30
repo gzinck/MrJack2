@@ -42,9 +42,9 @@ public class RegularTile extends Tile implements Lightable {
 
 	@Override
 	public boolean isLit() {
-		System.out.println("WHERE ARE");
+		
 		if(lamp != null && lamp.isLit()) return true;
-		System.out.println("WHERE ARE WE");
+		
 		for(int i = 0; i < NUM_NEIGHBOURS; i++) {
 			if(occupiableNeighbours[i] != null  && occupiableNeighbours[i].isOccupied())
 				return true;

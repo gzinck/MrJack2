@@ -33,7 +33,7 @@ public class TestManhole {
 		mc = new ManholeCover(m1);
 		assertEquals(m1.getAccessibleTiles(2, c, null).size(), 2); // Cannot get to any other manholes!
 		assertEquals(m2.getAccessibleTiles(2, c, null).size(), 1); // Cannot get to any other manholes!
-//		fail("Not yet implemented");
+
 	}
 
 }

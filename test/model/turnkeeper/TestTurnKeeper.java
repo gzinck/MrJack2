@@ -23,11 +23,11 @@ public class TestTurnKeeper
 	{
 		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
 		String expect = Integer.toString(tk.getRound());
-		assertEquals(expect, Integer.toString(1));
+		assertEquals(Integer.toString(0), expect);
 		String expect2 = Integer.toString(tk.getTurn());
-		assertEquals(expect2, Integer.toString(0));
+		assertEquals(Integer.toString(0), expect2);
 		String expect3 = Integer.toString(tk.getStage());
-		assertEquals(expect3, Integer.toString(-1));
+		assertEquals(Integer.toString(-1), expect3);
 
 	}	
 	@Test
@@ -38,14 +38,14 @@ public class TestTurnKeeper
 		try{
 			tk.getCurrPlayer();
 		}catch(IllegalArgumentException e){b = true;}
-		assertEquals(b, true);
+		assertEquals(true, b);
 	}
 	@Test 
 	public void testCurrPlayerAllRounds()
 	{
 		boolean t = false;
 		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
-		tk.nextTurn();
+		tk.startGame();
 		for(int i =0; i<tk.MAX_ROUNDS;i++)
 		{
 			for(int j = 0; j<tk.MAX_TURNS;j++)
@@ -89,5 +89,15 @@ public class TestTurnKeeper
 		assertEquals(-1, tk.getStage());
 	}
 	
-	
+	@Test
+	public void testStartGame()
+	{
+		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
+		Player curr = tk.startGame();
+		assertEquals(true, tk.getRound()==1);
+		assertEquals(true, tk.getStage()==0);
+		assertEquals(dec, curr);
+		
+	}
+
 }
