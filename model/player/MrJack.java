@@ -12,10 +12,12 @@ public class MrJack extends Player
 		jackChar.selectMrJack();
 	}
 	
+	@Override
 	public String getPlayerName() {
 		return PLAYER_NAME;
 	}
 	
+	@Override
 	public boolean canExitBoard(CharacterToken character) {
 		if(character.equals(jackChar)) {
 			return true;

@@ -1,9 +1,10 @@
 package test.model.turnkeeper;
 import static org.junit.Assert.*;
+
+import model.TurnKeeper;
 import model.player.*;
 import model.tile.*;
 import model.token.*;
-import model.turnkeeper.*;
 import org.junit.Test;
 public class TestTurnKeeper 
 {

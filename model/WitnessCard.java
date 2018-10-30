@@ -1,4 +1,4 @@
-package model.witnesscard;
+package model;
 
 import java.util.Observable;
 

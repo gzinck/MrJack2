@@ -1,4 +1,4 @@
-package model.turnkeeper;
+package model;
 import model.token.*;
 
 import java.util.Observable;

@@ -4,9 +4,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import controller.clickresponders.CardClickResponder;
+import model.Table;
+import model.TurnKeeper;
 import model.gameboard.CharacterFinder;
-import model.table.Table;
-import model.turnkeeper.TurnKeeper;
 import view.CardView;
 
 public class TableController implements Observer, CardClickResponder {

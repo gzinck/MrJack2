@@ -1,12 +1,12 @@
 package controller;
 
+import model.Table;
+import model.TurnKeeper;
+import model.WitnessCard;
 import model.gameboard.GameBoard;
 import model.player.*;
-import model.table.Table;
 import model.tile.Exit;
 import model.token.CharacterToken;
-import model.turnkeeper.TurnKeeper;
-import model.witnesscard.WitnessCard;
 import view.GameView;
 import view.board.BoardView;
 
@@ -18,7 +18,7 @@ public class GameController implements GameContinuer {
 	private Table table;
 	private WitnessCard witness;
 	
-	private TileController tileController; // TODO: actually make this an instance variable
+	private TileController tileController;
 	private CharTokenController charTokenController;
 	private TokenController tokenController;
 	private TurnKeeperController turnController;
@@ -78,6 +78,8 @@ public class GameController implements GameContinuer {
 		turnKeeper.startGame();
 		table.startRound();
 	}
+	
+	@Override
 	public void continueGame() {
 		if(gameIsOver) return;
 		// This runs through a turn
@@ -101,7 +103,6 @@ public class GameController implements GameContinuer {
 			return;
 		}
 		
-		System.out.println(turnStage);
 		switch(turnStage) {
 		case TurnKeeper.STAGE_CHOOSE_CHAR:
 			boardView.unhighlightTiles();
@@ -126,14 +127,11 @@ public class GameController implements GameContinuer {
 	public void detectiveWins() {
 		gameIsOver = true;
 		gameView.endGame(false);
-		System.out.println("DETECTIVE WINS");
 	}
 	@Override
 	public void jackWins() {
-		// Do something to indicate that Jack won.
 		gameIsOver = true;
 		gameView.endGame(true);
-		System.out.println("JACK WINS");
 	}
 	@Override
 	public boolean gameIsOver() {

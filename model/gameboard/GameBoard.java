@@ -221,7 +221,7 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		}
 	}
 	
-	public void evaluateInnocence(Boolean jackWasSeen) {
+	public void evaluateInnocence(boolean jackWasSeen) {
 		for(int i = 0; i < TokenConstants.NUM_CHARACTERS; i++) {
 			characters[i].evaluateInnocence(jackWasSeen);
 		}
@@ -235,13 +235,6 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		return removable;
 	}
 	
-	@Override
-	public CharacterToken getCharacter(String characterName) {
-		for(int i = 0 ; i < characters.length; i++)
-			if(characters[i].getName().equals(characterName)) return characters[i];
-		return null;
-	}
-
 	public <T extends Token> T getToken(T[] tokenArr, int[] location) {
 		for(int i = 0; i < tokenArr.length; i++) {
 			int[] thisLoc = tokenArr[i].getTokenLocation();
@@ -249,6 +242,13 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 			if(thisLoc != null)
 				if(thisLoc[0] == location[0] && thisLoc[1] == location[1]) return tokenArr[i];
 		}
+		return null;
+	}
+	
+	@Override
+	public CharacterToken getCharacter(String characterName) {
+		for(int i = 0 ; i < characters.length; i++)
+			if(characters[i].getName().equals(characterName)) return characters[i];
 		return null;
 	}
 	

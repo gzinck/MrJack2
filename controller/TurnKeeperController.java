@@ -3,7 +3,7 @@ package controller;
 import java.util.Observable;
 import java.util.Observer;
 
-import model.turnkeeper.TurnKeeper;
+import model.TurnKeeper;
 import view.TurnKeeperView;
 
 public class TurnKeeperController implements Observer {

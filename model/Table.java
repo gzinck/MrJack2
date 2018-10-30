@@ -1,10 +1,9 @@
-package model.table;
+package model;
 
 import java.util.Observable;
 
 import model.deck.AlibiDeck;
 import model.deck.CharacterDeck;
-import model.turnkeeper.TurnKeeper;
 
 public class Table extends Observable {
 	public String[] characters = new String[TurnKeeper.MAX_TURNS];

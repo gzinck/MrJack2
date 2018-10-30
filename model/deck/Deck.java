@@ -29,4 +29,6 @@ public abstract class Deck
 			cards[i] = temp;
 		}
 	}
+	
+	public abstract String drawCard();
 }

@@ -3,7 +3,7 @@ package controller;
 import java.util.Observable;
 import java.util.Observer;
 
-import model.witnesscard.WitnessCard;
+import model.WitnessCard;
 import view.WitnessView;
 
 public class WitnessController implements Observer {

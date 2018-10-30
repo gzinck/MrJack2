@@ -18,7 +18,9 @@ import view.board.BoardView;
  * GameView is the main component of the view, pulling in the XML of the
  * GUI and interacting with the controllers. It handles showing the cards,
  * showing the turn/round, showing the status of the witness card, showing
- * the end game, and instantiating the game board.
+ * the end game, and instantiating the game board. Not everything was broken
+ * into separate classes/interfaces because this would have increased
+ * the complication when working with the XML.
  * 
  * @author Graeme Zinck and Charles Jobin
  * @version 1.0

@@ -10,7 +10,6 @@ import javafx.application.*;
 
 public class MainApplication extends Application {
 	private static final String GAME_NAME = "Mr Jack";
-	private static GameController controller;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -23,7 +22,7 @@ public class MainApplication extends Application {
 		stage.setScene(new Scene(root));
 		stage.setTitle(GAME_NAME);
 		stage.show();
-		controller = new GameController(gv.drawBoard(TokenConstants.TILE_FRAMEWORK), gv);
+		new GameController(gv.drawBoard(TokenConstants.TILE_FRAMEWORK), gv);
 	}
 
 }

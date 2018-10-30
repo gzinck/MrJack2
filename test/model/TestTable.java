@@ -1,6 +1,7 @@
 package test.model;
 import static org.junit.Assert.*;
-import model.table.*;
+
+import model.Table;
 
 import org.junit.Test;
 public class TestTable 

@@ -5,9 +5,9 @@ import java.util.HashSet;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.Table;
 import model.deck.AlibiDeck;
 import model.deck.CharacterDeck;
-import model.table.Table;
 import model.token.TokenConstants;
 
 public class TestDecks {

@@ -1,11 +1,11 @@
 package controller;
 
 import controller.clickresponders.TileClickResponder;
+import model.TurnKeeper;
 import model.ability.Ability;
 import model.gameboard.CharTokenFinder;
 import model.player.Player;
 import model.token.*;
-import model.turnkeeper.TurnKeeper;
 import view.board.BoardView;
 
 public class TileController implements TileClickResponder {

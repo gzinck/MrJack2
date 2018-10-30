@@ -1,9 +1,10 @@
 package model.tile;
 
 import java.util.HashSet;
+
+import model.WitnessCard;
 import model.player.*;
 import model.token.CharacterToken;
-import model.witnesscard.WitnessCard;
 import model.token.Barricade;
 
 public class Exit extends Tile implements Passable {

@@ -1,7 +1,7 @@
 package controller;
 
 import controller.clickresponders.ActionBtnClickResponder;
-import model.turnkeeper.TurnKeeper;
+import model.TurnKeeper;
 
 public class ActionTimingController implements ActionBtnClickResponder {
 	private TurnKeeper turnKeeper;
