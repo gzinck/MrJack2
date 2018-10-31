@@ -6,7 +6,6 @@ import model.ability.StealthyAbility;
 import model.player.Player;
 import model.token.CharacterToken;
 import model.token.GasLight;
-import model.token.ManholeCover;
 
 /**
  * This class extends tile and is a lamppost, gas lights can be placed on a lamppost

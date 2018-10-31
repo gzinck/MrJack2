@@ -15,7 +15,7 @@ public class RegularTile extends Tile implements Lightable {
 	private Occupiable[] occupiableNeighbours;
 	/** lamp that may be lighting the tile */
 	private Lamppost lamp;
-	/** */
+	/** Whether the tile is occupied or not */
 	private boolean isOccupied;
 	/** 
 	 * Constructs a regular tile at a location on the gameboard
