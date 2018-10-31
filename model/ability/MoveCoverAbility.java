@@ -1,12 +1,25 @@
 package model.ability;
-
+/**
+ * Class for the move cover ability given to certain character(s)
+ * 
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 import model.gameboard.TokenFinder;
 import model.token.*;
 import model.tile.*;
 public class MoveCoverAbility implements Ability {
-private TokenFinder tokenFinder;
+
+	/** TokenFinder for the ability */
+	private TokenFinder tokenFinder;
 	
+	/** String for the ability's name */
 	public static final String ABILITY = "MoveCover";
+	
+	/**
+	 * Constructs a MoveCoverAbility
+	 * @param finder TokenFinder used to find the covers on the game board
+	 */
 	public MoveCoverAbility(TokenFinder finder) {
 		tokenFinder = finder;
 	}

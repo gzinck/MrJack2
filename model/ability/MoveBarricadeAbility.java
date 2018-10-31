@@ -1,5 +1,10 @@
 package model.ability;
-
+/**
+ * Class for the move barricade ability given to certain character(s)
+ * 
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 import model.gameboard.TokenFinder;
 import model.tile.*;
 import model.token.*;
@@ -9,6 +14,11 @@ public class MoveBarricadeAbility implements Ability{
 	private TokenFinder tokenFinder;
 	
 	public static final String ABILITY = "MoveBarricade";
+	
+	/**
+	 * Constructs a MoveBarricadeAbility
+	 * @param finder TokenFinder that is used to find the barricade tokens on the gameboard
+	 */
 	public MoveBarricadeAbility(TokenFinder finder) {
 		tokenFinder = finder;
 	}

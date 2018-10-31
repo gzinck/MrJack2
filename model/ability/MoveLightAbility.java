@@ -1,14 +1,27 @@
 package model.ability;
 
-
+/**
+ * Class for the move gaslight ability given to certain character(s)
+ * 
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 import model.gameboard.TokenFinder;
 import model.tile.*;
 import model.token.*;
 
 public class MoveLightAbility implements Ability {
-private TokenFinder tokenFinder;
 	
+	/** Token finder for the ability */
+	private TokenFinder tokenFinder;
+	
+    /** String for the ability's name */
 	public static final String ABILITY = "MoveGasLight";
+	
+	/**
+	 * Constructs a MoveLightAbility
+	 * @param finder TokenFinder used to find the gaslights on the game board
+	 */
 	public MoveLightAbility(TokenFinder finder) {
 		tokenFinder = finder;
 	}

@@ -4,26 +4,46 @@ import java.util.Observer;
 import model.ability.*;
 import model.tile.*;
 import model.token.*;
-
+/**
+ * Class for the gameboard, this class essentially instantiates the board of tiles, tokens and characters
+ * 
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 {
+	/** Array of abilites to be given to characters in the game */
 	private Ability[] CHAR_ABILITIES = {
 			new StealthyAbility(this), new MoveBarricadeAbility(this), new MoveCoverAbility(this), new MoveLightAbility(this)
 	};
 	
+	/** 2D Array of tiles that are placed on the gameboard */
 	private Tile[][] tiles;
+	/**  2D array of lampposts on the gameboard */
 	private Lamppost[][] lamps;
+	/** 2D array of lightable tiles on the gameboard */
 	private Lightable[][] lightableTiles;
+	/** Array of manholes on the gameboard */
 	private Manhole[] manholes;
+	/** Array of exits on the gameboard */
 	private Exit[] exits;
+	/** Arrau of lampposts on the gamboard */
 	private Lamppost[] lampList;
+	/** Number of rows and columns on the gameboard */
 	private int numRows, numCols;
 	
+	/** Array of the characters on the gameboard */
 	public CharacterToken[] characters;
+	/** array of barricades on the gameboard */
 	private Barricade[] barricades;
+	/** Array of gaslights on the gameboard */
 	private GasLight[] gaslights;
+	/** Array of manhole covers on the gameboard */
 	private ManholeCover[] mancovers; 
 	
+	/**
+	 * Constructs a gameboard, intializes the tiles tokens and characters
+	 */
 	public GameBoard()
 	{
 		initializeTiles();
@@ -31,6 +51,9 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		initializeCharacters();
 	}
 	
+	/**
+	 * Assigns the locations of all tiles on the gameboard
+	 */
 	private void initializeTiles() {
 		numRows = TokenConstants.TILE_FRAMEWORK.length;
 		numCols = TokenConstants.TILE_FRAMEWORK[0].length;
@@ -84,6 +107,9 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		Manhole.setManholes(manholes);
 	}
 	
+	/**
+	 * Adds the neighbours 
+	 */
 	private void addNeighbours() {
 		// Go through every place and get the neighbours
 		for(int row = 0; row < numRows; row++) {
