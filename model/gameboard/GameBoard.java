@@ -13,7 +13,9 @@ import model.token.*;
  */
 public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 {
-	/** Array of abilites to be given to characters in the game */
+	/** Array of abilites to be given to characters in the game.
+	 * The indexes correspond to the character indices in
+	 * <code>TokenConstants.java</code>. */
 	private Ability[] CHAR_ABILITIES = {
 			new StealthyAbility(this), new MoveBarricadeAbility(this), new MoveCoverAbility(this), new MoveLightAbility(this)
 	};
@@ -69,6 +71,10 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		int lampsSoFar = 0;
 		int exitsSoFar = 0;
 		
+		// We have to go through every row and column in the template
+		// and place the tiles in the appropriate places.
+		// Many different storage mechanisms are used in order to avoid
+		// the hideous world of the instanceof
 		for(int row = 0; row < numRows; row++) {
 			for(int col = 0; col < numCols; col++) {
 				switch(TokenConstants.TILE_FRAMEWORK[row][col]) {
@@ -109,7 +115,7 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 	}
 	
 	/**
-	 * Adds the neighbours 
+	 * Adds the neighbours for all of the tokens.
 	 */
 	private void addNeighbours() {
 		// Go through every place and get the neighbours
@@ -121,12 +127,23 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		}
 	}
 	
+	/**
+	 * Add the lamppost neighbour to a tile (design decision: each tile
+	 * can only have on lamppost as a neighbour). It cycles through all
+	 * the neighbouring tiles, looking for a lamppost. If it finds one,
+	 * then it assigns the lamppost to the lightable tile. 
+	 * 
+	 * @param tile a lightable tile which can have a neighbouring lamppost
+	 * @param row the row of the tile
+	 * @param col the column of the tile
+	 */
 	private void addLamppostNeighbour(Lightable tile, int row, int col) {
 		if(tile == null) return;
 		// Assumes can only have one lamppost as a neighbour
 		Lamppost l = null;
 		int[] loc = null;
 		int dir = 0;
+		// Check every direction for a lamppost
 		while(l == null && dir < Tile.NUM_NEIGHBOURS) {
 			loc = getLocation(row, col, dir);
 			if(loc != null)
@@ -136,6 +153,15 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		tile.setLamppost(l);
 	}
 	
+	/**
+	 * Adds all poassable neighbours for a tile based on its row and
+	 * column.
+	 * 
+	 * @param tile a passable tile (i.e. anything that could be walked
+	 * through by a character, even Stealthy).
+	 * @param row the row of the tile
+	 * @param col the column of the tile
+	 */
 	private void addPassableNeighbours(Passable tile, int row, int col) {
 		if(tile == null) return;
 		int[] loc = null;
@@ -148,6 +174,18 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		} // for every direction
 	}
 	
+	/**
+	 * Gets the location of the neighbour of a tile in a given direction
+	 * from a specified row and column. This is nontrivial because there
+	 * are six neighbours to a hexagonal tile, and the locations of those
+	 * neighbours depends on whether the column is even or odd.
+	 *  
+	 * @param row the row of the original tile
+	 * @param col the column of the original tile
+	 * @param direction the direction to find the neighbouring tile
+	 * @return the {row, col} of the neighbour, if it exists, or null
+	 * if it does not exist.
+	 */
 	public int[] getLocation(int row, int col, int direction) {
 		// This is some disgusting code, but it only ever has to be done ONCE.
 		// That is, this is the only time we have to do disgusting code to get neighbours.
@@ -206,6 +244,9 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		return null;
 	}
 	
+	/**
+	 * Initializes all the tokens in the appropriate locations.
+	 */
 	private void initializeTokens()
 	{
 		barricades = new Barricade[TokenConstants.NUM_BARRICADES];
@@ -216,6 +257,10 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		for(int i = 0; i < TokenConstants.NUM_MANCOVERS; i++) mancovers[i] = new ManholeCover(manholes[i]);
 	}
 	
+	/**
+	 * Initializes all the character tokens in their appriate locations,
+	 * as defined by <code>TokenConstants.java</code>.
+	 */
 	private void initializeCharacters()
 	{
 		characters = new CharacterToken[TokenConstants.NUM_CHARACTERS];
@@ -226,6 +271,11 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		}
 	}
 	
+	/**
+	 * Adds the observer (controller) to the character tokens.
+	 * 
+	 * @param obs the observer/controller for the characters
+	 */
 	public void addCharTokenObserver(Observer obs) {
 		for(int i = 0; i < TokenConstants.NUM_CHARACTERS; i++) {
 			characters[i].addObserver(obs);
@@ -233,6 +283,11 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		}
 	}
 	
+	/**
+	 * Adds the observer (controller) to the regular tokens.
+	 * 
+	 * @param obs the observer/controller for the tokens
+	 */
 	public void addTokenObserver(Observer obs) {
 		for(Barricade b : barricades) {
 			b.addObserver(obs);
@@ -248,12 +303,24 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		}
 	}
 	
+	/**
+	 * Evaluates the innocence of every character based on whether
+	 * Mr Jack was seen/witnessed.
+	 * 
+	 * @param jackWasSeen <code>true</code> if jack was seen
+	 */
 	public void evaluateInnocence(boolean jackWasSeen) {
 		for(int i = 0; i < TokenConstants.NUM_CHARACTERS; i++) {
 			characters[i].evaluateInnocence(jackWasSeen);
 		}
 	}
 	
+	/**
+	 * Gets the list of gaslights which can be removed.
+	 * This is used to pass to the <code>TurnKeeper</code>.
+	 * 
+	 * @return the list of gaslights which are removable
+	 */
 	public GasLight[] getRemovableGaslights() {
 		GasLight[] removable = new GasLight[TokenConstants.NUM_REMOVABLE_GASLIGHTS];
 		for(int i = 0; i < TokenConstants.NUM_REMOVABLE_GASLIGHTS; i++) {
@@ -262,6 +329,18 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		return removable;
 	}
 	
+	/**
+	 * Gets the token at the given location that exists in
+	 * the array passed in. This generic method is used for
+	 * many other methods for getting specialized types of
+	 * tokens, and to avoid code duplication, this uses generic
+	 * types.
+	 * 
+	 * @param tokenArr the array of tokens
+	 * @param location the location of the desired token (row, col)
+	 * @return the token with the corresponding location, found in the
+	 * input array
+	 */
 	public <T extends Token> T getToken(T[] tokenArr, int[] location) {
 		for(int i = 0; i < tokenArr.length; i++) {
 			int[] thisLoc = tokenArr[i].getTokenLocation();
