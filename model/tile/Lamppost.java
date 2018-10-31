@@ -8,19 +8,38 @@ import model.token.CharacterToken;
 import model.token.GasLight;
 import model.token.ManholeCover;
 
+/**
+ * This class extends tile and is a lamppost, gas lights can be placed on a lamppost
+ * 
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 public class Lamppost extends Tile implements Passable {
 	
+	/** number of lamps */
 	private static int numLamps;
+	/** gas light that may or may not be placed on the lamppost */
 	private GasLight light;
+	/** Array of all the lampposts on the game board */
 	private static Lamppost[] allLampposts;
+	/** Array of the lit lampposts on the board */
 	private static boolean[] litLampposts;
 	
+	/**
+	 * Constructs a lamppost
+	 * @param row the row on which the lamppost is located on the board
+	 * @param col the column on which the lamppost is located on the board
+	 */
 	public Lamppost(int row, int col)
 	{
 		super(row, col);
 		light = null;
 	}
 	
+	/**
+	 * 
+	 * @param inGasLight
+	 */
 	public void placeGasLight(GasLight inGasLight) {
 		light = inGasLight;
 		updateLit();

@@ -3,9 +3,19 @@ import java.util.*;
 import model.token.CharacterToken;
 import model.player.*;
 import model.ability.*;
-
+/**
+ * This class extends tile and is a building, buildings cannot be lightable but they are passable
+ * 
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 public class Building extends Tile implements Passable {
 	
+	/**
+	 * Constructs a building tile
+	 * @param row the row on which the building will be located on the board
+	 * @param col the column on which the building will be located on the board
+	 */
 	public Building(int row, int col) {
 		super(row, col);
 	}
