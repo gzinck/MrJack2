@@ -1,4 +1,9 @@
 package model.ability;
+/**
+ * Interface class for the character's abilities
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 public interface Ability{
 	static enum Timing {
 		BEFORE, AFTER, BEFORAFTER, INSTEAD, NONE
