@@ -1,5 +1,9 @@
 package test.model.tile;
-
+/**
+ * Test class for the Building classe
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -10,8 +14,11 @@ import model.ability.*;
 import model.token.CharacterToken;
 
 public class TestBuilding {
+	/** building to be tested */ 
 	Building b;
+	/** Regular tile for the building neighbour */
 	RegularTile r;
+	/** Character token to be placed */
 	CharacterToken c;
 	Ability a;
 
@@ -22,7 +29,7 @@ public class TestBuilding {
 		r = new RegularTile(0,0);
 		b.setNeighbour(r, 0);
 		c = new CharacterToken("Billy Bob Joe", 1, null);
-		//a = new StealthyAbility();
+		
 	}
 
 	@Test
