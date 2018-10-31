@@ -8,6 +8,16 @@ import model.token.TokenConstants;
 import controller.GameController;
 import javafx.application.*;
 
+/**
+ * This is the class that initiates the application by extending
+ * the <code>javafx.application.Application</code> class. It is
+ * responsible for starting up the game controller and
+ * loading in the view initially.
+ *  
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ *
+ */
 public class MainApplication extends Application {
 	private static final String GAME_NAME = "Mr Jack";
 
