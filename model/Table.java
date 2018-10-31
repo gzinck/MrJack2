@@ -1,21 +1,31 @@
 package model;
-
+/**
+ * Table the game is played on, has the character deck and alibi deck
+ */
 import java.util.Observable;
 
 import model.deck.AlibiDeck;
 import model.deck.CharacterDeck;
 
 public class Table extends Observable {
+	/** String array of the characters to be displayed on the table (picked from the character deck) */
 	public String[] characters = new String[TurnKeeper.MAX_TURNS];
+	/** Character deck on the table */
 	public CharacterDeck charDeck;
+	/** Alibi deck on the table */
 	public AlibiDeck alibis;
-	
+	 /**
+	  * Constructs the table with the character deck and the alibi deck
+	  */
 	public Table()
 	{
 		charDeck = new CharacterDeck();
 		alibis = new AlibiDeck();
 	}
 	
+	/**
+	 * Starts the round by drawing MAX_TURNS amount of character cards onto the table
+	 */
 	public void startRound() {
 		for(int i = 0; i < TurnKeeper.MAX_TURNS; i++) {
 			characters[i] = charDeck.drawCard();
@@ -24,6 +34,11 @@ public class Table extends Observable {
 		notifyObservers();
 	}
 	
+	/**
+	 * Returns the selection of character card
+	 * @param index index of the character card that was selected by the user
+	 * @return returns the character string with that index
+	 */
 	public String selectCharacter(int index) {
 		String curr = characters[index];
 		characters[index] = null;
@@ -31,9 +46,19 @@ public class Table extends Observable {
 		notifyObservers();
 		return curr;
 	}
+	
+	/**
+	 * Draws the alibi card from the alibi deck
+	 * @return the name of the character that will be MrJack during the game
+	 */
 	public String getJackCard() {
 		return alibis.drawCard();
 	}
+	
+	/**
+	 * Gets the cards that are on the table
+	 * @return the cards on the table that were drawn from the character deck
+	 */
 	public String[] getCards() {
 		return characters;
 	}

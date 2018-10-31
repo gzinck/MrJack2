@@ -7,16 +7,20 @@ package model.token;
  */
 public class TokenConstants {
 	
+	/** total number of characters in the game */
 	public static final int NUM_CHARACTERS	= 4;
-	// Bert, Lestrade, Smith, Stealthy
+	/** Character char array, Bert, Lestrade, Smith, Stealthy */
 	public static final char[] CHARACTER_CHARS = {'S', 'L', 'B', 's'};
+	/** String array of the character name */
 	public static final String[] CHAR_NAMES = {
 			"Stealthy",
 			"LeStrade",
 			"Bert",
 			"Smith"
 	};
+	/** Number of moves for each character */
 	public static final int[] CHAR_NUM_MOVES = {4, 3, 3, 3};
+	/** Locations of the character tokens at start of a game */
 	public static final int[][] CHAR_LOCATIONS = {
 			{1,1},
 			{1,4},
@@ -24,7 +28,7 @@ public class TokenConstants {
 			{3,5}
 	};
 	
-	// Exit, Barricade, Null, Regular Tile, Lamppost, Manhole
+	/** Charcter array of the tiles in the game; Exit, Barricade, Null, Regular Tile, Lamppost, Manhole */
 	public static final char[] TILE_CHARS = {'E', 'B', 'X', ' ', 'L', 'M'};
 	// Characters for individual tiles
 	public static final char EXIT_C 	= 'E';
