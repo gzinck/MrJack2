@@ -1,6 +1,8 @@
 package model.ability;
 /**
- * Class for the move cover ability given to certain character(s)
+ * Class for the move cover ability given to certain character(s).
+ * It enables a player to select a manhole cover and a manhole to move it to
+ * at the beginning of their turn.
  * 
  * @author Graeme Zinck and Charles Jobin
  * @version 1.0

@@ -5,7 +5,8 @@ import model.ability.*;
 import model.tile.*;
 import model.token.*;
 /**
- * Class for the gameboard, this class essentially instantiates the board of tiles, tokens and characters
+ * Class for the gameboard, this class essentially instantiates
+ * the board of tiles, tokens and characters.
  * 
  * @author Graeme Zinck and Charles Jobin
  * @version 1.0

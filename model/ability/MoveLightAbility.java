@@ -1,7 +1,8 @@
 package model.ability;
 
 /**
- * Class for the move gaslight ability given to certain character(s)
+ * Class for the move gaslight ability given to certain character(s).
+ * Enables the movement of the gaslight to a different lamppost.
  * 
  * @author Graeme Zinck and Charles Jobin
  * @version 1.0

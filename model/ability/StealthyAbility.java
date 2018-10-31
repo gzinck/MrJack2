@@ -1,6 +1,6 @@
 package model.ability;
 /**
- * Class for the stealthy ability given to certain character(s)
+ * Class for the stealthy ability given to certain character(s).
  * 
  * @author Graeme Zinck and Charles Jobin
  * @version 1.0
@@ -20,10 +20,12 @@ public class StealthyAbility implements Ability {
 		tokenFinder = finder;
 	}
 	
-	/**The ability is performed elsewhere
+	/**
+	 * The ability is performed elsewhere
 	 * This code smells (it's unimplemented), but the benefits of having a
 	 * single abilities class were better than the benefits of having many
-	 * different types. */
+	 * different types, at least for this version of Mr. Jack.
+	 */
 	public void performAbility(Player currPlayer) {
 		
 	}

@@ -22,7 +22,8 @@ public abstract class Deck
 	protected int numCardsRemaining; 
 	
 	/**
-	 * Constructs a deck of cards
+	 * Constructs a deck of cards with all of the characters
+	 * that are present in the game.
 	 */
 	public Deck()
 	{
@@ -32,7 +33,8 @@ public abstract class Deck
 	}
 	
 	/**
-	 * Shuffles a deck of cards in a random order using the Random class for the index of each card
+	 * Shuffles a deck of cards in a random order using
+	 * the Random class for the index of each card.
 	 */
 	public void shuffle()
 	{
@@ -48,8 +50,10 @@ public abstract class Deck
 	}
 	
 	/**
-	 * Abstract method for drawing a card from the deck, implemented in CharacterDeck and AlibiDeck classes
-	 * @return
+	 * Abstract method for drawing a card from the deck,
+	 * implemented in CharacterDeck and AlibiDeck classes
+	 * 
+	 * @return the card which has been drawn
 	 */
 	public abstract String drawCard();
 }

@@ -1,6 +1,8 @@
 package model.ability;
 /**
- * Class for the move barricade ability given to certain character(s)
+ * Class for the move barricade ability given to certain character(s).
+ * It enables a player to select a barricade and an exit to move it to
+ * at the beginning of their turn.
  * 
  * @author Graeme Zinck and Charles Jobin
  * @version 1.0
@@ -11,8 +13,10 @@ import model.token.*;
 
 public class MoveBarricadeAbility implements Ability{
 	
+	/** The finder which can find tokens on the game baord. */
 	private TokenFinder tokenFinder;
 	
+	/** The ability's name. */
 	public static final String ABILITY = "MoveBarricade";
 	
 	/**
