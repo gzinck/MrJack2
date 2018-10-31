@@ -2,6 +2,7 @@
  * Test class for CharacterToken
  * 
  * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
  */
 package test.model.token;
 

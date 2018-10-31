@@ -1,3 +1,9 @@
+/**
+ * This class holds the required parameters for a character in the MrJack game.
+ * 
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 package model.token;
 
 import java.util.HashSet;
@@ -9,13 +15,25 @@ import model.tile.Lightable;
 import model.tile.Passable;
 
 public class CharacterToken extends Observable implements Token {
+	/** Name of the character */
 	private String name;
+	/** Maximum number of spaces a character can move */
 	private int maxNumMoves;
+	/** Innocence of a character */
 	private boolean isInnocent;
+	/** True if the character was chosen from the alibi deck */
 	private boolean isMrJack;
+	/** Ability that the character holds */
 	private Ability ability;
+	/** current and previous tile that the character was on */
 	private Lightable currTile, prevTile;
 	
+	/**
+	 * Constructs a CharacterToken
+	 * @param charName input name of the character
+	 * @param maxMoves maximum number of moves for the character
+	 * @param initialTile initial tile the character is placed on a the start of a game
+	 */
 	public CharacterToken(String charName, int maxMoves, Lightable initialTile) {
 		name = charName;
 		maxNumMoves = maxMoves;
@@ -24,26 +42,50 @@ public class CharacterToken extends Observable implements Token {
 		isMrJack = false;
 	}
 	
+	/**
+	 * Getter method for the character name
+	 * @return returns the name of the character
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * Sets the character to MrJack when chosen from the alibi deck
+	 */
 	public void selectMrJack() {
 		isMrJack = true;
 	}
 	
+	/**
+	 * Checks to see if the character is MrJack
+	 * @return true if the character is MrJack, false otherwise
+	 */
 	public boolean isMrJack() {
 		return isMrJack;
 	}
 	
+	/**
+	 * Sets the ability of the character
+	 * @param charAbility input ability given to the character
+	 */
 	public void setAbility(Ability charAbility) {
 		ability = charAbility;
 	}
 	
+	/**
+	 * Gets the ability of the character
+	 * @return returns the ability of the character
+	 */
 	public Ability getAbility() {
 		return ability;
 	}
 	
+	/**
+	 * Checks to see if a character has a certain ability with a given name
+	 * @param abilityString input name that is being checked with the character's ability
+	 * @return true if the input string is the character's ability, false if not or if no ability has been set
+	 */
 	public boolean hasAbility(String abilityString) {
 		if(ability == null) return false;
 		return ability.isAbility(abilityString);
@@ -62,10 +104,19 @@ public class CharacterToken extends Observable implements Token {
 		return currTile.getAccessibleTiles(maxNumMoves, this, currPlayer);
 	}
 	
+	/**
+	 * Checks if the character is lit or not
+	 * @return true if the character is lit, false otherwise
+	 */
 	public boolean isLit() {
 		return currTile.isLit();
 	}
 	
+	/**
+	 * Checks to see if the character is innocent or not
+	 * @param jackWasSeen boolean for if jack is lit on the board or not lit
+	 * @return true if innocent, false if not innocent
+	 */
 	public boolean evaluateInnocence(boolean jackWasSeen) {
 		if(!isInnocent) {
 			isInnocent = (jackWasSeen != isLit());
@@ -89,6 +140,10 @@ public class CharacterToken extends Observable implements Token {
 		return isInnocent;
 	}
 	
+	/**
+	 * Moves a character from one tile to another
+	 * @param tile A tile the character will move to
+	 */
 	public void moveTo(Lightable tile) {
 		prevTile = currTile;
 		currTile = tile;

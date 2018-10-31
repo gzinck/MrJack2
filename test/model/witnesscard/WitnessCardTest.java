@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 
 import model.tile.*;
 import model.token.*;
-import model.witnesscard.*;
+import model.*;
 import org.junit.Before;
 import org.junit.Test;
 public class WitnessCardTest 
