@@ -1,5 +1,10 @@
 package model.token;
-
+/**
+ * Class for the all the token's constants
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ *
+ */
 public class TokenConstants {
 	
 	public static final int NUM_CHARACTERS	= 4;

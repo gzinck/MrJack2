@@ -1,5 +1,4 @@
 package model.token;
-
 import java.util.HashSet;
 
 import model.gameboard.CharTokenFinder;

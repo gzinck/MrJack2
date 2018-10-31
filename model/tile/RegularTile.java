@@ -5,13 +5,23 @@ import java.util.HashSet;
 import model.player.Detective;
 import model.player.Player;
 import model.token.CharacterToken;
-
+/**
+ * Regular tile that extends tile and is lightable (characters can land on this tile)
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 public class RegularTile extends Tile implements Lightable {
-	
+	/** occupiable tiles around the regular tile */
 	private Occupiable[] occupiableNeighbours;
+	/** lamp that may be lighting the tile */
 	private Lamppost lamp;
+	/** */
 	private boolean isOccupied;
-	
+	/** 
+	 * Constructs a regular tile at a location on the gameboard
+	 * @param row row on which the regular tile will be located on the gameboard
+	 * @param col column on which the regular tile will be located on the gameboard
+	 */
 	public RegularTile(int row, int col) {
 		super(row, col);
 		occupiableNeighbours = new Occupiable[NUM_NEIGHBOURS];

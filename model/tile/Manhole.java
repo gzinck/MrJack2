@@ -6,16 +6,34 @@ import model.player.Detective;
 import model.player.Player;
 import model.token.CharacterToken;
 import model.token.ManholeCover;
-
+/**
+ * This class extends tile and is a manhole, manhole covers can be placed on a manhole
+ * 
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 public class Manhole extends Tile implements Lightable {
+
+	/** array of all the manholes on the gameboard */
 	private static Manhole[] allManholes; // Static means we can access it from any instance
+	/** boolean array of the manholes that are covered */
 	private static boolean[] coveredManholes;
+	/** neighbours of this manhole that are occupiable */
 	private Occupiable[] occupiableNeighbours;
+	/** lamp that may be lighting up the manhole */
 	private Lamppost lamp;
+	/** cover that may be placed on the manhole */
 	private ManholeCover cover;
+	/** used to know if a manhole has a cover */
 	private boolean isOccupied;
+	/** number of manholes on the gameboard */
 	private static int numManholes;
 	
+	/**
+	 * Constructs a manhole at a certain location on the gameboard
+	 * @param row row location of the manhole on the gameboard
+	 * @param col column location of the manhole on the gameboard
+	 */
 	public Manhole(int row, int col) {
 		super(row, col);
 		cover = null;
@@ -24,24 +42,44 @@ public class Manhole extends Tile implements Lightable {
 		lamp = null;
 	}
 	
+	/**
+	 * places a cover on this manhole
+	 * @param mcover cover to be placed on the manhole
+	 */
 	public void placeCover(ManholeCover mcover) {
 		cover = mcover;
 		updateCoveredManholes();
 	}
 	
+	/**
+	 * removes the cover from the manhole
+	 */
 	public void removeCover() {
 		cover.currManhole=null;
 		cover = null;
 		updateCoveredManholes();
 	}
 	
+	/**
+	 * checks to see if a manhole is covered
+	 * @return true if the manhole is covered, false otherwise
+	 */
 	public boolean isCovered()
 	{
 		return(cover!=null);
 	}
+	
+	/**
+	 * Checks to see if a manhole is accessible to a character to pass through
+	 * @return true if accessible, false otherwise
+	 */
 	public boolean manholeAccessible() {
 		return (cover == null);
 	}
+	
+	/**
+	 * updates the covered manholes array
+	 */
 	public void updateCoveredManholes()
 	{
 		coveredManholes = new boolean[numManholes];
@@ -86,6 +124,10 @@ public class Manhole extends Tile implements Lightable {
 		return accessibleTiles;
 	}
 
+	/**
+	 * Sets up the all manhole array with an input amount of manholes
+	 * @param manholes manholes that are in the gameboard
+	 */
 	public static void setManholes(Manhole... manholes) {
 		allManholes = manholes;
 		numManholes = allManholes.length;

@@ -37,20 +37,27 @@ public class Lamppost extends Tile implements Passable {
 	}
 	
 	/**
-	 * 
-	 * @param inGasLight
+	 * Places a gas light on this lamppost
+	 * @param inGasLight gas light to be placed on this lamppost
 	 */
 	public void placeGasLight(GasLight inGasLight) {
 		light = inGasLight;
 		updateLit();
 	}
 	
+	/**
+	 * removes the gaslight from this lamppost
+	 */
 	public void removeGasLight() {
 		light.currLamppost=null;
 		light = null;
 		updateLit();
 	}
 	
+	/**
+	 * check if the lamppost is lit or not
+	 * @return true if the lamppost is light, false otherwise
+	 */
 	public boolean isLit() {
 		return (light != null);
 	}
@@ -73,6 +80,10 @@ public class Lamppost extends Tile implements Passable {
 		
 		return accessibleTiles;
 	}
+	
+	/**
+	 * updates the lit lampposts array
+	 */
 	public void updateLit()
 	{
 		litLampposts = new boolean[numLamps];
@@ -87,6 +98,11 @@ public class Lamppost extends Tile implements Passable {
 			}
 		}
 	}
+	
+	/**
+	 * sets the lamppost array of an input amount of lampposts
+	 * @param inLampposts input any amount of lampposts
+	 */
 	public static void setLampposts(Lamppost... inLampposts)
 	{
 		allLampposts = inLampposts;
