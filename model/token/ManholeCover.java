@@ -1,11 +1,11 @@
 package model.token;
 import model.tile.*;
+import java.util.Observable;
 /**
  * Manhole cover token that is placed on a manhole
  * @author Graeme Zinck and Charles Jobin
  * @version 1.0
  */
-import java.util.Observable;
 public class ManholeCover extends Observable implements Token 
 {
 	/** Current and previous manholes the cover is on */

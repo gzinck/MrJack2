@@ -1,11 +1,11 @@
 package model.token;
 import model.tile.*;
+import java.util.Observable;
 /**
  * This class is a gaslight token that is placed on a lamppost
  * @author Graeme Zinck and Charles Jobin
  * @version 1.0
  */
-import java.util.Observable;
 public class GasLight extends Observable implements Token 
 {
 	/** Current and previous lamppost the gas light is on */

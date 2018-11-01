@@ -1,9 +1,3 @@
-/**
- * This class holds the required parameters for a character in the MrJack game.
- * 
- * @author Graeme Zinck and Charles Jobin
- * @version 1.0
- */
 package model.token;
 
 import java.util.HashSet;
@@ -14,6 +8,12 @@ import model.player.Player;
 import model.tile.Lightable;
 import model.tile.Passable;
 
+/**
+ * This class holds the required parameters for a character in the MrJack game.
+ * 
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 public class CharacterToken extends Observable implements Token {
 	/** Name of the character */
 	private String name;
