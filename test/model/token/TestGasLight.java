@@ -1,4 +1,9 @@
 package test.model.token;
+/**
+ * Test class for the gaslight
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 import model.token.*;
 import model.tile.*;
 
@@ -7,6 +12,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 public class TestGasLight {
 
+	/**
+	 * Tests that a gaslight has a tile associated when it is initialized
+	 */
 	@Test
 	public void testHasTile()
 	{
@@ -15,7 +23,9 @@ public class TestGasLight {
 		String excpect = "true";
 		assertEquals(excpect, "" + (l1==g1.currLamppost));
 	}
-	
+	/**
+	 * Tests the moving of a gaslight from one lamppost to another
+	 */
 	@Test
 	public void testSetGasLight()
 	{
@@ -26,6 +36,9 @@ public class TestGasLight {
 		String excpect = "true";
 		assertEquals(excpect, "" + (l2==g1.currLamppost));
 	}
+	/**
+	 * Test for moving a gaslight to a lamppost that already has a gaslight
+	 */
 	@Test
 	public void testSetGasLightThatAlreadyHasAGasLight()
 	{
@@ -43,6 +56,9 @@ public class TestGasLight {
 		assertEquals(excpect, "" + didCatch);
 	}
 	
+	/**
+	 * Test removing a gaslight from the board (for end of rounds)
+	 */
 	@Test
 	public void testRemoveFromBoard()
 	{

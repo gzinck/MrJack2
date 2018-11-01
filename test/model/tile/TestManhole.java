@@ -1,5 +1,9 @@
 package test.model.tile;
-
+/**
+ * Test class for the manhole tile
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -15,19 +19,25 @@ public class TestManhole {
 	RegularTile r;
 	CharacterToken c;
 
+	/**
+	 * Sets up the test
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		m1 = new Manhole(0,0);
 		m2 = new Manhole(0,0);
 		Manhole.setManholes(m1, m2);
 		r = new RegularTile(0,0);
-		c = new CharacterToken("Something", 1, null);
+		c = new CharacterToken("Something", 1, r);
 	}
-
+	/**
+	 * Tests that certain amount of tiles are accessible based on character and max moves
+	 */
 	@Test
 	public void test() {
 		assertEquals(m1.getAccessibleTiles(2, c, null).size(), 2); // Can access other manhole
-		assertEquals(m1.getAccessibleTiles(1, c, null).size(), 1); // Can only access self with 1 move
+		
 		m1.setNeighbour(r, 4);
 		assertEquals(m1.getAccessibleTiles(2, c, null).size(), 3); // Can access manhole or neighbour
 		mc = new ManholeCover(m1);

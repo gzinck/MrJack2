@@ -37,8 +37,9 @@ public class ManholeCover extends Observable implements Token
 	{
 		prevManhole = currManhole;
 		currManhole.removeCover();
-		inManhole.placeCover(this);
 		currManhole = inManhole;
+		inManhole.placeCover(this);
+	
 		setChanged();
 		notifyObservers();
 	}
