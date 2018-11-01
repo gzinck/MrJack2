@@ -1,6 +1,7 @@
 package model.token;
 /**
- * Class for the all the token's constants
+ * Class for the all the token's constants.
+ * 
  * @author Graeme Zinck and Charles Jobin
  * @version 1.0
  *
@@ -28,24 +29,35 @@ public class TokenConstants {
 			{3,5}
 	};
 	
-	/** Charcter array of the tiles in the game; Exit, Barricade, Null, Regular Tile, Lamppost, Manhole */
+	/** Character array of the tiles in the game; Exit, Barricade, Null, Regular Tile, Lamppost, Manhole */
 	public static final char[] TILE_CHARS = {'E', 'B', 'X', ' ', 'L', 'M'};
-	// Characters for individual tiles
+	
+	/** CHaracter for the exit tile */
 	public static final char EXIT_C 	= 'E';
+	/** CHaracter for the building tile */
 	public static final char BUILD_C = 'B';
+	/** CHaracter for a non-existent tile */
 	public static final char NONE_C 	= 'X';
+	/** CHaracter for a regular tile */
 	public static final char REG_C 	= ' ';
+	/** CHaracter for the lamp tile */
 	public static final char LAMP_C 	= 'L';
+	/** CHaracter for the manhole tile */
 	public static final char MANH_C 	= 'M';
 	
-	// Barricade, Manhole cover, Gaslight
+	/** Barricade, Manhole Cover, and Gaslight token characters */ 
 	public static final char[] TOKEN_CHARS = {'B', 'M', 'G', '1', '2', '3', '4'};
-	// Characters for individual tokens
+	/** Character for the barricade */
 	public static final char BARRICADE_C = 'B';
+	/** Character for the manhole cover */
 	public static final char MANCOVER_C = 'M';
+	/** Character for the gaslight */
 	public static final char GASLIGHT_C = 'G';
 	
-	
+	/**
+	 * This is the actual game board, which uses the token
+	 * characters indicated above.
+	 */
 	public static final char[][] TILE_FRAMEWORK = new char[][] {
 		{'E', 'X', 'X', 'X', ' ', 'M', ' ', ' '},
 		{'X', ' ', 'L', 'B', ' ', 'L', ' ', ' '},
@@ -53,13 +65,19 @@ public class TokenConstants {
 		{' ', 'B', 'B', 'B', ' ', ' ', ' ', 'E'}
 	};
 	
-	
+	/** The number of manholes in the TILE_FRAMEWORK */
 	public static final int NUM_MANHOLES	= 3;
+	/** The number of exits in the TILE_FRAMEWORK */
 	public static final int NUM_EXITS	= 2;
+	/** The number of lamps in the TILE_FRAMEWORK */
 	public static final int NUM_LAMPS	= 3;
 	
+	/** The number of barricades that exist */
 	public static final int NUM_BARRICADES = 1;
+	/** The number of gaslights that exist */
 	public static final int NUM_GASLIGHTS = 2;
+	/** The number of gaslights (of those that exist) that can be removed */
 	public static final int NUM_REMOVABLE_GASLIGHTS = 1;
+	/** The number of manhole covers that exist */
 	public static final int NUM_MANCOVERS = 1;
 }
