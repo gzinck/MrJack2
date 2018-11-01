@@ -1,4 +1,9 @@
 package test.model.witnesscard;
+/**
+ * Test class for the witness card class
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
+ */
 import static org.junit.Assert.*;
 
 import model.tile.*;
@@ -8,6 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 public class WitnessCardTest 
 {
+	/**
+	 * Tests the witness status of a new card
+	 */
 	@Test
 	public void testNewCard()
 	{
@@ -18,6 +26,9 @@ public class WitnessCardTest
 		assertEquals(ct, wc.getCharacterToken());
 	}
 	
+	/**
+	 * Test the updateWitnessed method 
+	 */
 	@Test
 	public void testUpdateWitnessed()
 	{

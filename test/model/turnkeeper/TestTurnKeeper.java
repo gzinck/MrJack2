@@ -1,6 +1,8 @@
 package test.model.turnkeeper;
 /**
- * 
+ * test class for the turnkeeper class
+ * @author Graeme Zinck and Charles Jobin
+ * @version 1.0
  */
 import static org.junit.Assert.*;
 
@@ -21,7 +23,9 @@ public class TestTurnKeeper
 	MrJack mrJack = new MrJack();
 	Detective dec = new Detective();
 
-
+	/**
+	 * Checks the begining round, stage and turn are correct
+	 */
 	@Test
 	public void testNewTurnKeeper()
 	{
@@ -34,6 +38,10 @@ public class TestTurnKeeper
 		assertEquals(Integer.toString(-1), expect3);
 
 	}	
+	
+	/**
+	 * Tests the turnkeeper has no start player before the game begins
+	 */
 	@Test
 	public void testCurrPlayerAtStart()
 	{
@@ -44,6 +52,10 @@ public class TestTurnKeeper
 		}catch(IllegalArgumentException e){b = true;}
 		assertEquals(true, b);
 	}
+	
+	/** 
+	 * Test the curr player is correct for every round and turn in the game
+	 */
 	@Test 
 	public void testCurrPlayerAllRounds()
 	{
@@ -86,6 +98,10 @@ public class TestTurnKeeper
 
 
 	}
+	
+	/**
+	 * Tests the starting stage value
+	 */
 	@Test
 	public void testGetStageAtStart()
 	{
@@ -93,6 +109,9 @@ public class TestTurnKeeper
 		assertEquals(-1, tk.getStage());
 	}
 	
+	/**
+	 * Tests the round, stage values at start of game
+	 */
 	@Test
 	public void testStartGame()
 	{
