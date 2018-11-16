@@ -27,10 +27,12 @@ public class TileView extends Region {
 	};
 	/** This has all of the images for different types of character tokens. */
 	private static final Image[] CHARACTER_IMGS = {
-			new Image("/res/img/character-tokens/stealthy.png"),
 			new Image("/res/img/character-tokens/lestrade.png"),
 			new Image("/res/img/character-tokens/bert.png"),
 			new Image("/res/img/character-tokens/smith.png"),
+			new Image("/res/img/character-tokens/stealthy.png"),
+			new Image("/res/img/character-tokens/madame.png"),
+			new Image("/res/img/character-tokens/abberline.png")
 	};
 	/** This has all of the images for different types of regular tokens. */
 	private static final Image[] TOKEN_IMGS = {
@@ -131,8 +133,10 @@ public class TileView extends Region {
 	 * @param tokenIndex index of the character to place on the tile
 	 * as per <code>TokenConstants.java</code>
 	 */
-	public void addCharacterToken(int tokenIndex) {
-		characterImg.setImage(CHARACTER_IMGS[tokenIndex]);
+	public void addCharacterToken(String characterName) {
+		int charIndex = 0;
+		while(!TokenConstants.CHAR_NAMES[charIndex].equals(characterName)) charIndex++;
+		characterImg.setImage(CHARACTER_IMGS[charIndex]);
 	}
 	
 	/**

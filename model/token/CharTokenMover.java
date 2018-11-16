@@ -1,6 +1,7 @@
 package model.token;
 import java.util.HashSet;
 
+import model.ability.MoveReducerAbility;
 import model.gameboard.CharTokenFinder;
 import model.player.Player;
 import model.tile.Lightable;
@@ -37,7 +38,24 @@ public class CharTokenMover {
 	public int[][] getTileOptions(CharacterToken inCharacter, Player currPlayer, CharTokenFinder tokenFinder) {
 		character = inCharacter;
 		finder = tokenFinder;
-		HashSet<Passable> tiles = character.getAccessibleTiles(currPlayer);
+		HashSet<Passable> tiles = null;
+		
+		boolean isNextToMoveReducer = false;
+		for(CharacterToken c : finder.getCharacters()) {
+			if(c.hasAbility(MoveReducerAbility.ABILITY)) {
+				int[] currLoc = character.getTokenLocation();
+				int[] detective = c.getTokenLocation();
+				for(int i = 0; i < 6; i++) {
+					int[] possible = finder.getLocation(currLoc[0], currLoc[1], i);
+					if(possible != null && detective[0] == possible[0] && detective[1] == possible[1])
+						isNextToMoveReducer = true;
+				}
+			}
+		}
+		
+		if(isNextToMoveReducer) tiles = character.getAccessibleTiles(currPlayer, 1);
+		else tiles = character.getAccessibleTiles(currPlayer);
+		
 		tileLocationOptions = new int[tiles.size()][];
 		int i = 0;
 		for(Passable tile : tiles) {

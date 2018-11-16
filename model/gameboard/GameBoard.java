@@ -1,4 +1,5 @@
 package model.gameboard;
+import java.util.Arrays;
 import java.util.Observer;
 
 import model.ability.*;
@@ -13,12 +14,6 @@ import model.token.*;
  */
 public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 {
-	/** Array of abilites to be given to characters in the game.
-	 * The indexes correspond to the character indices in
-	 * <code>TokenConstants.java</code>. */
-	private Ability[] CHAR_ABILITIES = {
-			new StealthyAbility(this), new MoveBarricadeAbility(this), new MoveCoverAbility(this), new MoveLightAbility(this)
-	};
 	
 	/** 2D Array of tiles that are placed on the gameboard */
 	private Tile[][] tiles;
@@ -174,18 +169,7 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		} // for every direction
 	}
 	
-	/**
-	 * Gets the location of the neighbour of a tile in a given direction
-	 * from a specified row and column. This is nontrivial because there
-	 * are six neighbours to a hexagonal tile, and the locations of those
-	 * neighbours depends on whether the column is even or odd.
-	 *  
-	 * @param row the row of the original tile
-	 * @param col the column of the original tile
-	 * @param direction the direction to find the neighbouring tile
-	 * @return the {row, col} of the neighbour, if it exists, or null
-	 * if it does not exist.
-	 */
+	@Override
 	public int[] getLocation(int row, int col, int direction) {
 		// This is some disgusting code, but it only ever has to be done ONCE.
 		// That is, this is the only time we have to do disgusting code to get neighbours.
@@ -263,12 +247,8 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 	 */
 	private void initializeCharacters()
 	{
-		characters = new CharacterToken[TokenConstants.NUM_CHARACTERS];
-		for(int i = 0; i < TokenConstants.NUM_CHARACTERS; i++) {
-			int[] loc = TokenConstants.CHAR_LOCATIONS[i];
-			characters[i] = new CharacterToken(TokenConstants.CHAR_NAMES[i], TokenConstants.CHAR_NUM_MOVES[i], lightableTiles[loc[0]][loc[1]]);
-			characters[i].setAbility(CHAR_ABILITIES[i]);
-		}
+		CharGenerator gen = new CharGenerator(this);
+		characters = gen.initializeCharacters();
 	}
 	
 	/**
@@ -277,7 +257,7 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 	 * @param obs the observer/controller for the characters
 	 */
 	public void addCharTokenObserver(Observer obs) {
-		for(int i = 0; i < TokenConstants.NUM_CHARACTERS; i++) {
+		for(int i = 0; i < TokenConstants.NUM_ACTIVE_CHARACTERS; i++) {
 			characters[i].addObserver(obs);
 			characters[i].initializeObservers();
 		}
@@ -310,7 +290,7 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 	 * @param jackWasSeen <code>true</code> if jack was seen
 	 */
 	public void evaluateInnocence(boolean jackWasSeen) {
-		for(int i = 0; i < TokenConstants.NUM_CHARACTERS; i++) {
+		for(int i = 0; i < TokenConstants.NUM_ACTIVE_CHARACTERS; i++) {
 			characters[i].evaluateInnocence(jackWasSeen);
 		}
 	}

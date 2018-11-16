@@ -1,24 +1,25 @@
 package model.ability;
 
+import model.gameboard.TokenFinder;
 import model.player.Player;
-import model.gameboard.*;
 
 /**
- * Class for the stealthy ability given to certain character(s).
+ * This is an ability for reducing the moves of nearby
+ * characters.
  * 
- * @author Graeme Zinck and Charles Jobin
- * @version 1.0
+ * @author Josh Cookson and Graeme Zinck
+ * @version 1.1
  */
-public class StealthyAbility implements Ability {
+public class MoveReducerAbility implements Ability {
 
 	/** String for the ability name */
-	public static final String ABILITY = "Stealthy";
+	public static final String ABILITY = "Move Reducer";
 	
 	/** TokenFinder for the ability */
 	private TokenFinder tokenFinder;
 	
-	/** Constructs a Stealthy Ability */
-	public StealthyAbility(TokenFinder finder) {
+	/** Constructs a move reducer Ability */
+	public MoveReducerAbility(TokenFinder finder) {
 		tokenFinder = finder;
 	}
 	

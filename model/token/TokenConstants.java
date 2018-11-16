@@ -8,25 +8,42 @@ package model.token;
  */
 public class TokenConstants {
 	
-	/** total number of characters in the game */
-	public static final int NUM_CHARACTERS	= 4;
-	/** Character char array, Bert, Lestrade, Smith, Stealthy */
-	public static final char[] CHARACTER_CHARS = {'S', 'L', 'B', 's'};
+	/** Total number of active characters that are "basic" */
+	public static final int NUM_ACTIVE_BASIC_CHARS = 2;
+	/** Total number of active characters that are "optional" */
+	public static final int NUM_ACTIVE_OPTIONAL_CHARS = 2;
+	/** Total number of active characters in the game. */
+	public static final int NUM_ACTIVE_CHARACTERS = NUM_ACTIVE_BASIC_CHARS + NUM_ACTIVE_OPTIONAL_CHARS;
+	
+	/** Total number of POSSIBLE basic characters (which may or may not be included in the game) */
+	public static final int NUM_BASIC_CHARS = 3;
+	/** Total number of POSSIBLE optional characters (which may or may not be included in the game) */
+	public static final int NUM_OPTIONAL_CHARS = 3;
+	/** Total number of POSSIBLE characters in the game. */
+	public static final int NUM_TOTAL_CHARS = NUM_BASIC_CHARS + NUM_OPTIONAL_CHARS;
+	/** Character char array, Bert, Lestrade, Smith, Stealthy, Madame, Abberline */
+	public static final char[] CHARACTER_CHARS = {'L', 'B', 's', 'S', 'M', 'A'};
 	/** String array of the character name */
 	public static final String[] CHAR_NAMES = {
-			"Stealthy",
 			"LeStrade",
 			"Bert",
-			"Smith"
+			"Smith",
+			"Stealthy",
+			"Madame",
+			"Abberline"
 	};
+	/** String array of the character names that are actually used in the game */
+	public static String[] activeCharNames;
 	/** Number of moves for each character */
-	public static final int[] CHAR_NUM_MOVES = {4, 3, 3, 3};
+	public static final int[] CHAR_NUM_MOVES = {3, 3, 3, 4, 6, 3};
 	/** Locations of the character tokens at start of a game */
 	public static final int[][] CHAR_LOCATIONS = {
 			{1,1},
 			{1,4},
 			{3,0},
-			{3,5}
+			{3,5},
+			{2,0},
+			{6,0}
 	};
 	
 	/** Character array of the tiles in the game; Exit, Barricade, Null, Regular Tile, Lamppost, Manhole */
@@ -59,10 +76,10 @@ public class TokenConstants {
 	 * characters indicated above.
 	 */
 	public static final char[][] TILE_FRAMEWORK = new char[][] {
-		{'E', 'X', 'X', 'X', ' ', 'M', ' ', ' '},
-		{'X', ' ', 'L', 'B', ' ', 'L', ' ', ' '},
-		{' ', 'M', ' ', ' ', ' ', 'B', 'M', 'L'},
-		{' ', 'B', 'B', 'B', ' ', ' ', ' ', 'E'}
+		{'E', 'X', 'X', 'X', ' ', 'M', ' ', ' ', ' '},
+		{'X', ' ', 'L', 'B', ' ', 'L', ' ', 'B', ' '},
+		{' ', 'M', ' ', ' ', ' ', 'B', 'M', ' ', 'L'},
+		{' ', 'B', 'B', 'B', ' ', ' ', ' ', ' ', 'E'}
 	};
 	
 	/** The number of manholes in the TILE_FRAMEWORK */

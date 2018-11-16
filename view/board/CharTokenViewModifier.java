@@ -14,16 +14,15 @@ public interface CharTokenViewModifier {
 	/**
 	 * Moves a character from one location to the next location.
 	 * 
-	 * @param charIndex index representing the character. This
-	 * index corresponds to the index in the array of characters
-	 * in <code>TokenConstants.java</code>, and the index in the
-	 * array of character token images in the view
+	 * @param characterName The name of the character. This
+	 * name corresponds to the name in the array of characters
+	 * in <code>TokenConstants.java</code>.
 	 * @param prevLocation the previous (row, col) location of the
 	 * character (starting at 0)
 	 * @param newLocation the new (row, col) location of the character
 	 * (starting at 0)
 	 */
-	public void moveCharacter(int charIndex, int[] prevLocation, int[] newLocation);
+	public void moveCharacter(String characterName, int[] prevLocation, int[] newLocation);
 	/**
 	 * Sets a character's view to be innocent or not known.
 	 * 

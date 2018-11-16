@@ -31,7 +31,7 @@ public class CharTokenController implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		CharacterToken c = (CharacterToken)o;
-		view.moveCharacter(c.getTokenType(), c.getPrevTokenLocation(), c.getTokenLocation());
+		view.moveCharacter(c.getName(), c.getPrevTokenLocation(), c.getTokenLocation());
 		view.setInnocence(c.getTokenLocation(), c.isInnocent());
 	}
 

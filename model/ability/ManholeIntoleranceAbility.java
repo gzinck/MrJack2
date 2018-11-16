@@ -1,24 +1,25 @@
 package model.ability;
 
+import model.gameboard.TokenFinder;
 import model.player.Player;
-import model.gameboard.*;
 
 /**
- * Class for the stealthy ability given to certain character(s).
+ * This is an ability for preventing a character from using
+ * manholes.
  * 
- * @author Graeme Zinck and Charles Jobin
- * @version 1.0
+ * @author Josh Cookson and Graeme Zinck
+ * @version 1.1
  */
-public class StealthyAbility implements Ability {
+public class ManholeIntoleranceAbility implements Ability {
 
 	/** String for the ability name */
-	public static final String ABILITY = "Stealthy";
+	public static final String ABILITY = "Manhole Intolerance";
 	
 	/** TokenFinder for the ability */
 	private TokenFinder tokenFinder;
 	
-	/** Constructs a Stealthy Ability */
-	public StealthyAbility(TokenFinder finder) {
+	/** Constructs a Manhole Intolerance Ability */
+	public ManholeIntoleranceAbility(TokenFinder finder) {
 		tokenFinder = finder;
 	}
 	
@@ -58,6 +59,6 @@ public class StealthyAbility implements Ability {
 	@Override
 	public boolean isAbility(String abilityString) {
 		// TODO Auto-generated method stub
-		return (abilityString == ABILITY);
+		return (abilityString.equals(ABILITY));
 	}
 }

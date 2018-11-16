@@ -2,6 +2,7 @@ package model.tile;
 
 import java.util.HashSet;
 
+import model.ability.ManholeIntoleranceAbility;
 import model.player.Detective;
 import model.player.Player;
 import model.token.CharacterToken;
@@ -112,7 +113,7 @@ public class Manhole extends Tile implements Lightable {
 				accessibleTiles.addAll(neighbours[i].getAccessibleTiles(numMoves - 1, character, player));
 		
 		// Now, add all the other manholes as possible tiles we can visit.
-		if(manholeAccessible()) {
+		if(manholeAccessible() && !character.hasAbility(ManholeIntoleranceAbility.ABILITY)) {
 			// Get all other accessible manholes
 			for(int i = 0; i < allManholes.length; i++) {
 				// If manhole is available, go for it!
@@ -140,7 +141,7 @@ public class Manhole extends Tile implements Lightable {
 
 	@Override
 	public boolean isLit() {
-		if(lamp.isLit()) return true;
+		if(lamp != null && lamp.isLit()) return true;
 		for(int i = 0; i < NUM_NEIGHBOURS; i++) {
 			if(occupiableNeighbours[i] != null && occupiableNeighbours[i].isOccupied())
 				return true;

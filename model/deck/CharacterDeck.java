@@ -1,4 +1,7 @@
 package model.deck;
+
+import model.token.TokenConstants;
+
 /**
  * This class is used for determining which characters can
  * be moved during a round, the players pick which character
@@ -21,7 +24,7 @@ public class CharacterDeck extends Deck
 	public String drawCard() {
 		if(numCardsRemaining == 0) {
 			// Otherwise, we need to reshuffle
-			numCardsRemaining = Deck.CHARACTERS.length;
+			numCardsRemaining = TokenConstants.activeCharNames.length;
 			shuffle();
 		}
 		return cards[--numCardsRemaining];

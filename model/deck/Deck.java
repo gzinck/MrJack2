@@ -12,9 +12,6 @@ import model.token.TokenConstants;
 
 public abstract class Deck 
 {
-	/** String array of characters in the deck */
-	public static final String[] CHARACTERS = TokenConstants.CHAR_NAMES;
-	
 	/** String array of the cards in the deck */
 	public String[] cards;
 	
@@ -27,8 +24,8 @@ public abstract class Deck
 	 */
 	public Deck()
 	{
-		cards = Arrays.copyOf(CHARACTERS, CHARACTERS.length); // Must copy so it does not affect all decks
-		numCardsRemaining = CHARACTERS.length;
+		cards = Arrays.copyOf(TokenConstants.activeCharNames, TokenConstants.activeCharNames.length); // Must copy so it does not affect all decks
+		numCardsRemaining = cards.length;
 		shuffle();
 	}
 	

@@ -12,6 +12,7 @@ import org.junit.Test;
 import model.Table;
 import model.deck.AlibiDeck;
 import model.deck.CharacterDeck;
+import model.gameboard.GameBoard;
 import model.token.TokenConstants;
 
 public class TestDecks {
@@ -25,6 +26,7 @@ public class TestDecks {
 	 */
 	@Before
 	public void setUp() {
+		new GameBoard(); // Must initialize the game board to select the characters in play
 		charDeck = new CharacterDeck();
 		alibiDeck = new AlibiDeck();
 	}
@@ -35,7 +37,7 @@ public class TestDecks {
 	@Test
 	public void testCharDeck(){
 		HashSet<String> alreadyDone = new HashSet<String>();
-		for(int i = 0; i < TokenConstants.NUM_CHARACTERS; i++) {
+		for(int i = 0; i < TokenConstants.NUM_ACTIVE_CHARACTERS; i++) {
 			String curr = charDeck.drawCard();
 			assert(!alreadyDone.contains(curr));
 			alreadyDone.add(curr);
@@ -47,7 +49,7 @@ public class TestDecks {
 	@Test
 	public void testAlibiDeck() {
 		HashSet<String> alreadyDone = new HashSet<String>();
-		for(int i = 0; i < TokenConstants.NUM_CHARACTERS; i++) {
+		for(int i = 0; i < TokenConstants.NUM_ACTIVE_CHARACTERS; i++) {
 			String curr = charDeck.drawCard();
 			assert(!alreadyDone.contains(curr));
 			alreadyDone.add(curr);

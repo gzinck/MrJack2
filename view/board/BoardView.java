@@ -177,9 +177,9 @@ public class BoardView extends AnchorPane implements CharTokenViewModifier, Toke
 	}
 	
 	@Override
-	public void moveCharacter(int charIndex, int[] prevLocation, int[] newLocation) {
+	public void moveCharacter(String characterName, int[] prevLocation, int[] newLocation) {
 		tiles[prevLocation[0]][prevLocation[1]].removeCharToken();
-		tiles[newLocation[0]][newLocation[1]].addCharacterToken(charIndex);
+		tiles[newLocation[0]][newLocation[1]].addCharacterToken(characterName);
 	}
 	
 	@Override

@@ -108,4 +108,17 @@ public interface TokenFinder {
 	 * @return all lampposts
 	 */
 	public Lamppost[] getLamps();
+	/**
+	 * Gets the location of the neighbour of a tile in a given direction
+	 * from a specified row and column. This is nontrivial because there
+	 * are six neighbours to a hexagonal tile, and the locations of those
+	 * neighbours depends on whether the column is even or odd.
+	 *  
+	 * @param row the row of the original tile
+	 * @param col the column of the original tile
+	 * @param direction the direction to find the neighbouring tile
+	 * @return the {row, col} of the neighbour, if it exists, or null
+	 * if it does not exist.
+	 */
+	public int[] getLocation(int row, int col, int direction);
 }

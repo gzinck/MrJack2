@@ -38,6 +38,7 @@ public class CharacterToken extends Observable implements Token {
 		name = charName;
 		maxNumMoves = maxMoves;
 		currTile = initialTile;
+		currTile.occupy();
 		prevTile = initialTile;
 		isMrJack = false;
 	}
@@ -100,8 +101,30 @@ public class CharacterToken extends Observable implements Token {
 		return false;
 	}
 	
+	/**
+	 * Gets the accessible tiles for a character to move.
+	 * 
+	 * @param currPlayer the player trying to move the character
+	 * @return a set of passable tiles
+	 */
 	public HashSet<Passable> getAccessibleTiles(Player currPlayer) {
-		return currTile.getAccessibleTiles(maxNumMoves, this, currPlayer);
+		return getAccessibleTiles(currPlayer, maxNumMoves);
+	}
+	
+	/**
+	 * Gets the accessible tiles for a character to move, given a maximum
+	 * bound on the number of moves.
+	 * 
+	 * @param currPlayer the player trying to move the character
+	 * @param maxMoves the max number of moves allowed
+	 * @return a set of passable tiles
+	 */
+	public HashSet<Passable> getAccessibleTiles(Player currPlayer, int maxMoves) {
+		maxMoves = (maxMoves > maxNumMoves) ? maxNumMoves : maxMoves;
+		currTile.leave();
+		HashSet<Passable> tiles = currTile.getAccessibleTiles(maxMoves, this, currPlayer);
+		currTile.occupy();
+		return tiles;
 	}
 	
 	/**
@@ -146,7 +169,9 @@ public class CharacterToken extends Observable implements Token {
 	 */
 	public void moveTo(Lightable tile) {
 		prevTile = currTile;
+		prevTile.leave();
 		currTile = tile;
+		currTile.occupy();
 		setChanged();
 		notifyObservers();
 	}
