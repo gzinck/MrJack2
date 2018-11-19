@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.ability.StealthyAbility;
-import model.gameboard.*;
 public class StealthyAbilityTest {
 	/** StealthyAbility to be tested*/
 	StealthyAbility sa;
@@ -33,5 +32,4 @@ public class StealthyAbilityTest {
 		// Assert not wrong ability
 		assert(!sa.isAbility("Random Ability Name"));
 	}
-
 }

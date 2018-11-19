@@ -62,31 +62,21 @@ public class TestTurnKeeper
 		boolean t = false;
 		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
 		tk.startGame();
-		for(int i =0; i<tk.MAX_ROUNDS;i++)
-		{
-			for(int j = 0; j<tk.MAX_TURNS;j++)
-			{
-				
-				if(i%2==0)
-				{
-					if(j==0)
-					{
-						
-						 t = (dec==tk.getCurrPlayer() && tk.getRound()==i+1 && tk.getTurn()==j+1);
+		for(int i =0; i<tk.MAX_ROUNDS;i++) {
+			for(int j = 0; j<tk.MAX_TURNS;j++)	{
+				if(i%2==0) {
+					if(j==0) {
+						t = (dec==tk.getCurrPlayer() && tk.getRound()==i+1 && tk.getTurn()==j+1);
 					}
-					else
-					{
+					else {
 						t = (mrJack==tk.getCurrPlayer() && tk.getRound()==i+1 && tk.getTurn()==j+1);
 					}
 				}
-				else
-				{
-					if(j==0)
-					{
+				else {
+					if(j==0) {
 						 t = (mrJack==tk.getCurrPlayer() && tk.getRound()==i+1 && tk.getTurn()==j+1);
 					}
-					else
-					{
+					else {
 						t = (dec==tk.getCurrPlayer() && tk.getRound()==i+1 && tk.getTurn()==j+1);
 					}
 				}
@@ -95,8 +85,6 @@ public class TestTurnKeeper
 				tk.nextTurn();
 			}
 		}
-
-
 	}
 	
 	/**

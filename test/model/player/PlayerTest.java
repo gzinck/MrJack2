@@ -20,6 +20,7 @@ public class PlayerTest
 	{
 		Detective dt = new Detective();
 		MrJack mj = new MrJack();
+
 		assertEquals("MrJack", mj.getPlayerName());
 		assertEquals("Detective", dt.getPlayerName());
 	}
