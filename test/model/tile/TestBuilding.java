@@ -40,7 +40,7 @@ public class TestBuilding {
 	@Test
 	public void test() {
 		// Assert that no tiles are accessible unless the ability is StealthyAbility.
-		sa = new StealthyAbility(tk);
+		sa = new StealthyAbility();
 		c.setAbility(sa);
 		assertEquals(1, b.getAccessibleTiles(2, c, null).size());
 		c.setAbility(mba);

@@ -1,16 +1,15 @@
 package test.model.ability;
+import static org.junit.Assert.*;
+import model.gameboard.*;
+import org.junit.Before;
+import org.junit.Test;
+import model.ability.StealthyAbility;
 /**
  * Test class for the stealthy ability class
  * @author Graeme Zinck and Charles Jobin
  * @version 1.0
  */
-import model.gameboard.*;
-import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import model.ability.StealthyAbility;
 public class StealthyAbilityTest {
 	/** StealthyAbility to be tested*/
 	StealthyAbility sa;
@@ -20,7 +19,7 @@ public class StealthyAbilityTest {
 	@Before
 	public void setUp() throws Exception {
 	
-		sa = new StealthyAbility(tk);
+		sa = new StealthyAbility();
 	}
 	/**
 	 * Test method for the stealthy ability, checks that the ability is Stealthy
@@ -28,8 +27,8 @@ public class StealthyAbilityTest {
 	@Test
 	public void test() {
 		// Assert right ability
-		assert(sa.isAbility(StealthyAbility.ABILITY));
+		assertTrue(sa.isAbility(StealthyAbility.ABILITY));
 		// Assert not wrong ability
-		assert(!sa.isAbility("Random Ability Name"));
+		assertTrue(!sa.isAbility("Random Ability Name"));
 	}
 }
