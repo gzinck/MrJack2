@@ -14,7 +14,7 @@ import javafx.application.*;
  * responsible for starting up the game controller and
  * loading in the view initially.
  *  
- * @author Graeme Zinck and Charles Jobin
+ * @author Graeme Zinck and Charles Jobin and Josh Cookson
  * @version 1.0
  *
  */

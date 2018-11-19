@@ -10,7 +10,7 @@ import model.token.ManholeCover;
 /**
  * This class extends tile and is a manhole, manhole covers can be placed on a manhole
  * 
- * @author Graeme Zinck and Charles Jobin
+ * @author Graeme Zinck, Charles Jobin, and Joshua Cookson
  * @version 1.0
  */
 public class Manhole extends Tile implements Lightable {

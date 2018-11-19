@@ -7,7 +7,7 @@ import model.player.Player;
 import model.token.CharacterToken;
 /**
  * Regular tile that extends tile and is lightable (characters can land on this tile)
- * @author Graeme Zinck and Charles Jobin
+ * @author Graeme Zinck and Charles Jobin and Josh Cookson
  * @version 1.0
  */
 public class RegularTile extends Tile implements Lightable {

@@ -10,6 +10,12 @@ import model.ability.StealthyAbility;
 import model.token.CharacterToken;
 import model.token.TokenConstants;
 
+/**
+ * This class aids the game board in the initialization of the characters.
+ *
+ * @author Graeme Zinck and Josh Cookson
+ * @version 1.1 ish
+ */
 public class CharGenerator {
 	
 	private Ability[] abilities;
