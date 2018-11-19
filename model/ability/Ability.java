@@ -18,30 +18,26 @@ public interface Ability {
 	}
 	
 	/**
-	 * Performs an ability given the tile location that was clicked.
+	 * Starts the action defined by the ability, if applicable.
+	 * Returns an array of (row, col) of the tiles which should
+	 * be highlighted for the ability.
 	 * 
-	 * @param tileLocation Integer 2-tuple representing the (row, col)
-	 * of the tile to perform the ability 
+	 * @return array of (row, col) of tiles that should be highlighted,
+	 * if any
 	 */
-	public void performAbility(int[] tokenLocation, int[] tileLocation);
+	public int[][] startAction();
 	
 	/**
-	 * Gets all possible locations of tokens that the player can
-	 * click in order to perform the ability.
+	 * Continues the action defined by the ability, if applicable.
+	 * Returns an array of (row, col) of the tiles which should
+	 * be highlighted for the ability.
 	 * 
-	 * @return Array of 2-tuples of integers representing the (row, col)
-	 * of the possible tokens that can be clicked.
+	 * @return array of (row, col) of tiles that should be highlighted.
+	 * If the ability has run its course, it returns an array of length
+	 * 0. If the tile click input was illegal, then null is returned
+	 * (and therefore, the game should not advance).
 	 */
-	public int[][] getAbilityTokenOptions();
-	
-	/**
-	 * Gets all possible locations of tiles that the player can click
-	 * in order to perform the ability.
-	 * 
-	 * @return Array of 2-tuples of integers representing the (row, col)
-	 * of the possible tiles that can be clicked.
-	 */
-	public int[][] getAbilityTileOptions();
+	public int[][] continueAction(int[] tileClickLoc);
 	
 	/**
 	 * Gets when the ability can be used.

@@ -10,10 +10,7 @@ package model.ability;
 import model.gameboard.TokenFinder;
 import model.token.*;
 import model.tile.*;
-public class MoveCoverAbility implements Ability {
-
-	/** TokenFinder for the ability */
-	private TokenFinder tokenFinder;
+public class MoveCoverAbility extends MoveTokenAbility {
 	
 	/** String for the ability's name */
 	public static final String ABILITY = "MoveCover";
@@ -23,7 +20,7 @@ public class MoveCoverAbility implements Ability {
 	 * @param finder TokenFinder used to find the covers on the game board
 	 */
 	public MoveCoverAbility(TokenFinder finder) {
-		tokenFinder = finder;
+		super(finder);
 	}
 	
 	@Override
@@ -47,7 +44,7 @@ public class MoveCoverAbility implements Ability {
 		return locations;
 		
 	}
-
+	
 	@Override
 	public int[][] getAbilityTileOptions() {
 		Manhole[] manholes= tokenFinder.getManholes();

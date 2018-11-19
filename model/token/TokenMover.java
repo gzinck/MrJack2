@@ -1,7 +1,5 @@
 package model.token;
 
-import model.ability.Ability;
-
 /**
  * This moves tokens from one location to another, storing all the
  * intermediary data during selection of the token to move and the
@@ -17,22 +15,10 @@ public class TokenMover {
 	private int[][] tokenLocationOptions, tileLocationOptions;
 	/** The (row, col) of the selected token location and the selected tile location. */
 	private int[] selectedToken, selectedTile;
-	
-	/** The ability which is being used to move the token at that time. */
-	private Ability currAbility;
 
-	/**
-	 * Given an ability, this gets the possible locations (row, col) of
-	 * the tokens that can be moved.
-	 * 
-	 * @param ability the ability which defines which tokens can be moved.
-	 * @return array of (row, col) 2-tuples which define the locations of
-	 * the tokens which can be moved.
-	 */
-	public int[][] getTokenOptions(Ability ability) {
-		currAbility = ability;
-		tokenLocationOptions = ability.getAbilityTokenOptions();
-		return tokenLocationOptions;
+
+	public void setTokenOptions(int[][] options) {
+		tokenLocationOptions = options;
 	}
 	
 	/**
@@ -57,15 +43,13 @@ public class TokenMover {
 	}
 	
 	/**
-	 * Gets all the possible tile locations that the selected token
-	 * can move to.
+	 * Sets the options for a tile's moves
 	 * 
-	 * @return array of (row, col) 2-tuples representing the locations
-	 * of the tiles that the token can move to.
+	 * @param options array of 2-tuples representing the (row, col)
+	 * of every possible tile option
 	 */
-	public int[][] getTileOptions() {
-		tileLocationOptions = currAbility.getAbilityTileOptions();
-		return tileLocationOptions;
+	public void setTileOptions(int[][] options) {
+		tileLocationOptions = options;
 	}
 	
 	/**
@@ -87,14 +71,30 @@ public class TokenMover {
 		}
 		return false;
 	}
+	
 	/**
-	 * Performs the move on the selected token to the selected
-	 * tile.
+	 * Gets the token selected.
+	 * 
+	 * @return (row, col) of the token selected
 	 */
-	public void performMove() {
-		currAbility.performAbility(selectedToken, selectedTile);
-		// Reset variables so that logic still works
-		currAbility = null;
+	public int[] getSelectedToken() {
+		return selectedToken;
+	}
+	
+	/**
+	 * Gets the tile selected.
+	 * 
+	 * @return (row, col) of the tile selected
+	 */
+	public int[] getSelectedTile() {
+		return selectedTile;
+	}
+	
+	/**
+	 * Flushes the token mover to set it up for the
+	 * next time it is used.
+	 */
+	public void finishMove() {
 		tokenLocationOptions = null;
 		tileLocationOptions = null;
 		selectedToken = null;

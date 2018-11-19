@@ -11,11 +11,7 @@ import model.gameboard.TokenFinder;
 import model.tile.*;
 import model.token.*;
 
-public class MoveBarricadeAbility implements Ability{
-	
-	/** The finder which can find tokens on the game baord. */
-	private TokenFinder tokenFinder;
-	
+public class MoveBarricadeAbility extends MoveTokenAbility {
 	/** The ability's name. */
 	public static final String ABILITY = "MoveBarricade";
 	
@@ -24,7 +20,7 @@ public class MoveBarricadeAbility implements Ability{
 	 * @param finder TokenFinder that is used to find the barricade tokens on the gameboard
 	 */
 	public MoveBarricadeAbility(TokenFinder finder) {
-		tokenFinder = finder;
+		super(finder);
 	}
 	
 	@Override

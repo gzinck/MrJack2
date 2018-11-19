@@ -21,8 +21,8 @@ public class CharGenerator {
 	public CharGenerator(TokenFinder tf) {
 		finder = tf;
 		abilities = new Ability[]{
-				new MoveBarricadeAbility(tf), new MoveCoverAbility(tf), new MoveLightAbility(tf), new StealthyAbility(tf),
-				new ManholeIntoleranceAbility(tf), new MoveReducerAbility(tf)
+				new MoveBarricadeAbility(tf), new MoveCoverAbility(tf), new MoveLightAbility(tf), new StealthyAbility(),
+				new ManholeIntoleranceAbility(), new MoveReducerAbility()
 		};
 	}
 	

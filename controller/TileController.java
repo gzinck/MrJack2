@@ -22,8 +22,6 @@ import view.board.BoardView;
 public class TileController implements TileClickResponder {
 	/** The turn keeper in the model which has the information on the stage. */
 	private TurnKeeper turnKeeper;
-	/** The class that stores information regarding how to move a token. */
-	private TokenMover tokenMover;
 	/** The class that stores information regarding how to move a character. */
 	private CharTokenMover charMover;
 
@@ -47,7 +45,6 @@ public class TileController implements TileClickResponder {
 		boardView = inBoardView;
 		gameContinuer = inGameContinuer;
 		
-		tokenMover = new TokenMover();
 		charMover = new CharTokenMover();
 	}
 	
@@ -72,7 +69,7 @@ public class TileController implements TileClickResponder {
 	 * @param a the ability of the character performing the ability
 	 */
 	public void showActionOptions(Ability a) {
-		int[][] options = tokenMover.getTokenOptions(a);
+		int[][] options = a.startAction();
 		boardView.highlightTiles(options);
 	}
 	@Override
@@ -108,21 +105,13 @@ public class TileController implements TileClickResponder {
 	 * @param col the column of the tile clicked
 	 */
 	private void continueChoosingAction(int row, int col) {
-		if(!tokenMover.tokenSelected()) {
-			boolean success = tokenMover.selectToken(new int[]{row, col});
-			if(success) {
-				// Then highlight all the new places that can be clicked...
-				int[][] tileOptions = tokenMover.getTileOptions();
-				boardView.highlightTiles(tileOptions);
-			}
-		} else if(!tokenMover.tileSelected()) {
-			boolean success = tokenMover.selectTile(new int[] {row, col});
-			if(success) {
-				// Then, we just perform the ability and move to next stage!
-				tokenMover.performMove();
-				boardView.unhighlightTiles();
-				gameContinuer.continueGame();
-			}
+		int[][] tiles = turnKeeper.getCurrCharacter().getAbility().continueAction(new int[] {row, col});
+		if(tiles == null) return;
+		if(tiles.length == 0) {
+			boardView.unhighlightTiles();
+			gameContinuer.continueGame();
+		} else {
+			boardView.highlightTiles(tiles);
 		}
 	}
 	

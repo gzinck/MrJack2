@@ -11,10 +11,7 @@ import model.gameboard.TokenFinder;
 import model.tile.*;
 import model.token.*;
 
-public class MoveLightAbility implements Ability {
-	
-	/** Token finder for the ability */
-	private TokenFinder tokenFinder;
+public class MoveLightAbility extends MoveTokenAbility {
 	
     /** String for the ability's name */
 	public static final String ABILITY = "MoveGasLight";
@@ -24,7 +21,7 @@ public class MoveLightAbility implements Ability {
 	 * @param finder TokenFinder used to find the gaslights on the game board
 	 */
 	public MoveLightAbility(TokenFinder finder) {
-		tokenFinder = finder;
+		super(finder);
 	}
 	
 	@Override
