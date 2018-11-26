@@ -38,9 +38,9 @@ public class Exit extends Tile implements Passable {
 	}
 	
 	@Override
-	public HashSet<Passable> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
+	public HashSet<Passable> getAccessibleTiles(int minMoves, int maxMoves, CharacterToken character, Player player) {
 
-		if(numMoves < 0) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 0.");
+		if(maxMoves < 0) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 0.");
 		
 		HashSet<Passable> accessibleTiles = new HashSet<Passable>();
 		
