@@ -18,11 +18,11 @@ public class TokenConstants {
 	/** Total number of POSSIBLE basic characters (which may or may not be included in the game) */
 	public static final int NUM_BASIC_CHARS = 3;
 	/** Total number of POSSIBLE optional characters (which may or may not be included in the game) */
-	public static final int NUM_OPTIONAL_CHARS = 3;
+	public static final int NUM_OPTIONAL_CHARS = 4;
 	/** Total number of POSSIBLE characters in the game. */
 	public static final int NUM_TOTAL_CHARS = NUM_BASIC_CHARS + NUM_OPTIONAL_CHARS;
 	/** Character char array, Bert, Lestrade, Smith, Stealthy, Madame, Abberline */
-	public static final char[] CHARACTER_CHARS = {'L', 'B', 's', 'S', 'M', 'A'};
+	public static final char[] CHARACTER_CHARS = {'L', 'B', 's', 'S', 'M', 'A', 'P'};
 	/** String array of the character name */
 	public static final String[] CHAR_NAMES = {
 			"LeStrade",
@@ -30,12 +30,13 @@ public class TokenConstants {
 			"Smith",
 			"Stealthy",
 			"Madame",
-			"Abberline"
+			"Abberline",
+			"Pizer"
 	};
 	/** String array of the character names that are actually used in the game */
 	public static String[] activeCharNames;
 	/** Number of moves for each character */
-	public static final int[] CHAR_NUM_MOVES = {3, 3, 3, 4, 6, 3};
+	public static final int[] CHAR_NUM_MOVES = {3, 3, 3, 4, 6, 3, 3};
 	/** Locations of the character tokens at start of a game */
 	public static final int[][] CHAR_LOCATIONS = {
 			{1,1},
@@ -43,7 +44,8 @@ public class TokenConstants {
 			{3,0},
 			{3,5},
 			{2,0},
-			{6,0}
+			{6,0},
+			{7,0}
 	};
 	
 	/** Character array of the tiles in the game; Exit, Barricade, Null, Regular Tile, Lamppost, Manhole */

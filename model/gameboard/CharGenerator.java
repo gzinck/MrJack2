@@ -1,12 +1,6 @@
 package model.gameboard;
 
-import model.ability.Ability;
-import model.ability.ManholeIntoleranceAbility;
-import model.ability.MoveBarricadeAbility;
-import model.ability.MoveCoverAbility;
-import model.ability.MoveLightAbility;
-import model.ability.MoveReducerAbility;
-import model.ability.StealthyAbility;
+import model.ability.*;
 import model.token.CharacterToken;
 import model.token.TokenConstants;
 
@@ -25,6 +19,7 @@ public class CharGenerator {
 	private CharacterToken[] characters;
 	/** The names of the characters created */
 	private String[] charNames;
+	private MoveOthersAbility moveOthersAbility;
 	
 	/**
 	 * Creates a new character generator.
@@ -32,9 +27,11 @@ public class CharGenerator {
 	 * @param tf a token finder, used by some characters' abilities.
 	 */
 	public CharGenerator(TokenFinder tf) {
+		finder = tf;
+		moveOthersAbility = new MoveOthersAbility(tf);
 		abilities = new Ability[]{
 				new MoveBarricadeAbility(tf), new MoveCoverAbility(tf), new MoveLightAbility(tf), new StealthyAbility(),
-				new ManholeIntoleranceAbility(), new MoveReducerAbility()
+				new ManholeIntoleranceAbility(), new MoveReducerAbility(), moveOthersAbility
 		};
 	}
 	
@@ -51,6 +48,10 @@ public class CharGenerator {
 		selectChars(0, TokenConstants.NUM_BASIC_CHARS, 0, TokenConstants.NUM_ACTIVE_BASIC_CHARS);
 		// Selects characters from the optional character set
 		selectChars(TokenConstants.NUM_BASIC_CHARS, TokenConstants.NUM_OPTIONAL_CHARS, TokenConstants.NUM_ACTIVE_BASIC_CHARS, TokenConstants.NUM_ACTIVE_OPTIONAL_CHARS);
+		for(CharacterToken c: characters){
+		    if(c.getAbility() == moveOthersAbility)
+                moveOthersAbility.addCharacterToken(c);
+        }
 		TokenConstants.activeCharNames = charNames;
 		return characters;
 	}
