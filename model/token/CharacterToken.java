@@ -123,7 +123,7 @@ public class CharacterToken extends Observable implements Token {
 	public HashSet<Passable> getAccessibleTiles(Player currPlayer, int maxMoves) {
 		maxMoves = (maxMoves > maxNumMoves) ? maxNumMoves : maxMoves;
 		currTile.leave();
-		HashSet<Passable> tiles = currTile.getAccessibleTiles(maxMoves, this, currPlayer);
+		HashSet<Passable> tiles = currTile.getAccessibleTiles(Math.min(maxMoves, this.maxNumMoves), this, currPlayer);
 		currTile.occupy();
 		return tiles;
 	}

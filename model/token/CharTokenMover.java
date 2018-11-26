@@ -43,6 +43,10 @@ public class CharTokenMover {
 	 * @return an array of (row, col) locations that are possible
 	 */
 	public int[][] getTileOptions(CharacterToken inCharacter, Player currPlayer, CharTokenFinder tokenFinder) {
+		return getTileOptions(inCharacter, currPlayer, tokenFinder, 0, Integer.MAX_VALUE);
+	}
+	
+	public int[][] getTileOptions(CharacterToken inCharacter, Player currPlayer, CharTokenFinder tokenFinder, int minNumMoves, int maxNumMoves) {
 		character = inCharacter;
 		finder = tokenFinder;
 		HashSet<Passable> tiles = null;
@@ -60,8 +64,12 @@ public class CharTokenMover {
 			}
 		}
 		
-		if(isNextToMoveReducer) tiles = character.getAccessibleTiles(currPlayer, 1);
-		else tiles = character.getAccessibleTiles(currPlayer);
+		if(isNextToMoveReducer) tiles = character.getAccessibleTiles(currPlayer, minNumMoves, 1);
+		else {
+			while(tiles == null || tiles.size() == 0)
+				tiles = character.getAccessibleTiles(currPlayer, minNumMoves--, maxNumMoves);
+		}
+		
 		
 		tileLocationOptions = new int[tiles.size()][];
 		int i = 0;
