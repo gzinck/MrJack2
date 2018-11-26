@@ -27,6 +27,13 @@ public class CharTokenMover {
 	/** The finder which can find character tokens upon request. */
 	private CharTokenFinder finder;
 	
+	public int[][] getInitialTileOptions(CharacterToken inCharacter, Player currPlayer, CharTokenFinder tokenFinder) {
+		character = inCharacter;
+		finder = tokenFinder;
+		tileLocationOptions = finder.getAllUnoccupiedLocations();
+		return tileLocationOptions;
+	}
+	
 	/**
 	 * This gets the possible options for where a character can move.
 	 * 

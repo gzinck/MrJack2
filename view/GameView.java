@@ -40,6 +40,10 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 	@FXML private ImageView card1;
 	/** Second character card visible on the game board. */
 	@FXML private ImageView card2;
+	/** Third character card visible on the game board. */
+	@FXML private ImageView card3;
+	/** Fourth character card visible on the game board. */
+	@FXML private ImageView card4;
 	/** Text indicating the round number. */
 	@FXML private Text roundText;
 	/** Text indicating the turn number. */
@@ -88,7 +92,6 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 	
 	/** Initializes the game view upon loading the FXML. */
 	public void initialize() {
-		witnessCard.setImage(WITNESS_IMGS[1]);
 		deactivateActionBtns();
     }
 	
@@ -100,7 +103,7 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 	 * @return the boardview that is created
 	 */
 	public BoardView drawBoard(char[][] boardTemplate) {
-		cards = new ImageView[] {card1, card2};
+		cards = new ImageView[] {card1, card2, card3, card4};
 		boardView = new BoardView(boardTemplate);
 		AnchorPane.setTopAnchor(boardView, 0.0);
 		AnchorPane.setBottomAnchor(boardView, 0.0);
@@ -199,7 +202,23 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 	private void onClickCard2() {
 		cardClicker.cardClicked(1);
 	}
+	
+	/**
+	 * Response to when the third card on the table is clicked.
+	 */
+	@FXML
+	private void onClickCard3() {
+		cardClicker.cardClicked(2);
+	}
 
+	/**
+	 * Response to when the fourth card on the table is clicked.
+	 */
+	@FXML
+	private void onClickCard4() {
+		cardClicker.cardClicked(3);
+	}
+	
 	@Override
 	public void placeCard(String cardName, int index) {
 		if(cardName == null) {

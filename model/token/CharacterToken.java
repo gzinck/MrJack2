@@ -38,7 +38,8 @@ public class CharacterToken extends Observable implements Token {
 		name = charName;
 		maxNumMoves = maxMoves;
 		currTile = initialTile;
-		currTile.occupy();
+		if(currTile != null)
+			currTile.occupy();
 		prevTile = initialTile;
 		isMrJack = false;
 	}
@@ -169,7 +170,8 @@ public class CharacterToken extends Observable implements Token {
 	 */
 	public void moveTo(Lightable tile) {
 		prevTile = currTile;
-		prevTile.leave();
+		if(prevTile != null)
+			prevTile.leave();
 		currTile = tile;
 		currTile.occupy();
 		setChanged();
@@ -178,11 +180,13 @@ public class CharacterToken extends Observable implements Token {
 	
 	@Override
 	public int[] getTokenLocation() {
+		if(currTile == null) return null;
 		return currTile.getTileLocation();
 	}
 	
 	@Override
 	public int[] getPrevTokenLocation() {
+		if(prevTile == null) return null;
 		return prevTile.getTileLocation();
 	}
 	
