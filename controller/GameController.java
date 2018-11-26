@@ -115,7 +115,7 @@ public class GameController implements GameContinuer {
 		
 		// Then start the turn
 		turnKeeper.startGame();
-		table.startRound();
+		table.startGame();
 	}
 	
 	@Override
@@ -129,7 +129,8 @@ public class GameController implements GameContinuer {
 		int turnStage = turnKeeper.nextStage();
 		if(turnKeeper.turnOver()) {
 			if(turnKeeper.roundOver()) {
-				gb.evaluateInnocence(witness.updateWitnessed());
+				if(turnKeeper.getRound() > 0)
+					gb.evaluateInnocence(witness.updateWitnessed());
 				table.startRound();
 			}
 			currentPlayer = turnKeeper.nextTurn();
@@ -146,6 +147,12 @@ public class GameController implements GameContinuer {
 		
 		// Figure out what to do, given what the current stage is
 		switch(turnStage) {
+		case TurnKeeper.STAGE_INIT_CHOOSE_CARD:
+			boardView.unhighlightTiles();
+			break;
+		case TurnKeeper.STAGE_INIT_CHOOSE_TILE:
+			tileController.showInitCharOptions(turnKeeper.getCurrCharacter(), turnKeeper.getCurrPlayer(), gb);
+			break;
 		case TurnKeeper.STAGE_CHOOSE_CHAR:
 			boardView.unhighlightTiles();
 			break;

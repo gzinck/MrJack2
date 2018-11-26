@@ -49,6 +49,20 @@ public class TileController implements TileClickResponder {
 	}
 	
 	/**
+	 * Shows the move options for a character who has not yet
+	 * been placed on the board by highlighting all options in
+	 * the view.
+	 * 
+	 * @param character the character who can move
+	 * @param currPlayer the player moving the character
+	 * @param tokenFinder the finder for tokens
+	 */
+	public void showInitCharOptions(CharacterToken character, Player currPlayer, CharTokenFinder tokenFinder) {
+		int[][] options = charMover.getInitialTileOptions(character, currPlayer, tokenFinder);
+		boardView.highlightTiles(options);
+	}
+	
+	/**
 	 * Shows the move options for a character by highlighting
 	 * all the options in the view.
 	 * 
@@ -78,6 +92,9 @@ public class TileController implements TileClickResponder {
 		
 		int turnStage = turnKeeper.getStage();
 		switch(turnStage) {
+		case TurnKeeper.STAGE_INIT_CHOOSE_TILE:
+			continueChoosingInitTile(row, col);
+			break;
 		case TurnKeeper.STAGE_CHOOSE_ACTIONMOVEBEFORE:
 			continueChoosingAction(row, col);
 			break;
@@ -89,6 +106,22 @@ public class TileController implements TileClickResponder {
 			break;
 		default:
 			break;
+		}
+	}
+	
+	/**
+	 * Continues to choose the initial tile location for a character,
+	 * if applicable.
+	 * 
+	 * @param row the row of the tile clicked
+	 * @param col the column of the tile clicked
+	 */
+	private void continueChoosingInitTile(int row, int col) {
+		boolean success = charMover.selectTile(new int[] {row, col});
+		if(success) {
+			charMover.performMove();
+			boardView.unhighlightTiles();
+			gameContinuer.continueGame();
 		}
 	}
 	

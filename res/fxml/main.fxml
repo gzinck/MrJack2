@@ -12,6 +12,8 @@
    <children>
       <ImageView id="tablecard1" fx:id="card1" fitHeight="105.0" fitWidth="75.0" onMouseClicked="#onClickCard1" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
       <ImageView id="tablecard2" fx:id="card2" fitHeight="105.0" fitWidth="75.0" onMouseClicked="#onClickCard2" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="105.0" />
+      <ImageView id="tablecard3" fx:id="card3" fitHeight="105.0" fitWidth="75.0" layoutX="125.0" layoutY="475.0" onMouseClicked="#onClickCard3" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="190.0" />
+      <ImageView id="tablecard4" fx:id="card4" fitHeight="105.0" fitWidth="75.0" layoutX="210.0" layoutY="475.0" onMouseClicked="#onClickCard4" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="275.0" />
       <GridPane id="infopane" hgap="10.0" layoutX="532.0" layoutY="31.0" prefHeight="106.0" prefWidth="236.0" style="-fx-background-color: rgba(256, 256, 256, 0.35); -fx-background-radius: 10px;" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

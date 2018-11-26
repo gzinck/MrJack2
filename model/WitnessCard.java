@@ -43,8 +43,7 @@ public class WitnessCard extends Observable {
 	 * Gets the character that is mrjack
 	 * @return the character token that is mrJack
 	 */
-	public CharacterToken getCharacterToken()
-	{
+	public CharacterToken getCharacterToken() {
 		return jackToken;
 	}
 }
