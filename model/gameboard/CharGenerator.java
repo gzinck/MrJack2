@@ -1,12 +1,6 @@
 package model.gameboard;
 
-import model.ability.Ability;
-import model.ability.ManholeIntoleranceAbility;
-import model.ability.MoveBarricadeAbility;
-import model.ability.MoveCoverAbility;
-import model.ability.MoveLightAbility;
-import model.ability.MoveReducerAbility;
-import model.ability.StealthyAbility;
+import model.ability.*;
 import model.token.CharacterToken;
 import model.token.TokenConstants;
 
@@ -28,7 +22,7 @@ public class CharGenerator {
 		finder = tf;
 		abilities = new Ability[]{
 				new MoveBarricadeAbility(tf), new MoveCoverAbility(tf), new MoveLightAbility(tf), new StealthyAbility(),
-				new ManholeIntoleranceAbility(), new MoveReducerAbility()
+				new ManholeIntoleranceAbility(), new MoveReducerAbility(), new MoveOthersAbility(tf)
 		};
 	}
 	
