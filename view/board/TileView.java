@@ -130,7 +130,7 @@ public class TileView extends Region {
 	/**
 	 * Adds a character token to the tile.
 	 * 
-	 * @param tokenIndex index of the character to place on the tile
+	 * @param characterName index of the character to place on the tile
 	 * as per <code>TokenConstants.java</code>
 	 */
 	public void addCharacterToken(String characterName) {

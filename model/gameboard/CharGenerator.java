@@ -17,12 +17,14 @@ public class CharGenerator {
 	private boolean[] chosenChars;
 	private CharacterToken[] characters;
 	private String[] charNames;
+	private MoveOthersAbility moveOthersAbility;
 	
 	public CharGenerator(TokenFinder tf) {
 		finder = tf;
+		moveOthersAbility = new MoveOthersAbility(tf);
 		abilities = new Ability[]{
 				new MoveBarricadeAbility(tf), new MoveCoverAbility(tf), new MoveLightAbility(tf), new StealthyAbility(),
-				new ManholeIntoleranceAbility(), new MoveReducerAbility(), new MoveOthersAbility(tf)
+				new ManholeIntoleranceAbility(), new MoveReducerAbility(), moveOthersAbility
 		};
 	}
 	
@@ -32,6 +34,10 @@ public class CharGenerator {
 		chosenChars = new boolean[TokenConstants.NUM_TOTAL_CHARS];
 		selectChars(0, TokenConstants.NUM_BASIC_CHARS, 0, TokenConstants.NUM_ACTIVE_BASIC_CHARS);
 		selectChars(TokenConstants.NUM_BASIC_CHARS, TokenConstants.NUM_OPTIONAL_CHARS, TokenConstants.NUM_ACTIVE_BASIC_CHARS, TokenConstants.NUM_ACTIVE_OPTIONAL_CHARS);
+		for(CharacterToken c: characters){
+		    if(c.getAbility() == moveOthersAbility)
+                moveOthersAbility.addCharacterToken(c);
+        }
 		TokenConstants.activeCharNames = charNames;
 		return characters;
 	}
