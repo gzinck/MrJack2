@@ -37,4 +37,13 @@ public interface CharTokenFinder extends TokenFinder {
 	 * @return the corresponding character token, if it exists
 	 */
 	public CharacterToken getCharacter(String characterName);
+
+  /**
+	 * Gets all locations on the board where a lightable tile exists
+	 * which is not occupied by a character.
+	 * 
+	 * @return array of (row, col) tuples representing all possible
+	 * locations.
+	 */
+	public int[][] getAllUnoccupiedLocations();
 }

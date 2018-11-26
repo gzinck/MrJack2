@@ -249,6 +249,21 @@ public class GameBoard implements TokenFinder, CharacterFinder, CharTokenFinder
 		characters = gen.initializeCharacters();
 	}
 	
+	@Override
+	public int[][] getAllUnoccupiedLocations() {
+		// First pass: get how many options are available
+		int numLocs = 0;
+		for(Lightable[] arr : lightableTiles) for(Lightable tile : arr)
+			if(tile != null && !tile.isOccupied()) numLocs++;
+		
+		// Second pass: get the locations to return
+		int[][] locations = new int[numLocs][2];
+		numLocs = 0;
+		for(Lightable[] arr : lightableTiles) for(Lightable tile : arr)
+			if(tile != null && !tile.isOccupied()) locations[numLocs++] = tile.getTileLocation();
+		return locations;
+	}
+	
 	/**
 	 * Adds the observer (controller) to the character tokens.
 	 * 

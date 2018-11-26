@@ -58,12 +58,17 @@ public class TableController implements Observer, CardClickResponder {
 
 	@Override
 	public void cardClicked(int cardIndex) {
-		if(turnKeeper.getStage() != TurnKeeper.STAGE_CHOOSE_CHAR) return;
-		
-		String character = table.selectCharacter(cardIndex);
-		if(character == null) return;
-		
-		turnKeeper.setCurrCharacter(finder.getCharacter(character));
-		continuer.continueGame();
+		if(turnKeeper.getStage() == TurnKeeper.STAGE_CHOOSE_CHAR) {
+			String character = table.selectCharacter(cardIndex);
+			if(character == null) return;
+			
+			turnKeeper.setCurrCharacter(finder.getCharacter(character));
+			continuer.continueGame();
+		} else if(turnKeeper.getStage() == TurnKeeper.STAGE_INIT_CHOOSE_CARD) {
+			String character = table.selectCharacter(cardIndex);
+			if(character == null) return;
+			turnKeeper.setCurrCharacter(finder.getCharacter(character));
+			continuer.continueGame();
+		}
 	}
 }
