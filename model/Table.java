@@ -1,15 +1,14 @@
 package model;
+
+import java.util.Observable;
+import model.deck.AlibiDeck;
+import model.deck.CharacterDeck;
 /**
  * Table the game is played on, has the character deck and alibi deck
  */
-import java.util.Observable;
-
-import model.deck.AlibiDeck;
-import model.deck.CharacterDeck;
-
 public class Table extends Observable {
 	/** String array of the characters to be displayed on the table (picked from the character deck) */
-	public String[] characters = new String[TurnKeeper.MAX_TURNS];
+	public String[] characters = new String[TurnKeeper.NUM_CHARS_TO_PLACE];
 	/** Character deck on the table */
 	public CharacterDeck charDeck;
 	/** Alibi deck on the table */
@@ -30,6 +29,17 @@ public class Table extends Observable {
 		for(int i = 0; i < TurnKeeper.MAX_TURNS; i++) {
 			characters[i] = charDeck.drawCard();
 		}
+		setChanged();
+		notifyObservers();
+	}
+	
+	/**
+	 * Starts the game by setting all characters down on the
+	 * table to choose.
+	 */
+	public void startGame() {
+		for(int i = 0; i < characters.length; i++)
+			characters[i] = charDeck.drawCard();
 		setChanged();
 		notifyObservers();
 	}

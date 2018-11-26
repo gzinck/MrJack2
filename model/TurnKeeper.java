@@ -2,7 +2,7 @@ package model;
 /**
  * Class that keeps track of rounds, turns and gaslight to remove for the game
  * @author Graeme Zinck and Charles Jobin
- * @version 1.0
+ * @version 1.2
  */
 import model.token.*;
 
@@ -15,6 +15,13 @@ public class TurnKeeper extends Observable {
 	public static enum StageTiming {
 		ACTION_BEFORE, ACTION_AFTER, NO_ACTION
 	}
+	
+	/** Value for a stage where the game has not been started */
+	public static final int STAGE_GAME_NOT_STARTED = -4;
+	/** Value for a stage where the user must choose a character card to initialize game */
+	public static final int STAGE_INIT_CHOOSE_CARD = -3;
+	/** Value for a stage where the user must choose a tile for a character to initialize game */
+	public static final int STAGE_INIT_CHOOSE_TILE = -2;
 	/** Value for a stage that has not been started */
 	public static final int STAGE_TURN_NOT_STARTED = -1;
 	/** Value for the stage where a user must select a character to play */
@@ -34,6 +41,8 @@ public class TurnKeeper extends Observable {
 	private Player[] oddRoundOrder;
 	/** Array of the player turn order for even rounds */
 	private Player[] evenRoundOrder;
+	/** Array of the player character placing order for the beginning of the game */
+	private Player[] placeCharOrder;
 	/** Round value for before the start of a game */
 	private static final int START_ROUND = 0;
 	/** Turn value for before the start of a turn */
@@ -42,6 +51,10 @@ public class TurnKeeper extends Observable {
 	public int currTurn;
 	/** Value for the current round */
 	public int currRound;
+	/** The number of characters that need to be placed on the table */
+	public static final int NUM_CHARS_TO_PLACE = 4;
+	/** The number of characters on the table so far */
+	private int numCharsPlaced;
 	/** Maximum number of rounds in a game */
 	public static final int MAX_ROUNDS = 8;
 	/** Maximum number of turns in a round */
@@ -67,9 +80,11 @@ public class TurnKeeper extends Observable {
 		currRound = START_ROUND;
 		oddRoundOrder = new Player[] {det, jack};
 		evenRoundOrder = new Player[] {jack, det};
+		placeCharOrder = new Player[] {det, jack, jack, det};
 		lightsToRemove = removableLights;
-		currStage = STAGE_TURN_NOT_STARTED;
+		currStage = STAGE_GAME_NOT_STARTED;
 		currCharacter = null;
+		numCharsPlaced = 0;
 	}
 	
 	/**
@@ -77,12 +92,8 @@ public class TurnKeeper extends Observable {
 	 * @return the Player that must play their turn
 	 */
 	public Player getCurrPlayer() {
-		if(currTurn == 0)
-		{
-			throw new IllegalArgumentException("Turn has not started");
-		}	
-		else if(currRound % 2 == 1)
-			return oddRoundOrder[currTurn - 1];
+		if(currRound == 0) return placeCharOrder[numCharsPlaced];
+		if(currRound % 2 == 1) return oddRoundOrder[currTurn - 1];
 		return evenRoundOrder[currTurn - 1];
 	}
 	
@@ -91,9 +102,8 @@ public class TurnKeeper extends Observable {
 	 * @return the player who's turn is first
 	 */
 	public Player startGame() {
-		currRound++; // Make the round equal to 1
-		currStage = STAGE_CHOOSE_CHAR; // Go to the first stage
-		Player nextPlayer = oddRoundOrder[currTurn++];
+		currStage = STAGE_INIT_CHOOSE_CARD; // Go to the first stage
+		Player nextPlayer = placeCharOrder[numCharsPlaced];
 		setChanged();
 		notifyObservers();
 		return nextPlayer;
@@ -129,8 +139,7 @@ public class TurnKeeper extends Observable {
 	 * Gets the current round of the game 
 	 * @return the round of the game
 	 */
-	public int getRound()
-	{
+	public int getRound() {
 		return currRound;
 	}
 	
@@ -167,6 +176,17 @@ public class TurnKeeper extends Observable {
 			currStage++;
 		if(currStage == STAGE_CHOOSE_ACTIONMOVEBEFORE && (timing == StageTiming.ACTION_AFTER || timing == StageTiming.NO_ACTION))
 			currStage++;
+		// If we're still setting up the game...
+		if(currStage == STAGE_TURN_NOT_STARTED) {
+			if(++numCharsPlaced < NUM_CHARS_TO_PLACE) {
+				currStage = STAGE_INIT_CHOOSE_CARD;
+				setChanged();
+				notifyObservers();
+			} else {
+				currTurn = MAX_TURNS;
+				currStage = STAGE_TURN_OVER;
+			}
+		}
 		return currStage;
 	}
 	

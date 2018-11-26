@@ -30,4 +30,12 @@ public interface CharTokenFinder extends TokenFinder {
 	 * token
 	 */
 	public boolean collisionWithJack(CharacterToken recentlyMoved);
+	/**
+	 * Gets all locations on the board where a lightable tile exists
+	 * which is not occupied by a character.
+	 * 
+	 * @return array of (row, col) tuples representing all possible
+	 * locations.
+	 */
+	public int[][] getAllUnoccupiedLocations();
 }
