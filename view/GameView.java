@@ -75,7 +75,8 @@ public class GameView implements CardView, TurnKeeperView, WitnessView {
 			new Image("/res/img/characters-cards/smith.jpg"),
 			new Image("/res/img/characters-cards/stealthy.jpg"),
 			new Image("/res/img/characters-cards/madame.jpg"),
-			new Image("/res/img/characters-cards/abberline.jpg")
+			new Image("/res/img/characters-cards/abberline.jpg"),
+			new Image("/res/img/characters-cards/pizer.jpg")
 	};
 	
 	/** Images for both of the possible witness states. */

@@ -32,7 +32,8 @@ public class TileView extends Region {
 			new Image("/res/img/character-tokens/smith.png"),
 			new Image("/res/img/character-tokens/stealthy.png"),
 			new Image("/res/img/character-tokens/madame.png"),
-			new Image("/res/img/character-tokens/abberline.png")
+			new Image("/res/img/character-tokens/abberline.png"),
+			new Image("/res/img/character-tokens/pizer.png")
 	};
 	/** This has all of the images for different types of regular tokens. */
 	private static final Image[] TOKEN_IMGS = {

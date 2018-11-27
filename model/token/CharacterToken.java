@@ -109,7 +109,7 @@ public class CharacterToken extends Observable implements Token {
 	 * @return a set of passable tiles
 	 */
 	public HashSet<Passable> getAccessibleTiles(Player currPlayer) {
-		return getAccessibleTiles(currPlayer, maxNumMoves);
+		return getAccessibleTiles(currPlayer, 0,maxNumMoves);
 	}
 	
 	/**
@@ -120,10 +120,10 @@ public class CharacterToken extends Observable implements Token {
 	 * @param maxMoves the max number of moves allowed
 	 * @return a set of passable tiles
 	 */
-	public HashSet<Passable> getAccessibleTiles(Player currPlayer, int maxMoves) {
+	public HashSet<Passable> getAccessibleTiles(Player currPlayer, int minMoves,int maxMoves) {
 		maxMoves = (maxMoves > maxNumMoves) ? maxNumMoves : maxMoves;
 		currTile.leave();
-		HashSet<Passable> tiles = currTile.getAccessibleTiles(Math.min(maxMoves, this.maxNumMoves), this, currPlayer);
+		HashSet<Passable> tiles = currTile.getAccessibleTiles(minMoves, maxMoves, this, currPlayer);
 		currTile.occupy();
 		return tiles;
 	}

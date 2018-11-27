@@ -97,28 +97,29 @@ public class Manhole extends Tile implements Lightable {
 		}
 	}
 	@Override
-	public HashSet<Passable> getAccessibleTiles(int numMoves, CharacterToken character, Player player) {
-		if(numMoves < 0) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 0.");
+	public HashSet<Passable> getAccessibleTiles(int minMoves, int maxMoves, CharacterToken character, Player player) {
+		if(maxMoves < 0) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 0.");
 		HashSet<Passable> accessibleTiles = new HashSet<Passable>();
 		
 		// If curr tile is not occupied (or player is the Detective), add it as a possibility
-		if(!isOccupied || player.getPlayerName().equals(Detective.PLAYER_NAME)) accessibleTiles.add(this);
+		if(!isOccupied || (player != null && player.getPlayerName().equals(Detective.PLAYER_NAME)))
+			accessibleTiles.add(this);
 		
 		// If no moves left, quit here.
-		if(numMoves == 0) return accessibleTiles;
+		if(maxMoves == 0) return accessibleTiles;
 		
 		// We just need to get all the tiles around us!
 		for(int i = 0; i < NUM_NEIGHBOURS; i++)
 			if(neighbours[i] != null)
-				accessibleTiles.addAll(neighbours[i].getAccessibleTiles(numMoves - 1, character, player));
+				accessibleTiles.addAll(neighbours[i].getAccessibleTiles(minMoves, maxMoves - 1, character, player));
 		
 		// Now, add all the other manholes as possible tiles we can visit.
-		if(manholeAccessible() && !character.hasAbility(ManholeIntoleranceAbility.ABILITY)) {
+		if(manholeAccessible() && !character.hasAbility(ManholeIntoleranceAbility.ABILITY) && (player != null)) {
 			// Get all other accessible manholes
 			for(int i = 0; i < allManholes.length; i++) {
 				// If manhole is available, go for it!
 				if(allManholes[i] != null && allManholes[i].manholeAccessible())
-					accessibleTiles.addAll(allManholes[i].getAccessibleTiles(numMoves - 1, character, player));
+					accessibleTiles.addAll(allManholes[i].getAccessibleTiles(minMoves, maxMoves - 1, character, player));
 			}
 		}
 		

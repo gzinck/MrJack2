@@ -64,12 +64,9 @@ public class CharTokenMover {
 			}
 		}
 		
-		if(isNextToMoveReducer) tiles = character.getAccessibleTiles(currPlayer, minNumMoves, 1);
-		else {
-			while(tiles == null || tiles.size() == 0)
-				tiles = character.getAccessibleTiles(currPlayer, minNumMoves--, maxNumMoves);
-		}
-		
+		if(isNextToMoveReducer) maxNumMoves = 1;
+		while(tiles == null || tiles.size() == 0)
+			tiles = character.getAccessibleTiles(currPlayer, minNumMoves--, maxNumMoves);
 		
 		tileLocationOptions = new int[tiles.size()][];
 		int i = 0;
@@ -111,6 +108,12 @@ public class CharTokenMover {
 		return false;
 	}
 	
+	public void clear() {
+		character = null;
+		tileLocationOptions = null;
+		selectedTile = null;
+	}
+	
 	/**
 	 * Checks if there was a collision with another character.
 	 * 
@@ -128,6 +131,14 @@ public class CharTokenMover {
 	 */
 	public boolean wasCollisionWithJack() {
 		return finder.collisionWithJack(character);
+	}
+	
+	public boolean characterSelected() {
+		return (character != null);
+	}
+	
+	public CharacterToken getCharacter() {
+		return character;
 	}
 	
 	/**

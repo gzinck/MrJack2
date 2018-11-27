@@ -27,11 +27,12 @@ public interface Passable extends VisibleTile {
 	 * number of moves, and the player. If the player is Jack, exits are
 	 * accessible. If the character is Stealthy, buildings can be passed
 	 * through. This is called recursively.
-	 * 
-	 * @param numMoves the number of moves for the character from this tile
+	 *
+	 * @param minMoves the minimum number of move for the character from this tile
+	 * @param maxMoves the maximum number of moves for the character from this tile
 	 * @param character the character which is being moved
 	 * @param player the player who is moving the characters
 	 * @return a hashset of passable tiles which are accessible
 	 */
-	public abstract HashSet<Passable> getAccessibleTiles(int numMoves, CharacterToken character, Player player);
+	public abstract HashSet<Passable> getAccessibleTiles(int minMoves, int maxMoves, CharacterToken character, Player player);
 }

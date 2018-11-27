@@ -26,8 +26,7 @@ public class CharGenerator {
 	 * 
 	 * @param tf a token finder, used by some characters' abilities.
 	 */
-	public CharGenerator(TokenFinder tf) {
-		finder = tf;
+	public CharGenerator(CharTokenFinder tf) {
 		moveOthersAbility = new MoveOthersAbility(tf);
 		abilities = new Ability[]{
 				new MoveBarricadeAbility(tf), new MoveCoverAbility(tf), new MoveLightAbility(tf), new StealthyAbility(),

@@ -166,15 +166,16 @@ public class TurnKeeper extends Observable {
 	 */
 	public int nextStage() {
 		currStage++;
-		// Skip if the character doesn't have any action...
-		if(currStage == STAGE_CHOOSE_IFACTIONFIRST && currCharacter.getAbility().whenUseAbility() == Ability.Timing.NONE) {
-			timing = StageTiming.NO_ACTION;
+		Ability.Timing whenUse = currCharacter.getAbility().whenUseAbility();
+		// Skip if the character doesn't have any action decisions...
+		if(currStage == STAGE_CHOOSE_IFACTIONFIRST && whenUse != Ability.Timing.BEFORAFTER) {
 			currStage++;
+			timing = null;
 		}
 		// Skip the stage if not applicable
-		if(currStage == STAGE_CHOOSE_ACTIONMOVEAFTER && (timing == StageTiming.ACTION_BEFORE || timing == StageTiming.NO_ACTION))
+		if(currStage == STAGE_CHOOSE_ACTIONMOVEAFTER && (whenUse != Ability.Timing.AFTER && timing != StageTiming.ACTION_AFTER))
 			currStage++;
-		if(currStage == STAGE_CHOOSE_ACTIONMOVEBEFORE && (timing == StageTiming.ACTION_AFTER || timing == StageTiming.NO_ACTION))
+		if(currStage == STAGE_CHOOSE_ACTIONMOVEBEFORE && (whenUse != Ability.Timing.BEFORE && timing != StageTiming.ACTION_BEFORE))
 			currStage++;
 		// If we're still setting up the game...
 		if(currStage == STAGE_TURN_NOT_STARTED) {
