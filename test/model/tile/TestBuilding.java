@@ -42,12 +42,12 @@ public class TestBuilding {
 		// Assert that no tiles are accessible unless the ability is StealthyAbility.
 		sa = new StealthyAbility();
 		c.setAbility(sa);
-		assertEquals(1, b.getAccessibleTiles(2, c, null).size());
+		assertEquals(1, b.getAccessibleTiles(0, 2, c, null).size());
 		c.setAbility(mba);
-		assertEquals(0, b.getAccessibleTiles(2, c, null).size());
+		assertEquals(0, b.getAccessibleTiles(0, 2, c, null).size());
 		
 		// Assert that no tiles accessible when the distance to go is only 1
-		assertEquals(b.getAccessibleTiles(1, c, null).size(), 0);
+		assertEquals(b.getAccessibleTiles(0, 1, c, null).size(), 0);
 	}
 
 }
