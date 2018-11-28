@@ -38,7 +38,7 @@ public class TestExit {
 		c1 = new CharacterToken("Billy Bob Joe", 1, reg);
 		c2 = new CharacterToken("Billy Bob Jock", 1, reg);
 		wc = new WitnessCard(c1);
-		exit.setWitnessCard(wc);
+		Exit.setWitnessCard(wc);
 		jack.setCharacter(c1);
 		wc.updateWitnessed();
 	}
@@ -47,18 +47,24 @@ public class TestExit {
 	@Test
 	public void exitAllowsOnlyJack() {
 		// Allows Jack
-		
-		
-		HashSet<Passable> tiles = exit.getAccessibleTiles(1, c1, jack);
+		HashSet<Passable> tiles = exit.getAccessibleTiles(0, 1, c1, jack);
 		assertEquals(tiles.size(), 1);
 		
 		// Should not allow Jack when wrong character used
-		HashSet<Passable> tiles2 = exit.getAccessibleTiles(1, c2, jack);
+		HashSet<Passable> tiles2 = exit.getAccessibleTiles(0, 1, c2, jack);
 		assertEquals(0, tiles2.size());
 		
 		// Does not allow Detective
-		tiles = exit.getAccessibleTiles(1, null, detective);
+		tiles = exit.getAccessibleTiles(0, 1, null, detective);
 		assertEquals(0, tiles.size());
+		
+		// Does not allow when min moves is ABOVE 0
+		tiles = exit.getAccessibleTiles(1, 1, c1, jack);
+		assertEquals(0, tiles.size());
+		
+		// But ok if negative
+		tiles = exit.getAccessibleTiles(-1, 1, c1, jack);
+		assertEquals(1, tiles.size());
 	}
 
 }

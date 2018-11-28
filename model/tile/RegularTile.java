@@ -25,6 +25,7 @@ public class RegularTile extends Tile implements Lightable {
 	public RegularTile(int row, int col) {
 		super(row, col);
 		occupiableNeighbours = new Occupiable[NUM_NEIGHBOURS];
+		isOccupied = false;
 	}
 	
 	@Override
@@ -33,8 +34,12 @@ public class RegularTile extends Tile implements Lightable {
 		HashSet<Passable> accessibleTiles = new HashSet<Passable>();
 		
 		// If curr tile is not occupied (or player is detective, add it as a possibility
-		if(!isOccupied || (player != null && player.getPlayerName().equals(Detective.PLAYER_NAME)))
-			accessibleTiles.add(this);
+		if(minMoves <= 0) {
+			if(!isOccupied || (player != null && player.getPlayerName().equals(Detective.PLAYER_NAME)))
+				accessibleTiles.add(this);
+			if(character.getTokenLocation().equals(this.getTileLocation()))
+				accessibleTiles.add(this);
+		}
 		
 		// If no moves left, quit here.
 		if(maxMoves == 0) return accessibleTiles;
@@ -42,7 +47,7 @@ public class RegularTile extends Tile implements Lightable {
 		// Check all the neighbours if they're accessible
 		for(int i = 0; i < NUM_NEIGHBOURS; i++)
 			if(neighbours[i] != null)
-				accessibleTiles.addAll(neighbours[i].getAccessibleTiles(minMoves,maxMoves - 1, character, player));
+				accessibleTiles.addAll(neighbours[i].getAccessibleTiles(minMoves - 1,maxMoves - 1, character, player));
 		return accessibleTiles;
 	}
 

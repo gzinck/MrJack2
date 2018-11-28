@@ -100,26 +100,33 @@ public class Manhole extends Tile implements Lightable {
 	public HashSet<Passable> getAccessibleTiles(int minMoves, int maxMoves, CharacterToken character, Player player) {
 		if(maxMoves < 0) throw new IllegalArgumentException("Cannot get accessible tiles when numMoves is less than 0.");
 		HashSet<Passable> accessibleTiles = new HashSet<Passable>();
-		
 		// If curr tile is not occupied (or player is the Detective), add it as a possibility
-		if(!isOccupied || (player != null && player.getPlayerName().equals(Detective.PLAYER_NAME)))
-			accessibleTiles.add(this);
+		// Note that the min moves must be small enough!
+		if(minMoves <= 0) {
+			if(!isOccupied || (player != null && player.getPlayerName().equals(Detective.PLAYER_NAME)))
+				accessibleTiles.add(this);
+			// Add anyways if character at this location is the character we're moving
+			if(character.getTokenLocation().equals(this.getTileLocation()))
+				accessibleTiles.add(this);
+		}
 		
 		// If no moves left, quit here.
 		if(maxMoves == 0) return accessibleTiles;
 		
 		// We just need to get all the tiles around us!
 		for(int i = 0; i < NUM_NEIGHBOURS; i++)
-			if(neighbours[i] != null)
-				accessibleTiles.addAll(neighbours[i].getAccessibleTiles(minMoves, maxMoves - 1, character, player));
+			if(neighbours[i] != null) {
+				accessibleTiles.addAll(neighbours[i].getAccessibleTiles(minMoves - 1, maxMoves - 1, character, player));
+			}
 		
 		// Now, add all the other manholes as possible tiles we can visit.
-		if(manholeAccessible() && !character.hasAbility(ManholeIntoleranceAbility.ABILITY) && (player != null)) {
+		if(manholeAccessible() && !character.hasAbility(ManholeIntoleranceAbility.ABILITY) && player != null) {
 			// Get all other accessible manholes
 			for(int i = 0; i < allManholes.length; i++) {
 				// If manhole is available, go for it!
 				if(allManholes[i] != null && allManholes[i].manholeAccessible())
-					accessibleTiles.addAll(allManholes[i].getAccessibleTiles(minMoves, maxMoves - 1, character, player));
+					if(allManholes[i] != this) // Can't move to same location!
+						accessibleTiles.addAll(allManholes[i].getAccessibleTiles(minMoves - 1, maxMoves - 1, character, player));
 			}
 		}
 		

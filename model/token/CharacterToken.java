@@ -118,6 +118,7 @@ public class CharacterToken extends Observable implements Token {
 	 * 
 	 * @param currPlayer the player trying to move the character
 	 * @param maxMoves the max number of moves allowed
+	 * @param minMoves the minimum number of moves allowed
 	 * @return a set of passable tiles
 	 */
 	public HashSet<Passable> getAccessibleTiles(Player currPlayer, int minMoves,int maxMoves) {

@@ -46,7 +46,7 @@ public class Exit extends Tile implements Passable {
 		
 		// Can only exit if right player with right character and the witness card
 		// shows not witnessed.
-		if(player != null && player.canExitBoard(character) && !witnessCard.getWitnessed()) {
+		if(minMoves <= 0 && player != null && player.canExitBoard(character) && !witnessCard.getWitnessed()) {
 			accessibleTiles.add(this);
 		}
 		return accessibleTiles;

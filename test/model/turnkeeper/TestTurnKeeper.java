@@ -7,6 +7,7 @@ package test.model.turnkeeper;
 import static org.junit.Assert.*;
 
 import model.TurnKeeper;
+import model.ability.StealthyAbility;
 import model.player.*;
 import model.tile.*;
 import model.token.*;
@@ -30,17 +31,14 @@ public class TestTurnKeeper
 	public void testNewTurnKeeper()
 	{
 		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
-		String expect = Integer.toString(tk.getRound());
-		assertEquals(Integer.toString(0), expect);
-		String expect2 = Integer.toString(tk.getTurn());
-		assertEquals(Integer.toString(0), expect2);
-		String expect3 = Integer.toString(tk.getStage());
-		assertEquals(Integer.toString(-1), expect3);
+		assertEquals(0, tk.getRound());
+		assertEquals(0, tk.getTurn());
+		assertEquals(TurnKeeper.STAGE_GAME_NOT_STARTED, tk.getStage());
 
 	}	
 	
 	/**
-	 * Tests the turnkeeper has no start player before the game begins
+	 * Tests the turnkeeper has start player before the game begins
 	 */
 	@Test
 	public void testCurrPlayerAtStart()
@@ -50,7 +48,7 @@ public class TestTurnKeeper
 		try{
 			tk.getCurrPlayer();
 		}catch(IllegalArgumentException e){b = true;}
-		assertEquals(true, b);
+		assertEquals(false, b);
 	}
 	
 	/** 
@@ -59,11 +57,31 @@ public class TestTurnKeeper
 	@Test 
 	public void testCurrPlayerAllRounds()
 	{
+		// Check out if the initial stages work for setting the characters
+		// on the table
+		// NEW----------------------------------------------------
 		boolean t = false;
 		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
+		assertEquals(TurnKeeper.STAGE_GAME_NOT_STARTED, tk.getStage());
 		tk.startGame();
-		for(int i =0; i<tk.MAX_ROUNDS;i++) {
-			for(int j = 0; j<tk.MAX_TURNS;j++)	{
+		CharacterToken c = new CharacterToken(null, 0, null);
+		c.setAbility(new StealthyAbility());
+		tk.setCurrCharacter(c);
+		assertEquals(TurnKeeper.STAGE_INIT_CHOOSE_CARD, tk.getStage());
+		assertEquals(TurnKeeper.STAGE_INIT_CHOOSE_TILE, tk.nextStage());
+		for(int i = 1; i < TurnKeeper.NUM_CHARS_TO_PLACE; i++) {
+			assertEquals(TurnKeeper.STAGE_INIT_CHOOSE_CARD, tk.nextStage());
+			assertEquals(TurnKeeper.STAGE_INIT_CHOOSE_TILE, tk.nextStage());
+		}
+		// NEW----------------------------------------------------
+		
+		// Now, do all the subsequent turns
+		assertEquals(tk.roundOver(), true);
+		tk.nextTurn();
+		assertEquals(tk.getTurn(), 1);
+		assertEquals(tk.getRound(), 1);
+		for(int i =0; i<TurnKeeper.MAX_ROUNDS;i++) {
+			for(int j = 0; j<TurnKeeper.MAX_TURNS;j++)	{
 				if(i%2==0) {
 					if(j==0) {
 						t = (dec==tk.getCurrPlayer() && tk.getRound()==i+1 && tk.getTurn()==j+1);
@@ -85,30 +103,6 @@ public class TestTurnKeeper
 				tk.nextTurn();
 			}
 		}
-	}
-	
-	/**
-	 * Tests the starting stage value
-	 */
-	@Test
-	public void testGetStageAtStart()
-	{
-		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
-		assertEquals(-1, tk.getStage());
-	}
-	
-	/**
-	 * Tests the round, stage values at start of game
-	 */
-	@Test
-	public void testStartGame()
-	{
-		TurnKeeper tk = new TurnKeeper(mrJack, dec, gs);
-		Player curr = tk.startGame();
-		assertEquals(true, tk.getRound()==1);
-		assertEquals(true, tk.getStage()==0);
-		assertEquals(dec, curr);
-		
 	}
 
 }
